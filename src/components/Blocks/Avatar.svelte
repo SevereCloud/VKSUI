@@ -1,10 +1,44 @@
 <style>
-  .Div--ios {
-    padding: 12px;
+  .Avatar {
+    box-sizing: border-box;
   }
 
-  .Div--android {
-    padding: 12px 16px;
+  .Avatar__in {
+    position: relative;
+    color: var(--icon_secondary);
+  }
+
+  .Avatar__img {
+    background: var(--placeholder_icon_background);
+    border: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .Avatar__shadow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 0 1px var(--image_border);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .Avatar__children {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>
 
@@ -12,9 +46,20 @@
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
-  import Caption from '../Typography/Caption.svelte';
 
-  export let size: 80 | 72 | 64 | 56 | 48 | 44 | 40 | 36 | 32 | 28 | 24 = 48;
+  export let size:
+    | 96
+    | 80
+    | 72
+    | 64
+    | 56
+    | 48
+    | 44
+    | 40
+    | 36
+    | 32
+    | 28
+    | 24 = 48;
   export let src: string;
   export let alt: string = 'avatar';
   export let mode: 'default' | 'image' | 'app' = 'default';
