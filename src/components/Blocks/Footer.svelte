@@ -1,0 +1,25 @@
+<style>
+  :global(.Footer) {
+    margin: 24px 0;
+    font-size: 13px;
+    color: var(--text_secondary);
+    line-height: 16px;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  :global(.Div.Footer) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+</style>
+
+<script lang="ts">
+  import classNames from '../../lib/classNames';
+  import Div from './Div.svelte';
+
+</script>
+
+<Div class="{classNames('Footer', $$props.class)}">
+  <slot />
+</Div>

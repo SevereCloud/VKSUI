@@ -1,0 +1,43 @@
+<style>
+  .FormLayoutGroup > * ~ * {
+    margin-top: 12px;
+  }
+
+  .FormLayoutGroup > .Radio,
+  .FormLayoutGroup > .Checkbox,
+  .FormLayoutGroup > .Cell,
+  .FormLayoutGroup > .CellButton {
+    margin-top: 0;
+  }
+</style>
+
+<script lang="ts">
+  import { FormStatusType } from '../../types';
+  import usePlatform from '../../hooks/usePlatform';
+  import classNames from '../../lib/classNames';
+  import getClassName from '../../lib/getClassName';
+
+  export let status: FormStatusType = 'default';
+
+  const platform = usePlatform();
+</script>
+
+<!-- TODO: top, bottom, status -->
+<div
+  class="{classNames('FormLayout__row', {
+    [`FormLayout__row--s-${status}`]: !!status,
+  })}"
+>
+  <div class="FormLayout__row-top">
+    <slot name="top" />
+  </div>
+  <div
+    {...$$restProps}
+    class="{classNames(getClassName('FormLayoutGroup', platform), $$props.class)}"
+  >
+    <slot />
+  </div>
+  <div class="FormLayout__row-bottom">
+    <slot name="bottom" />
+  </div>
+</div>

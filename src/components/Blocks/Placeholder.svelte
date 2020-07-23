@@ -1,0 +1,84 @@
+<style>
+  .Placeholder {
+    background: var(--background_content);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Placeholder--stretched {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding-top: inherit;
+    padding-bottom: inherit;
+  }
+
+  .Placeholder__in {
+    text-align: center;
+    box-sizing: border-box;
+    padding: 48px 32px;
+  }
+
+  .Placeholder__icon {
+    margin-bottom: 12px;
+    display: inline-block;
+    vertical-align: top;
+    color: var(--placeholder_icon_foreground_secondary);
+  }
+
+  .Placeholder__header {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    color: var(--text_primary);
+  }
+
+  .Placeholder__text {
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--text_placeholder);
+  }
+
+  .Placeholder__header + .Placeholder__text {
+    margin-top: 8px;
+  }
+
+  .Placeholder__action:not(:first-child) {
+    margin-top: 24px;
+  }
+
+  .Placeholder__action :global(.Button--lvl-tertiary) {
+    margin-top: -8px;
+  }
+</style>
+
+<script lang="ts">
+  // import usePlatform from '../../hooks/usePlatform';
+  import classNames from '../../lib/classNames';
+
+  export let stretched: boolean = false;
+
+  // const platform = usePlatform();
+</script>
+
+<div
+  {...$$restProps}
+  class="{classNames('Placeholder', { 'Placeholder--stretched': stretched }, $$props.class)}"
+>
+  <div class="Placeholder__icon">
+    <slot name="icon" />
+  </div>
+  <div class="Placeholder__header">
+    <slot name="header" />
+  </div>
+  <div class="Placeholder__text">
+    <slot />
+  </div>
+  <div class="Placeholder__action">
+    <slot name="action" />
+  </div>
+</div>

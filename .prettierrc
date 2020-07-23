@@ -1,0 +1,9 @@
+{
+  "parser": "typescript",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "svelteSortOrder" : "styles-scripts-markup",
+  "svelteStrictMode": true,
+  "svelteBracketNewLine": true,
+  "svelteAllowShorthand": false
+}

@@ -1,0 +1,37 @@
+/* @import './bright_light.css';
+@import './space_gray.css';
+@import './constants.css';
+@import './animations.css'; */
+
+html,
+body,
+div#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--font-common);
+  color: var(--text_primary);
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  }
+
+#root {
+  user-select: none;
+  }
+
+a:focus {
+  outline: none;
+  }
