@@ -97,7 +97,7 @@
 
 ### SSR
 
-- [ ] Поддержка userAgent для SSR
+- [x] Поддержка userAgent для SSR
 
 ### Icons
 
@@ -128,3 +128,4 @@
 - [ ] Прикрутить github-action
 - [ ] Создать отдельную организацию для VKSUI
 - [ ] Продумать нейминг
+- [ ] Проверить [VKUI#444](https://github.com/VKCOM/VKUI/issues/444)

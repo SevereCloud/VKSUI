@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Div from "./components/Blocks/Div.svelte";
-	import Caption from "./components/Typography/Caption.svelte";
 	import Progress from "./components/Blocks/Progress.svelte";
 	import './styles/styles.css'
 	import './styles/bright_light.css'
@@ -11,11 +10,9 @@ import Card from "./components/Blocks/Card.svelte";
 import Header from "./components/Blocks/Header.svelte";
 import Separator from "./components/Blocks/Separator.svelte";
 import Link from "./components/Blocks/Link.svelte";
-import Switch from "./components/Blocks/Switch.svelte";
 import Avatar from "./components/Blocks/Avatar.svelte";
-
-console.log(Avatar.prototype);
-
+import Touch from "./components/Touch.svelte";
+import SSRWrapper from "./components/SSRWrapper.svelte";
 	let open = false;
 </script>
 
@@ -95,9 +92,16 @@ console.log(Avatar.prototype);
       </Card>
     </CardGrid>
   </Div>
+  <SSRWrapper userAgent="android">
+    <Div>test a</Div>
+  </SSRWrapper>
+  <SSRWrapper userAgent="iphone">
+    <Div>test b</Div>
+  </SSRWrapper>
+
   <Avatar src="https://sun9-69.userapi.com/c206728/v206728108/15b1b9/YpxKXVzlvaA.jpg?ava=1"/>
   
-
+  <Touch><a href="#test">Test</a></Touch>
 
   <div on:click={()=>{open=!open}}>OPEN</div>
 
