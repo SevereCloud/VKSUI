@@ -133,7 +133,7 @@
   {...$$restProps}
   class="{classNames(getClassName('Tabs', platform), $$props.class, `Tabs--${mode}`)}"
 >
-  <div className="Tabs__in">
+  <div class="Tabs__in">
     <slot />
   </div>
 </div>

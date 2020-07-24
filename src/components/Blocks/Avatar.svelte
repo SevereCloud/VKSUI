@@ -125,7 +125,7 @@
 
     {#if SLOTS && SLOTS.default}
       <div
-        className="Avatar__children"
+        class="Avatar__children"
         style="{`width: ${size}px, height: ${size}px; border-radius:${borderRadius}`}"
       >
         <slot />
