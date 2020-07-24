@@ -12,8 +12,11 @@
    * @param {Object} e Браузерное событие
    * @returns {void}
    */
-  const onDragStart = (e) => {
-    if (e.target.tagName === "A" || e.target.tagName === "IMG") {
+  const onDragStart = (e:DragEvent) => {
+    const target = e.target as HTMLElement;
+    console.log(target.tagName);
+    
+    if (target.tagName === "A" || target.tagName === "IMG") {
       e.preventDefault();
     }
   };
@@ -25,7 +28,7 @@
    * @param {Object} e Браузерное событие
    * @returns {void}
    */
-  const onClick = (e) => {
+  const onClick = (e:MouseEvent): void => {
     if (cancelClick) {
       cancelClick = false;
       e.preventDefault();
@@ -34,6 +37,6 @@
   };
 </script>
 
-<div on:click={onClick} on:dragstart={onDragStart}>
+<div {...$$restProps} on:click={onClick} on:dragstart={onDragStart}>
   <slot />
 </div>

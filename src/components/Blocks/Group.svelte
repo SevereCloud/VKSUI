@@ -50,7 +50,6 @@
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
-  import Header from './Header.svelte';
   import Separator from './Separator.svelte';
 
   /**
