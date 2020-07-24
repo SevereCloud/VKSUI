@@ -57,28 +57,35 @@
 </style>
 
 <script lang="ts">
-  // import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
 
   export let stretched: boolean = false;
 
-  // const platform = usePlatform();
+  const SLOTS = $$props.$$slots;
 </script>
 
 <div
   {...$$restProps}
   class="{classNames('Placeholder', { 'Placeholder--stretched': stretched }, $$props.class)}"
 >
-  <div class="Placeholder__icon">
-    <slot name="icon" />
-  </div>
-  <div class="Placeholder__header">
-    <slot name="header" />
-  </div>
-  <div class="Placeholder__text">
-    <slot />
-  </div>
-  <div class="Placeholder__action">
-    <slot name="action" />
-  </div>
+  {#if SLOTS && SLOTS.icon}
+    <div class="Placeholder__icon">
+      <slot name="icon" />
+    </div>
+  {/if}
+  {#if SLOTS && SLOTS.header}
+    <div class="Placeholder__header">
+      <slot name="header" />
+    </div>
+  {/if}
+  {#if SLOTS && SLOTS.default}
+    <div class="Placeholder__text">
+      <slot />
+    </div>
+  {/if}
+  {#if SLOTS && SLOTS.action}
+    <div class="Placeholder__action">
+      <slot name="action" />
+    </div>
+  {/if}
 </div>
