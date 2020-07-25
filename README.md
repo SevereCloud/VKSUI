@@ -66,10 +66,11 @@
   - [ ] Tooltip
   - [ ] PullToRefresh
   - [x] Counter
-  - [ ] UsersStack
+  - [x] UsersStack
   - [x] Separator
   - [ ] Placeholder
   - [ ] Banner
+  - [ ] MiniInfoCell
 - [ ] Forms
   - [ ] FormLayout
   - [ ] FormLayoutGroup
@@ -83,6 +84,9 @@
   - [ ] SelectMimicry
   - [ ] Textarea
   - [ ] File
+  - [ ] CustomSelect
+  - [ ] DatePicker
+  - [ ] SliderSwitch
 - [x] Typography
   - [x] Title
   - [x] Headline
@@ -121,11 +125,10 @@
 
 ### Всячина
 
-- [ ] подумать про вынос `usePlatform()` и `baseClassName` в `<script context="module">`
 - [ ] Сделать компоненты как компоненты
 - [ ] Прикрутить 100500 линтеров
 - [ ] Починить prettierrc
 - [ ] Прикрутить github-action
-- [ ] Создать отдельную организацию для VKSUI
+- [ ] Создать отдельную организацию для Svelte VKUI
 - [ ] Продумать нейминг
 - [ ] Проверить [VKUI#444](https://github.com/VKCOM/VKUI/issues/444)

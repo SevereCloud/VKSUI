@@ -4,10 +4,10 @@ import { SSRContextKey, SSRContextInterface } from '../lib/ssr';
 
 export default function usePlatform(): OS {
   const ssrContext = getContext(SSRContextKey) as SSRContextInterface;
-  
+
   if (ssrContext && ssrContext.platform) {
-    return ssrContext.platform
+    return ssrContext.platform;
   }
-  
+
   return platform();
 }

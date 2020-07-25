@@ -1,6 +1,6 @@
 <script lang="ts">
     import { setContext } from 'svelte';
-    import { SSRContextKey , SSRBuildContext} from '../lib/ssr'
+    import { SSRContextKey , SSRBuildContext} from '../../lib/ssr'
 
     export let userAgent:string;
     

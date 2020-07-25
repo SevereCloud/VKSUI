@@ -103,6 +103,8 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
 
+  export let indicator: any = undefined;
+  export let subtitle: string = '';
   export let mode: 'primary' | 'secondary' = 'primary';
 
   const platform = usePlatform();
@@ -112,21 +114,21 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Header', platform), $$props.class, `Header--mode-${mode}`)}"
+  class="{classNames(getClassName('Header', platform), { 'Header--pi': typeof indicator === 'string' || typeof indicator === 'number' }, `Header--mode-${mode}`, $$props.class)}"
 >
 
   <div class="Header__in">
     <div class="Header__content">
       <slot />
-      {#if SLOTS && SLOTS.subtitle}
+      {#if (SLOTS && SLOTS.subtitle) || subtitle !== ''}
         <div class="Header__subtitle">
-          <slot name="subtitle" />
+          <slot name="subtitle">{subtitle}</slot>
         </div>
       {/if}
     </div>
-    {#if SLOTS && SLOTS.indicator}
+    {#if (SLOTS && SLOTS.indicator) || typeof indicator !== 'undefined'}
       <div class="Header__indicator">
-        <slot name="indicator" />
+        <slot name="indicator">{indicator}</slot>
       </div>
     {/if}
     {#if SLOTS && SLOTS.aside}

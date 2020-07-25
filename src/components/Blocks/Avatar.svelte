@@ -60,8 +60,6 @@
     | 32
     | 28
     | 24 = 48;
-  export let src: string;
-  export let alt: string = 'avatar';
   export let mode: 'default' | 'image' | 'app' = 'default';
   export let shadow: boolean = true;
 
@@ -99,19 +97,18 @@
   class="{classNames(getClassName('Avatar', platform), $$props.class, `Avatar--type-${mode}`, `Avatar--sz-${size}`)}"
 >
   <div class="Avatar__in" style="{`width: ${size}px; height: ${size}px`}">
-    {#if src}
+    {#if $$props.src}
       <img
         {...$$restProps}
         class="Avatar__img"
-        src="{src}"
-        alt="{alt}"
+        src="{$$props.src}"
+        alt="{$$props.alt}"
         style="{$$props.style + `; border-radius:${borderRadius}`}"
       />
     {:else}
       <div
         {...$$restProps}
         class="Avatar__img"
-        src="{src}"
         style="{$$props.style + `; border-radius:${borderRadius}`}"
       ></div>
     {/if}

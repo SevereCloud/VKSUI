@@ -38,7 +38,9 @@ export function parseiOSVersion(userAgent: string): Version | null {
     return null;
   }
 
-  const match = userAgent.match(/(iphone os|cpu os|ios) \b([0-9]+_[0-9]+(?:_[0-9]+)?)\b/i);
+  const match = userAgent.match(
+    /(iphone os|cpu os|ios) \b([0-9]+_[0-9]+(?:_[0-9]+)?)\b/i,
+  );
   if (!match) {
     return null;
   }

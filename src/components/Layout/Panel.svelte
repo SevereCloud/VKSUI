@@ -1,0 +1,151 @@
+<style>
+  .Panel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .Panel::after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    content: '';
+  }
+
+  .Panel--centered :global(.Panel__in) {
+    height: 100%;
+  }
+
+  .Panel--centered :global(.PanelHeader) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .Panel__in {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+    z-index: 2;
+  }
+
+  .Panel__centered {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .Panel__centered .PanelHeader--ios.PanelHeader--vis + * {
+    margin-top: var(--panelheader_height_ios);
+  }
+
+  .Panel__centered .PanelHeader--android.PanelHeader--vis + * {
+    margin-top: var(--panelheader_height_android);
+  }
+
+  .Panel--sizeX-compact
+    .Panel__centered
+    .PanelHeader--ios.PanelHeader--sep
+    + * {
+    margin-top: calc(var(--panelheader_height_ios) + 5px);
+  }
+
+  .Panel--sizeX-compact
+    .Panel__centered
+    .PanelHeader--android.PanelHeader--sep
+    + * {
+    margin-top: calc(var(--panelheader_height_android) + 5px);
+  }
+
+  .Panel--sizeX-regular
+    .Panel__centered
+    .PanelHeader--ios.PanelHeader--sep
+    + * {
+    margin-top: calc(var(--panelheader_height_ios) + 16px);
+  }
+
+  .Panel--sizeX-regular
+    .Panel__centered
+    .PanelHeader--android.PanelHeader--sep
+    + * {
+    margin-top: calc(var(--panelheader_height_android) + 16px);
+  }
+
+  :global(.Epic .Panel__in) {
+    padding-bottom: var(--tabbar_height);
+    padding-bottom: calc(var(--safe-area-inset-bottom) + var(--tabbar_height));
+  }
+
+  .Panel__in-before {
+    height: 1px;
+    margin-bottom: -1px;
+  }
+
+  .Panel__separator {
+    position: relative;
+    z-index: 3;
+  }
+
+  .Panel__in-after {
+    height: 1px;
+    margin-top: -1px;
+  }
+
+  .Panel :global(.Panel__in),
+  .Panel::after {
+    background-color: var(--background_content);
+  }
+
+  .Panel.Panel--regular :global(.Panel__in),
+  .Panel.Panel--regular::after {
+    background-color: transparent;
+  }
+</style>
+
+<script lang="ts">
+  import usePlatform from '../../hooks/usePlatform';
+  import classNames from '../../lib/classNames';
+  import getClassName from '../../lib/getClassName';
+  import { IOS } from '../../lib/platform';
+  import Touch from '../Service/Touch.svelte';
+  import { SizeType } from '../Service/AdaptivityContext';
+
+  // TODO: Нужно получать из контекста
+  export let sizeX: SizeType = SizeType.REGULAR;
+  // export let sizeY: SizeType = SizeType.REGULAR;
+  // export let viewWidth: ViewWidth = ViewWidth.MOBILE;
+
+  export let centered: boolean = false;
+
+  const platform = usePlatform();
+</script>
+
+<!-- TODO: -->
+<div
+  {...$$restProps}
+  class="{classNames(getClassName('Panel', platform), `Panel--${sizeX}`, { 'Panel--centered': centered, [`Panel--sizeX-${sizeX}`]: true }, $$props.class)}"
+>
+  <Touch class="Panel__in">
+    {#if platform === IOS}
+      <div class="Panel__fade"></div>
+    {/if}
+    <div class="Panel__in-before"></div>
+    {#if centered}
+      <div class="Panel__centered">
+        <slot />
+      </div>
+    {:else}
+      <slot />
+    {/if}
+    <div class="Panel__in-after"></div>
+  </Touch>
+
+</div>

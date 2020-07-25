@@ -58,6 +58,7 @@
     auto – разделитель рисуется автоматически между соседними группами.
    */
   export let separator: 'show' | 'hide' | 'auto' = 'auto';
+  export let description: string = '';
 
   const platform = usePlatform();
 
@@ -71,9 +72,9 @@
 >
   <slot name="header" />
   <slot />
-  {#if SLOTS && SLOTS.description}
+  {#if (SLOTS && SLOTS.description) || description !== ''}
     <div class="Group__description">
-      <slot name="description" />
+      <slot name="description">{description}</slot>
     </div>
   {/if}
   {#if separator !== 'hide'}

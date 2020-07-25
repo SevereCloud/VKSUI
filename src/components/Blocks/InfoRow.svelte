@@ -7,13 +7,14 @@
     line-height: 20px;
   }
 
-  .InfoRow__header {
+  /* margin у .Subhead перекрывает margin-bottom */
+  /* :global(.InfoRow__header) {
     margin-bottom: 2px;
     color: var(--text_secondary);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
+  } */
 </style>
 
 <script lang="ts">
@@ -21,6 +22,8 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import Subhead from '../Typography/Subhead.svelte';
+
+  export let header: string = '';
 
   const platform = usePlatform();
 
@@ -31,9 +34,9 @@
   {...$$restProps}
   class="{classNames(getClassName('InfoRow', platform), $$props.class)}"
 >
-  {#if SLOTS && SLOTS.header}
+  {#if (SLOTS && SLOTS.header) || header}
     <Subhead class="InfoRow__header" weight="regular">
-      <slot name="header" />
+      <slot name="header">{header}</slot>
     </Subhead>
   {/if}
   <slot />

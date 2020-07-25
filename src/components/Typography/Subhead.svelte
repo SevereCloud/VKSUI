@@ -37,6 +37,14 @@
   .Subhead--w-bold {
     font-weight: 600;
   }
+
+  .InfoRow__header {
+    margin-bottom: 2px;
+    color: var(--text_secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 </style>
 
 {#if platform === ANDROID}
