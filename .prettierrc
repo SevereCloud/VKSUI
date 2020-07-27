@@ -1,9 +1,11 @@
 {
+  "tabWidth": 2,
   "parser": "typescript",
   "singleQuote": true,
   "trailingComma": "all",
   "svelteSortOrder" : "styles-scripts-markup",
   "svelteStrictMode": true,
   "svelteBracketNewLine": true,
-  "svelteAllowShorthand": false
+  "svelteAllowShorthand": false,
+  "plugins": ["prettier-plugin-svelte"]
 }
