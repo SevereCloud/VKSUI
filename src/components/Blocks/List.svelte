@@ -7,6 +7,11 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Контейнер для однородных `Cell`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('List', platform), $$props.class)}"

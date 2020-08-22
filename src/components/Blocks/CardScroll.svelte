@@ -58,6 +58,11 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Горизонтальный скролл для `Card`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('CardScroll', platform), $$props.class)}"

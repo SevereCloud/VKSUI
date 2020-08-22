@@ -61,6 +61,12 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Компонент для отрисовки счетчика в ячейках и кнопках.
+Принимает в качестве слота число или строку с отформатированным числом по разрядам.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('Counter', platform), $$props.class, `Counter--${mode}`, `Counter--s-${size}`)}"

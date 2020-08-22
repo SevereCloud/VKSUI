@@ -74,8 +74,10 @@
     margin-top: 3px;
   }
 
-  .SimpleCell :global(.Avatar--sz-32 ~ .SimpleCell__main .SimpleCell__description),
-  .SimpleCell :global(.Avatar--sz-28 ~ .SimpleCell__main .SimpleCell__description) {
+  .SimpleCell
+    :global(.Avatar--sz-32 ~ .SimpleCell__main .SimpleCell__description),
+  .SimpleCell
+    :global(.Avatar--sz-28 ~ .SimpleCell__main .SimpleCell__description) {
     margin-top: 2px;
   }
 
@@ -151,7 +153,8 @@
   }
 
   .SimpleCell--ios :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__main),
-  .SimpleCell--ios :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__indicator) {
+  .SimpleCell--ios
+    :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__indicator) {
     font-size: 16px;
     line-height: 20px;
   }
@@ -216,6 +219,13 @@
 
   const SLOTS = $$props.$$slots;
 </script>
+
+<!-- 
+@component
+SimpleCell — это упрощенная и улучшенная с точки зрения соответствия дизайну версия Cell. Она не может быть
+удаляемой, выделяемой или перетаскиваемой. У неё нет размеров. В ней меньше html-элементов.
+Всё это влияет на скорость её отрисовки, особенно если идёт речь о сотнях экземпляров.
+-->
 
 <!-- TODO: Tappable -->
 <div

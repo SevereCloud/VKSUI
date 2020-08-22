@@ -16,6 +16,12 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Компонент с установленными паддингами, которые отличаются в зависимости от платформы. Необходим, когда есть какой-то
+кастомный блок, у которого должны быть стандартные отступы.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('Div', platform), $$props.class)}"

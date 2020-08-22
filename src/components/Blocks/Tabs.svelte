@@ -9,7 +9,7 @@
     align-items: center;
   }
 
- :global(.PanelHeader) .Tabs {
+  :global(.PanelHeader) .Tabs {
     overflow: hidden;
     background: var(--header_background);
     font-family: var(--font-common);
@@ -52,7 +52,6 @@
   /*
  iOS
  */
-
 
   .Tabs--ios.Tabs--segmented {
     padding: 4px 12px 8px;

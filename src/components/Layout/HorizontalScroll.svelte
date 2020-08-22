@@ -20,10 +20,12 @@
   import classNames from '../../lib/classNames';
 </script>
 
-<div
-  {...$$restProps}
-  class="{classNames('HorizontalScroll', $$props.class)}"
->
+<!-- 
+@component
+Компонент для отрисовки "длинного" содержимого, которое можно скроллить по горизонтали.
+-->
+
+<div {...$$restProps} class="{classNames('HorizontalScroll', $$props.class)}">
   <div class="HorizontalScroll__in">
     <slot />
   </div>

@@ -49,9 +49,14 @@
   import Spinner from '../Blocks/Spinner.svelte';
   import PopoutWrapper from './PopoutWrapper.svelte';
 
-
   const platform = usePlatform();
 </script>
+
+<!-- 
+@component
+Компонент-обертка над `Spinner`.
+Рекомендуется использовать в случаях, когда требуется заблокировать интерфейс до завершения асинхронного процесса.
+-->
 
 <PopoutWrapper
   class="{classNames(getClassName('ScreenSpinner', platform), $$props.class)}"

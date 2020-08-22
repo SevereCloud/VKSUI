@@ -20,6 +20,11 @@
 
 </script>
 
+<!-- 
+@component
+Подвал для списков.
+-->
+
 <Div class="{classNames('Footer', $$props.class)}">
   <slot />
 </Div>

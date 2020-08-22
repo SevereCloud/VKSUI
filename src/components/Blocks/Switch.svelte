@@ -109,6 +109,11 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Надстройка над `<input type="checkbox" />`. Компонент принимает все валидные для этого элемента свойства.
+-->
+
 <label
   class="{classNames(getClassName('Switch', platform), $$props.class)}"
   style="{$$props.style}"

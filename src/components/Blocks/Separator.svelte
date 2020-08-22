@@ -41,6 +41,11 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Используется для разделения какого-либо контента. Отступы справа и слева контролируются свойством `wide`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('Separator', platform), $$props.class, {

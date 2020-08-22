@@ -63,6 +63,11 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Сетка для `Card`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('CardGrid', platform), $$props.class)}"

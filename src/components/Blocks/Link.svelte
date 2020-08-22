@@ -15,6 +15,16 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Надстройка над `<a />`.
+
+```jsx
+<Link href="https://google.com" target="_blank">Google</Link>
+<Link href="/profile">Profile</Link>
+```
+-->
+
 <a
   href="{href}"
   {...$$restProps}

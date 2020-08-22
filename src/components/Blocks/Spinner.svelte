@@ -43,8 +43,6 @@
   }
 </style>
 
-<!-- svelte-ignore css-unused-selector -->
-<!-- svelte-ignore css-unused-selector -->
 <script lang="ts">
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
@@ -54,6 +52,12 @@
 
   const platform = usePlatform();
 </script>
+
+<!-- 
+@component
+Используется для визуализации выполнения асинхронного процесса (например ajax запроса). Если нужно на момент загрузки
+заблокировать интерфейс, то можно использовать надстройку над `Spinner` – `ScreenSpinner`.
+-->
 
 <!-- TODO: spinnerIcon -->
 <div

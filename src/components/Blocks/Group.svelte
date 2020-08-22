@@ -65,7 +65,12 @@
   const SLOTS = $$props.$$slots;
 </script>
 
-<!-- svelte-ignore css-unused-selector -->
+
+<!-- 
+@component
+Группа – базовый компонент для группировки контента по смыслу.
+-->
+
 <section
   {...$$restProps}
   class="{classNames(getClassName('Group', platform), $$props.class)}"

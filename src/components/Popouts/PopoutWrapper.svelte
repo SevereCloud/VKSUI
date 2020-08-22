@@ -115,11 +115,25 @@
   const platform = usePlatform();
 </script>
 
+<!-- 
+@component
+Компонент-обертка для отрисовки всплывающих окон с затемнением фона. Используется внутри `Alert`, `ActionSheet`
+и `ScreenSpinner`. Свойства `alignY` и `alignX` служат для удобного позиционирования контента. Пример:
+
+```jsx static
+<PopoutWrapper alignY="center" alignX="center">
+  Some content
+</PopoutWrapper>
+```
+
+Все всплывающие окна передаются в свойство `popout` компонентов `View` или `Root`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('PopoutWrapper', platform), `PopoutWrapper--v-${alignY}`, `PopoutWrapper--h-${alignX}`, { 'PopoutWrapper--closing': closing, 'PopoutWrapper--opened': opened }, $$props.class)}"
   transition:fade="{{ duration: platform === ANDROID ? 200 : 300 }}"
-  on:introend="{() => opened = true}"
+  on:introend="{() => (opened = true)}"
 >
   {#if hasMask}
     <div class="PopoutWrapper__mask"></div>

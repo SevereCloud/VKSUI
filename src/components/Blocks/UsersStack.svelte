@@ -176,6 +176,13 @@
   const SLOTS = $$props.$$slots;
 </script>
 
+<!-- 
+@component
+Используется для отображения аватарок пользователей с каким-то сопроводительным текстом.
+
+У компонента есть вертикальный режим – когда текст располагается под аватарками. В таком режиме рекомендуется использовать размер `m`.
+-->
+
 <div
   {...$$restProps}
   class="{classNames(getClassName('UsersStack', platform), `UsersStack--size-${size}`, `UsersStack--l-${layout}`, { 'UsersStack--others': canShowOthers, 'UsersStack--simple': !canUseClipPath }, $$props.class)}"
