@@ -1,6 +1,15 @@
 <style>
   .MiniInfoCell {
     display: flex;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .MiniInfoCell--lvl-primary {
+    color: var(--text_primary);
+  }
+
+  .MiniInfoCell--lvl-secondary {
     color: var(--text_subhead);
   }
 
@@ -17,14 +26,17 @@
     white-space: nowrap;
   }
 
-  .MiniInfoCell--mult :global(.MiniInfoCell__content) {
+  .MiniInfoCell--wr-short :global(.MiniInfoCell__content) {
     white-space: initial;
     display: -webkit-box;
     max-height: 60px;
     -webkit-line-clamp: 3;
-    /* Workaround for autoprefixer bug with this property. Maybe this was fixed in 9.8.5 */
-    /* autoprefixer: ignore next */
     -webkit-box-orient: vertical;
+  }
+
+  .MiniInfoCell--wr-full :global(.MiniInfoCell__content) {
+    overflow: inherit;
+    white-space: initial;
   }
 
   .MiniInfoCell__after {
@@ -47,16 +59,23 @@
     color: var(--link_alternate);
   }
 
+  .MiniInfoCell--md-more {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
   /* iOS */
 
   .MiniInfoCell--ios {
-    padding: 6px 12px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
   /* Android */
 
   .MiniInfoCell--android {
-    padding: 6px 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 </style>
 
@@ -66,8 +85,32 @@
   import getClassName from '../../lib/getClassName';
   import Text from '../Typography/Text.svelte';
 
+  /**
+   * Тип ячейки:
+   *
+   * - `base` – базовая ячейка с серой иконкой и серым текстом.<br />
+   * В компонент можно передать `Link`, чтобы визуально сделать часть текста ссылкой.
+   * - `add` – тип ячейки, который показывает, что взаимодействие с ней должно вызывать действие добавления чего-то.
+   * - `more` – взаимодействие с такой ячейкой должно открывать какую-то подробную информацию.
+   */
   export let mode: 'base' | 'add' | 'more' = 'base';
-  export let multiline: boolean = false;
+
+  /**
+   * Тип отображения текста:
+   *
+   * - `nowrap` – в одну строку, текст не переносится и обрезается.
+   * - `short` – максимально отображается 3 строки, остальное обрезается.
+   * - `full` – текст отображается полностью.
+   */
+  export let textWrap: 'nowrap' | 'short' | 'full' = 'nowrap';
+
+  /**
+   * Стиль текста:
+   *
+   * - `primary` – используйте этот стиль, если хотите выделить информацию в общем списке.<br />Пример использования: подробная информация на странице сообщества
+   * - `secondary` – стиль по-умолчанию.
+   */
+  export let textLevel: 'primary' | 'secondary' = 'secondary';
 
   const platform = usePlatform();
 
@@ -76,7 +119,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('MiniInfoCell', platform), { [`MiniInfoCell--md-${mode}`]: mode !== 'base', 'MiniInfoCell--mult': multiline }, $$props.class)}"
+  class="{classNames(getClassName('MiniInfoCell', platform), { [`MiniInfoCell--md-${mode}`]: mode !== 'base', [`MiniInfoCell--wr-${textWrap}`]: textWrap !== 'nowrap' }, `MiniInfoCell--lvl-${textLevel}`, $$props.class)}"
 >
   <div class="MiniInfoCell__icon">
     <slot name="before" />
