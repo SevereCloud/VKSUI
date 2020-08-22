@@ -100,7 +100,7 @@
 </style>
 
 <script lang="ts" context="module">
-  import { canUseDOM } from '../../lib/dom';
+  import { canUseDOM, onDOMLoaded } from '../../lib/dom';
   if (canUseDOM) {
     const svgElement = document.createElementNS(
       'http://www.w3.org/2000/svg',
@@ -131,7 +131,9 @@
   </clipPath>
 </defs>`;
 
-    document.body.appendChild(svgElement);
+    onDOMLoaded(() => {
+      document.body.appendChild(svgElement);
+    });
   }
 </script>
 

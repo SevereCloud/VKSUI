@@ -7,3 +7,5 @@ export interface Version {
   minor?: number;
   patch?: number;
 }
+
+export type AnyFunction = (...args: any[]) => any;
