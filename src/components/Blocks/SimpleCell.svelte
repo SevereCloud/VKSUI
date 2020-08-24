@@ -195,6 +195,8 @@
 </style>
 
 <script lang="ts">
+  import Icon24Chevron from '@sveltevk/icons/dist/24/chevron';
+
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
@@ -252,7 +254,9 @@ SimpleCell — это упрощенная и улучшенная с точки
   {#if (SLOTS && SLOTS.after) || (expandable && platform === IOS)}
     <div class="SimpleCell__after">
       <slot name="after" />
-      <!-- TODO: иконка для iOS -->
+      {#if expandable && platform === IOS}
+        <Icon24Chevron />
+      {/if}
     </div>
   {/if}
 </div>
