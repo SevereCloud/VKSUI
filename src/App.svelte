@@ -41,6 +41,7 @@
   import Footer from './components/Blocks/Footer.svelte';
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
+  import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron } from '@sveltevk/icons';
 </script>
 
 <main>
@@ -92,14 +93,20 @@
           Плейлисты
         </Header>
         <Separator />
-        <!-- <Header aside={<Link>Добавленные<Icon16Dropdown /></Link>} indicator={16}>
+        <Header indicator={16}>
+          <div slot="aside">
+            <Link>Добавленные<Icon16Dropdown /></Link>
+          </div>
           Мои видео
         </Header>
-        <Separator />-->
-        <!-- <Header aside={<Icon24Dismiss />}>
+        <Separator />
+        <Header>
+          <div slot="aside">
+            <Icon24Dismiss />
+          </div>
           Недавние
         </Header>
-        <Separator />-->
+        <Separator />
         <Header>
           <div slot="aside">
             <Link>Показать все</Link>
@@ -127,10 +134,13 @@
           Приглашения
         </Header>
         <Separator />
-        <!-- <Header mode="secondary" indicator="667" aside={<Icon16Chevron />}>
+          <Header mode="secondary" indicator="667">
+          <div slot="aside">
+            <Icon16Chevron />
+          </div>
           Фотографии
         </Header>
-        <Separator />-->
+        <Separator />
         <Header mode="secondary">
           <div slot="aside">
             <Link>Показать все</Link>

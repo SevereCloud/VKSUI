@@ -3,6 +3,16 @@
     color: var(--accent);
     text-decoration: none;
   }
+
+  .Link :global(.Icon) {
+    display: inline-block;
+    margin-left: 4px;
+  }
+
+  .Link :global(.Icon--dropdown_16) {
+    position: relative;
+    top: 1px;
+  }
 </style>
 
 <script lang="ts">
