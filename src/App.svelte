@@ -41,6 +41,7 @@
   import Footer from './components/Blocks/Footer.svelte';
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
+  import Spinner from './components/Blocks/Spinner.svelte';
   import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron } from '@sveltevk/icons';
 </script>
 
@@ -378,7 +379,12 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Spinner</Title>
-      <div class="Example"></div>
+      <div class="Example" style="display: flex;align-items: center; flex-direction: column">
+          <Spinner size="large" style="margin-top: 20px" />
+          <Spinner size="medium" style="margin-top: 20px" />
+          <Spinner size="regular" style="margin-top: 20px" />
+          <Spinner size="small" style="margin-top: 20px" />
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">PanelSpinner</Title>
