@@ -42,6 +42,7 @@
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
   import Spinner from './components/Blocks/Spinner.svelte';
+  import TouchExample from './TouchExample.svelte';
   import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron } from '@sveltevk/icons';
 </script>
 
@@ -635,6 +636,23 @@
         <Caption level="4" weight="semibold" caps>
           Caption CAPS 4 semibold
         </Caption>
+      </div>
+    </Div>
+  </Div>
+
+  <Div>
+    <Title level="1" weight="heavy">Service</Title>
+    <Div>
+      <Title level="2" weight="semibold">Touch</Title>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">
+              Перетащите кружок
+            </Header>
+          </div>
+          <TouchExample />
+        </Group>
       </div>
     </Div>
   </Div>

@@ -1,9 +1,228 @@
+<script context="module" lang="ts">
+  import {
+    getSupportedEvents,
+    coordX,
+    coordY,
+    touchEnabled,
+  } from '../../lib/touch';
+  import type {
+    VKUITouchEventHander,
+    VKUITouchEvent,
+  } from '../../lib/touch';
+
+  export interface Gesture {
+    startX?: number;
+    startY?: number;
+    startT?: Date;
+    isPressed?: boolean;
+    isY?: boolean;
+    isX?: boolean;
+    isSlideX?: boolean;
+    isSlideY?: boolean;
+    isSlide?: boolean;
+    shiftX?: number;
+    shiftY?: number;
+    shiftXAbs?: number;
+    shiftYAbs?: number;
+  }
+
+  export interface TouchEvent extends Gesture {
+    originalEvent: VKUITouchEvent;
+  }
+
+  export type TouchEventHandler = (e: TouchEvent) => void;
+  export type ClickHandler = (e: MouseEvent) => void;
+  export type DragHandler = (e: DragEvent) => void;
+
+  const events = getSupportedEvents();
+</script>
+
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte';
+  import { createEventDispatcher, onDestroy, onMount } from 'svelte';
+  import { canUseDOM } from '../../lib/dom';
 
   const dispatch = createEventDispatcher();
 
+  export let onStart: (outputEvent: TouchEvent) => void = undefined;
+  export let onStartX: (outputEvent: TouchEvent) => void = undefined;
+  export let onStartY: (outputEvent: TouchEvent) => void = undefined;
+  export let onMove: (outputEvent: TouchEvent) => void = undefined;
+  export let onMoveX: (outputEvent: TouchEvent) => void = undefined;
+  export let onMoveY: (outputEvent: TouchEvent) => void = undefined;
+  export let onEnd: (outputEvent: TouchEvent) => void = undefined;
+  export let onEndX: (outputEvent: TouchEvent) => void = undefined;
+  export let onEndY: (outputEvent: TouchEvent) => void = undefined;
+  export let useCapture = false; 
+  
+  export let container:HTMLElement;
+  let gesture: Partial<Gesture> = {};
   let cancelClick = false;
+
+  onMount(() => {
+    if (canUseDOM) {
+      container.addEventListener(events[0], onStartEvent, { capture: useCapture, passive: false });
+      touchEnabled && subscribe(container);
+    }
+  })
+
+  onDestroy(()=>{
+    container.removeEventListener(events[0], onStartEvent);
+    touchEnabled && unsubscribe(container);
+  })
+
+  /**
+   * Обработчик событий touchstart
+   *
+   * @param {Object} e Браузерное событие
+   * @return {void}
+   */
+   const onStartEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
+    gesture = {
+      startX: coordX(e),
+      startY: coordY(e),
+      startT: new Date(),
+      isPressed: true,
+    };
+
+    // Вызываем нужные колбеки из props
+    const outputEvent = {
+      ...gesture,
+      originalEvent: e,
+    };
+
+    if (onStart) {
+      onStart(outputEvent);
+    }
+
+    if (onStartX) {
+      onStartX(outputEvent);
+    }
+
+    if (onStartY) {
+      onStartY(outputEvent);
+    }
+
+    !touchEnabled && subscribe(document);
+  };
+
+   /**
+   * Обработчик событий touchmove
+   *
+   * @param {Object} e Браузерное событие
+   * @return {void}
+   */
+   const onMoveEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
+    const { isPressed, isX, isY, startX, startY } = gesture;
+
+    if (isPressed) {      
+      // смещения
+      const shiftX = coordX(e) - startX;
+      const shiftY = coordY(e) - startY;
+
+      // абсолютные значения смещений
+      const shiftXAbs = Math.abs(shiftX);
+      const shiftYAbs = Math.abs(shiftY);
+
+      // Если определяем мультитач, то прерываем жест
+      if (!!e.touches && e.touches.length > 1) {
+        return onEndEvent(e);
+      }
+
+      // если мы ещё не определились
+      if (!isX && !isY) {
+        let willBeX = shiftXAbs >= 5 && shiftXAbs > shiftYAbs;
+        let willBeY = shiftYAbs >= 5 && shiftYAbs > shiftXAbs;
+        let willBeSlidedX = willBeX && !!onMoveX || !!onMove;
+        let willBeSlidedY = willBeY && !!onMoveY || !!onMove;
+
+        gesture.isY = willBeY;
+        gesture.isX = willBeX;
+        gesture.isSlideX = willBeSlidedX;
+        gesture.isSlideY = willBeSlidedY;
+        gesture.isSlide = willBeSlidedX || willBeSlidedY;
+      }
+
+      if (gesture.isSlide) {
+        gesture.shiftX = shiftX;
+        gesture.shiftY = shiftY;
+        gesture.shiftXAbs = shiftXAbs;
+        gesture.shiftYAbs = shiftYAbs;
+
+        // Вызываем нужные колбеки из props
+        const outputEvent: TouchEvent = {
+          ...gesture,
+          originalEvent: e,
+        };
+
+        if (onMove) {
+          onMove(outputEvent);
+        }
+
+        if (gesture.isSlideX && onMoveX) {
+          onMoveX(outputEvent);
+        }
+
+        if (gesture.isSlideY && onMoveY) {
+          onMoveY(outputEvent);
+        }
+      }
+    }
+  };
+
+  /**
+   * Обработчик событий touchend, touchcancel
+   *
+   * @param {Object} e Браузерное событие
+   * @return {void}
+   */
+  const onEndEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
+    const { isPressed, isSlide, isSlideX, isSlideY } = gesture;
+
+    if (isPressed) {
+      // Вызываем нужные колбеки из props
+      const outputEvent: TouchEvent = {
+        ...gesture,
+        originalEvent: e,
+      };
+
+      if (onEnd) {
+        onEnd(outputEvent);
+      }
+
+      if (isSlideY && onEndY) {
+        onEndY(outputEvent);
+      }
+
+      if (isSlideX && onEndX) {
+        onEndX(outputEvent);
+      }
+    }
+
+    const target = e.target as HTMLElement;
+
+    // Если закончили жест на ссылке, выставляем флаг для отмены перехода
+    cancelClick = target.tagName === 'A' && isSlide;
+    gesture = {};
+
+    !touchEnabled && unsubscribe(document);
+  };
+
+  const subscribe = (element: HTMLElement|Document) => {
+    const listenerParams = { capture: useCapture, passive: false };
+    element.addEventListener(events[1], onMoveEvent, listenerParams);
+    element.addEventListener(events[2], onEndEvent, listenerParams);
+    element.addEventListener(events[3], onEndEvent, listenerParams);
+  }
+
+  const unsubscribe = (element: HTMLElement|Document) => {
+    // Здесь нужен последний аргумент с такими же параметрами, потому что
+    // некоторые браузеры на странных вендорах типа Meizu не удаляют обработчик.
+    // https://github.com/VKCOM/VKUI/issues/444
+    const listenerParams = { capture: useCapture, passive: false };
+    element.removeEventListener(events[1], onMoveEvent, listenerParams);
+    element.removeEventListener(events[2], onEndEvent, listenerParams);
+    element.removeEventListener(events[3], onEndEvent, listenerParams);
+  }
 
   /**
    * Обработчик событий dragstart
@@ -14,8 +233,6 @@
    */
   const onDragStart = (e: DragEvent) => {
     const target = e.target as HTMLElement;
-    console.log(target.tagName);
-
     if (target.tagName === 'A' || target.tagName === 'IMG') {
       e.preventDefault();
     }
@@ -46,6 +263,6 @@ Touch – это компонент для удобной работы с pointe
 Компонент используется во многих других компонентах библиотеки (Cell, Slider, Gallery, Tappable).
 -->
 
-<div {...$$restProps} on:click="{onClick}" on:dragstart="{onDragStart}">
+<div {...$$restProps} bind:this={container} on:click="{onClick}" on:dragstart="{onDragStart}">
   <slot />
 </div>
