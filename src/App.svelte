@@ -43,7 +43,6 @@
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
   import Spinner from './components/Blocks/Spinner.svelte';
-  import Input from './components/Forms/Input.svelte';
   import TouchExample from './TouchExample.svelte';
 
   import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron, Icon28UserOutline, Icon28PaletteOutline, Icon28SettingsOutline, Icon28MessageOutline } from '@sveltevk/icons';
