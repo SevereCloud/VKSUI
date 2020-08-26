@@ -19,13 +19,13 @@
     color: var(--text_secondary);
   }
 
-  .Group__separator {
+  :global(.Group__separator) {
     margin-top: 12px;
   }
 
-  .Cell + .Group__separator,
-  .CellButton + .Group__separator,
-  .InfoRow + .Group__separator {
+  :global(.Cell) + :global(.Group__separator),
+  :global(.CellButton) + :global(.Group__separator),
+  :global(.InfoRow) + :global(.Group__separator) {
     margin-top: 8px;
   }
 

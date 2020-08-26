@@ -6,6 +6,7 @@
   main :global(.Example) {
     height: 667px;
     width: 375px;
+    overflow-y:auto;
     border: 1px solid rgba(0, 0, 0, 0.12);
     display: block;
     margin: auto;
@@ -42,8 +43,10 @@
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
   import Spinner from './components/Blocks/Spinner.svelte';
+  import Input from './components/Forms/Input.svelte';
   import TouchExample from './TouchExample.svelte';
-  import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron } from '@sveltevk/icons';
+
+  import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron, Icon28UserOutline, Icon28PaletteOutline, Icon28SettingsOutline, Icon28MessageOutline } from '@sveltevk/icons';
 </script>
 
 <main>
@@ -317,6 +320,24 @@
       <Title level="2" weight="semibold">SimpleCell</Title>
       <div class="Example">
         <Group>
+          <Header mode="secondary">Меню</Header>
+          <SimpleCell expandable>
+            <div slot="before">
+              <Icon28UserOutline />
+            </div>
+            Аккаунт</SimpleCell>
+          <SimpleCell expandable>
+            <div slot="before">
+              <Icon28PaletteOutline />
+            </div>
+            Внешний вид</SimpleCell>
+          <SimpleCell expandable>
+            <div slot="before">
+              <Icon28SettingsOutline />
+            </div>
+            Основные</SimpleCell>
+        </Group>
+        <Group>
           <Header mode="secondary">Настройки</Header>
           <SimpleCell disabled>
             <div slot="after">
@@ -336,6 +357,49 @@
           <SimpleCell expandable indicator="Русский">Язык</SimpleCell>
           <SimpleCell expandable indicator="При использовании">
             Геолокация
+          </SimpleCell>
+        </Group>
+        <Group>
+          <Header mode="secondary">Список диалогов</Header>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar size={40} src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1" />
+            </div>
+            <div slot="after">
+              <Icon28MessageOutline />
+            </div>
+            Игорь Фёдоров
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar size={40} src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1" />
+            </div>
+            <div slot="after">
+              <Icon28MessageOutline />
+            </div>
+            Artur Stambultsian
+          </SimpleCell>
+        </Group>
+        <Group>
+          <Header mode="secondary">Список друзей</Header>
+          <SimpleCell description="Команда ВКонтакте">
+            <div slot="before">
+              <Avatar size={40} src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1" />
+            </div>
+            <div slot="after">
+              <Icon28MessageOutline />
+            </div>
+            Игорь Фёдоров
+          </SimpleCell>
+          <SimpleCell description="Бот">
+          <div slot="before">
+            <Avatar size={40} src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1" />
+          </div>
+            <div slot="after">
+              <Icon28MessageOutline />
+            </div>
+          
+            Artur Stambultsian
           </SimpleCell>
         </Group>
       </div>
