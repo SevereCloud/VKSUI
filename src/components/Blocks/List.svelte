@@ -3,7 +3,6 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
 
-
   const platform = usePlatform();
 </script>
 

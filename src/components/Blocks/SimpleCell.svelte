@@ -152,7 +152,8 @@
     padding-bottom: 11px;
   }
 
-  :global(.SimpleCell--ios) :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__main),
+  :global(.SimpleCell--ios)
+    :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__main),
   :global(.SimpleCell--ios)
     :global(.Avatar:not(.Avatar--sz-32) ~ .SimpleCell__indicator) {
     font-size: 16px;
@@ -172,7 +173,9 @@
   }
 
   :global(.SimpleCell--ios) .SimpleCell__after :global(.IconButton .Icon--16),
-  :global(.SimpleCell--ios) .SimpleCell__after :global(.IconButton .Icon--16 ~ *) {
+  :global(.SimpleCell--ios)
+    .SimpleCell__after
+    :global(.IconButton .Icon--16 ~ *) {
     margin-right: -12px;
   }
 
@@ -197,7 +200,7 @@
 <script lang="ts">
   import Icon24Chevron from '@sveltevk/icons/dist/24/chevron';
 
-  import Tapptable from '../Service/Tapptable.svelte'
+  import Tapptable from '../Service/Tapptable.svelte';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';

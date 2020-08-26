@@ -1,4 +1,4 @@
-export interface VKUITouchEvent extends MouseEvent, TouchEvent {}
+export interface VKUITouchEvent extends MouseEvent, TouchEvent { }
 export type VKUITouchEventHander = (e: VKUITouchEvent) => void;
 
 /*

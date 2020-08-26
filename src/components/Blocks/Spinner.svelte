@@ -69,12 +69,12 @@
   class="{classNames(getClassName('Spinner', platform), $$props.class)}"
 >
   {#if size === 'large'}
-    <Spinner44 class="Spinner__self"/>
+    <Spinner44 class="Spinner__self" />
   {:else if size === 'medium'}
-    <Spinner32 class="Spinner__self"/>
+    <Spinner32 class="Spinner__self" />
   {:else if size === 'small'}
-    <Spinner16 class="Spinner__self"/>
+    <Spinner16 class="Spinner__self" />
   {:else}
-    <Spinner24 class="Spinner__self"/>
+    <Spinner24 class="Spinner__self" />
   {/if}
 </div>

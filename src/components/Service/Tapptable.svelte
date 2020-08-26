@@ -1,33 +1,33 @@
 <style>
-/**
+  /**
  * iOS tappable
  */
- :global(.Tappable--ios) {
-  transition: background-color .15s ease-out;
+  :global(.Tappable--ios) {
+    transition: background-color 0.15s ease-out;
   }
 
-/** TODO: Переписать без использования !important */
-:global(.Tappable--ios.Tappable--active:not([disabled]):not(.TabsItem):not(.PanelHeaderButton):not(.Button):not(.PanelHeaderContent__in):not(.ActionSheetItem):not(.Banner__in)) {
-  background: var(--separator_common) !important;
-  transition: none;
+  /** TODO: Переписать без использования !important */
+  :global(.Tappable--ios.Tappable--active:not([disabled]):not(.TabsItem):not(.PanelHeaderButton):not(.Button):not(.PanelHeaderContent__in):not(.ActionSheetItem):not(.Banner__in)) {
+    background: var(--separator_common) !important;
+    transition: none;
   }
 
-/**
+  /**
  * Android tappable
  */
- :global(.Tappable--android) {
-  position: relative;
-  transition: background-color .15s ease-out;
+  :global(.Tappable--android) {
+    position: relative;
+    transition: background-color 0.15s ease-out;
   }
 
   :global(.Tappable--android.Tappable--active:not([disabled]):not(.TabsItem):not(.PanelHeaderButton):not(.Button):not(.PanelHeaderContent__in)) {
-  background: var(--background_highlighted) !important;
+    background: var(--background_highlighted) !important;
   }
 
   /**
    * Waves container
    */
-   :global(.Tappable--android) .Tappable__waves {
+  :global(.Tappable--android) .Tappable__waves {
     position: absolute;
     top: 0;
     right: 0;
@@ -38,43 +38,43 @@
     border-radius: inherit;
     /* Fix for Safari: css animation + border-radius + overflow ignores parent border-radius */
     will-change: transform;
-    }
+  }
 
-    /**
+  /**
      * Wave
      */
-     :global(.Tappable--android) .Tappable__wave {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 24px;
-      height: 24px;
-      margin: -12px 0 0 -12px;
-      opacity: 0;
-      content: '';
-      border-radius: 50%;
-      background: rgba(127, 127, 127, .1);
-      animation: animation-wave .3s var(--android-easing);
-      }
+  :global(.Tappable--android) .Tappable__wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    margin: -12px 0 0 -12px;
+    opacity: 0;
+    content: '';
+    border-radius: 50%;
+    background: rgba(127, 127, 127, 0.1);
+    animation: animation-wave 0.3s var(--android-easing);
+  }
 
-/**
+  /**
  * Animations
  */
-@keyframes animation-wave {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  @keyframes animation-wave {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
 
-  30% {
-    opacity: 1;
-  }
+    30% {
+      opacity: 1;
+    }
 
-  100% {
-    transform: scale(8);
-    opacity: 0;
+    100% {
+      transform: scale(8);
+      opacity: 0;
+    }
   }
-}
 </style>
 
 <script context="module" lang="ts">
@@ -85,14 +85,8 @@
   import { getOffsetRect } from '../../lib/offset';
   import Touch from './Touch.svelte';
   import type { TouchEventHandler, TouchEvent } from './Touch.svelte';
-  import {
-    coordX,
-    coordY,
-  } from '../../lib/touch';
-  import type {
-    VKUITouchEventHander,
-    VKUITouchEvent,
-  } from '../../lib/touch';
+  import { coordX, coordY } from '../../lib/touch';
+  import type { VKUITouchEventHander, VKUITouchEvent } from '../../lib/touch';
 
   export interface StorageItem {
     activeTimeout: number;
@@ -114,16 +108,18 @@
   let storage: Storage = {};
 
   /*
-  * Очищает таймауты и хранилище для всех экземпляров компонента, кроме переданного
-  */
+   * Очищает таймауты и хранилище для всех экземпляров компонента, кроме переданного
+   */
   function deactivateOtherInstances(exclude?: string) {
-    Object.keys(storage).filter((id: string) => id !== exclude).forEach((id: string) => {
-      clearTimeout(storage[id].activeTimeout);
-      clearTimeout(storage[id].timeout);
-      storage[id].stop();
+    Object.keys(storage)
+      .filter((id: string) => id !== exclude)
+      .forEach((id: string) => {
+        clearTimeout(storage[id].activeTimeout);
+        clearTimeout(storage[id].timeout);
+        storage[id].stop();
 
-      delete storage[id];
-    });
+        delete storage[id];
+      });
   }
 </script>
 
@@ -140,24 +136,24 @@
       y: number;
     };
   } = {};
-  export let active: boolean = false
-  export let ts: number = null
-  let container:HTMLElement;
+  export let active: boolean = false;
+  export let ts: number = null;
+  let container: HTMLElement;
 
   // other
   const id = Math.round(Math.random() * 1e8).toString(16);
   let isSlide = false;
   let insideTouchRoot = false;
   let timeout = 0;
-  let wavesTimeout = 0
+  let wavesTimeout = 0;
   const platform = usePlatform();
 
-    /*
+  /*
    * Обрабатывает событие touchstart
    */
   const onStart: TouchEventHandler = ({ originalEvent }: TouchEvent) => {
-    console.log("onStart");
-    
+    console.log('onStart');
+
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     if (originalEvent.touches && originalEvent.touches.length > 1) {
       deactivateOtherInstances();
@@ -177,7 +173,11 @@
   /*
    * Обрабатывает событие touchmove
    */
-   const onMove: TouchEventHandler = ({ originalEvent, shiftXAbs, shiftYAbs }: TouchEvent) => {
+  const onMove: TouchEventHandler = ({
+    originalEvent,
+    shiftXAbs,
+    shiftYAbs,
+  }: TouchEvent) => {
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     if (shiftXAbs > 20 || shiftYAbs > 20) {
       isSlide = true;
@@ -241,12 +241,12 @@
       clicks[key] = {
         x,
         y,
-      }
+      };
 
       wavesTimeout = window.setTimeout(() => {
-        const clicksNew = clicks
+        const clicksNew = clicks;
         delete clicksNew[key];
-        clicks = clicksNew
+        clicks = clicksNew;
       }, 225);
     }
   };
@@ -256,8 +256,8 @@
    */
   const start: VoidFunction = () => {
     if (!active) {
-      active = true
-      ts = nowTs()
+      active = true;
+      ts = nowTs();
     }
     deactivateOtherInstances(id);
   };
@@ -267,8 +267,8 @@
    */
   const stop: VoidFunction = () => {
     if (active) {
-      active = false
-      ts = null
+      active = false;
+      ts = null;
     }
     if (getStorage()) {
       clearTimeout(getStorage().activeTimeout);
@@ -282,20 +282,28 @@
   const getStorage: GetStorage = () => {
     return storage[id];
   };
-
-
 </script>
 
 <!-- TODO: проверить пропсы с классом -->
 
-<Touch bind:container class="{classNames(getClassName('Tappable', platform), $$props.class, {
-  'Tappable--active': active,
-  'Tappable--inactive': !active,
-})}" {onStart} {onMove} {onEnd}>
+<Touch
+  bind:container
+  class="{classNames(getClassName('Tappable', platform), $$props.class, {
+    'Tappable--active': active,
+    'Tappable--inactive': !active,
+  })}"
+  onStart="{onStart}"
+  onMove="{onMove}"
+  onEnd="{onEnd}"
+>
   {#if platform === ANDROID}
     <span class="Tappable__waves">
       {#each Object.keys(clicks) as k}
-        <span class="Tappable__wave" style={`top: ${clicks[k].y}px; left: ${clicks[k].x}px`} id={k}/>
+        <span
+          class="Tappable__wave"
+          style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
+          id="{k}"
+        ></span>
       {/each}
     </span>
   {/if}

@@ -3,10 +3,10 @@
     max-width: 900px;
     margin: 0 auto;
   }
-  main :global(.Example) {
+  .Example {
     height: 667px;
     width: 375px;
-    overflow-y:auto;
+    overflow-y: auto;
     border: 1px solid rgba(0, 0, 0, 0.12);
     display: block;
     margin: auto;
@@ -46,18 +46,18 @@
   import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
   import TouchExample from './TouchExample.svelte';
 
-  import { 
-    Icon16Dropdown, 
-    Icon24Dismiss, 
-    Icon16Chevron, 
-    Icon28UserOutline, 
-    Icon28PaletteOutline, 
-    Icon28SettingsOutline, 
-    Icon28MessageOutline, 
-    Icon20ArticleOutline, 
-    Icon20FollowersOutline, 
-    Icon20GlobeOutline, 
-    Icon20WorkOutline, 
+  import {
+    Icon16Dropdown,
+    Icon24Dismiss,
+    Icon16Chevron,
+    Icon28UserOutline,
+    Icon28PaletteOutline,
+    Icon28SettingsOutline,
+    Icon28MessageOutline,
+    Icon20ArticleOutline,
+    Icon20FollowersOutline,
+    Icon20GlobeOutline,
+    Icon20WorkOutline,
     Icon20Info,
   } from '@sveltevk/icons';
 </script>
@@ -111,9 +111,12 @@
           Плейлисты
         </Header>
         <Separator />
-        <Header indicator={16}>
+        <Header indicator="{16}">
           <div slot="aside">
-            <Link>Добавленные<Icon16Dropdown /></Link>
+            <Link>
+              Добавленные
+              <Icon16Dropdown />
+            </Link>
           </div>
           Мои видео
         </Header>
@@ -152,7 +155,7 @@
           Приглашения
         </Header>
         <Separator />
-          <Header mode="secondary" indicator="667">
+        <Header mode="secondary" indicator="667">
           <div slot="aside">
             <Icon16Chevron />
           </div>
@@ -338,17 +341,20 @@
             <div slot="before">
               <Icon28UserOutline />
             </div>
-            Аккаунт</SimpleCell>
+            Аккаунт
+          </SimpleCell>
           <SimpleCell expandable>
             <div slot="before">
               <Icon28PaletteOutline />
             </div>
-            Внешний вид</SimpleCell>
+            Внешний вид
+          </SimpleCell>
           <SimpleCell expandable>
             <div slot="before">
               <Icon28SettingsOutline />
             </div>
-            Основные</SimpleCell>
+            Основные
+          </SimpleCell>
         </Group>
         <Group>
           <Header mode="secondary">Настройки</Header>
@@ -376,7 +382,10 @@
           <Header mode="secondary">Список диалогов</Header>
           <SimpleCell>
             <div slot="before">
-              <Avatar size={40} src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1" />
+              <Avatar
+                size="{40}"
+                src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1"
+              />
             </div>
             <div slot="after">
               <Icon28MessageOutline />
@@ -385,7 +394,10 @@
           </SimpleCell>
           <SimpleCell>
             <div slot="before">
-              <Avatar size={40} src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1" />
+              <Avatar
+                size="{40}"
+                src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1"
+              />
             </div>
             <div slot="after">
               <Icon28MessageOutline />
@@ -397,7 +409,10 @@
           <Header mode="secondary">Список друзей</Header>
           <SimpleCell description="Команда ВКонтакте">
             <div slot="before">
-              <Avatar size={40} src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1" />
+              <Avatar
+                size="{40}"
+                src="https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1"
+              />
             </div>
             <div slot="after">
               <Icon28MessageOutline />
@@ -405,13 +420,15 @@
             Игорь Фёдоров
           </SimpleCell>
           <SimpleCell description="Бот">
-          <div slot="before">
-            <Avatar size={40} src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1" />
-          </div>
+            <div slot="before">
+              <Avatar
+                size="{40}"
+                src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1"
+              />
+            </div>
             <div slot="after">
               <Icon28MessageOutline />
             </div>
-          
             Artur Stambultsian
           </SimpleCell>
         </Group>
@@ -457,11 +474,14 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Spinner</Title>
-      <div class="Example" style="display: flex;align-items: center; flex-direction: column">
-          <Spinner size="large" style="margin-top: 20px" />
-          <Spinner size="medium" style="margin-top: 20px" />
-          <Spinner size="regular" style="margin-top: 20px" />
-          <Spinner size="small" style="margin-top: 20px" />
+      <div
+        class="Example"
+        style="display: flex;align-items: center; flex-direction: column"
+      >
+        <Spinner size="large" style="margin-top: 20px" />
+        <Spinner size="medium" style="margin-top: 20px" />
+        <Spinner size="regular" style="margin-top: 20px" />
+        <Spinner size="small" style="margin-top: 20px" />
       </div>
     </Div>
     <Div>
@@ -599,64 +619,65 @@
       <Title level="2" weight="semibold">MiniInfoCell</Title>
       <div class="Example">
         <MiniInfoCell textWrap="short">
-        <div slot="before">
-          <Icon20ArticleOutline />
-        </div>
-        ВКонтакте начинался как сайт для выпускников вузов, а сейчас это огромная экосистема с безграничными возможностями и миллионами пользователей.
-      </MiniInfoCell>
+          <div slot="before">
+            <Icon20ArticleOutline />
+          </div>
+          ВКонтакте начинался как сайт для выпускников вузов, а сейчас это
+          огромная экосистема с безграничными возможностями и миллионами
+          пользователей.
+        </MiniInfoCell>
 
-      <MiniInfoCell>
-        <div slot="before">
-          <Icon20FollowersOutline />
-        </div>
-        <div slot="after">
-          <UsersStack
-            photos={[
-              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
-              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
-              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
-            ]}
-          />
-        </div>
-        514,7K подписчиков · 77 друзей
-      </MiniInfoCell>
+        <MiniInfoCell>
+          <div slot="before">
+            <Icon20FollowersOutline />
+          </div>
+          <div slot="after">
+            <UsersStack
+              photos="{['https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1', 'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1', 'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1']}"
+            />
+          </div>
+          514,7K подписчиков · 77 друзей
+        </MiniInfoCell>
 
-      <MiniInfoCell>
-        <div slot="before">
-          <Icon20GlobeOutline />
-        </div>
-        <Link href="https://vk.com/team">vk.com/team</Link>
-      </MiniInfoCell>
+        <MiniInfoCell>
+          <div slot="before">
+            <Icon20GlobeOutline />
+          </div>
+          <Link href="https://vk.com/team">vk.com/team</Link>
+        </MiniInfoCell>
 
-      <MiniInfoCell>
-        <div slot="before">
-          <Icon20WorkOutline />
-        </div>
-        <div slot="after">
-          <Avatar size={24} src="https://sun9-29.userapi.com/c623616/v623616034/1c184/MnbEYczHxSY.jpg?ava=1" />
-        </div>
-        Место работы: Команда ВКонтакте
-      </MiniInfoCell>
+        <MiniInfoCell>
+          <div slot="before">
+            <Icon20WorkOutline />
+          </div>
+          <div slot="after">
+            <Avatar
+              size="{24}"
+              src="https://sun9-29.userapi.com/c623616/v623616034/1c184/MnbEYczHxSY.jpg?ava=1"
+            />
+          </div>
+          Место работы: Команда ВКонтакте
+        </MiniInfoCell>
 
-      <MiniInfoCell
-        mode="add"
-        onClick={() => console.log('Указать место учёбы')}
-      >
-        <div slot="before">
-          <Icon20WorkOutline />
-        </div>
-        Укажите место учёбы
-      </MiniInfoCell>
+        <MiniInfoCell
+          mode="add"
+          onClick="{() => console.log('Указать место учёбы')}"
+        >
+          <div slot="before">
+            <Icon20WorkOutline />
+          </div>
+          Укажите место учёбы
+        </MiniInfoCell>
 
-      <MiniInfoCell
-        mode="more"
-        onClick={() => console.log('Показать подробную информацию')}
-      >
-        <div slot="before">
-          <Icon20Info />
-        </div>
-        Подробная информация
-      </MiniInfoCell>
+        <MiniInfoCell
+          mode="more"
+          onClick="{() => console.log('Показать подробную информацию')}"
+        >
+          <div slot="before">
+            <Icon20Info />
+          </div>
+          Подробная информация
+        </MiniInfoCell>
       </div>
     </Div>
   </Div>
@@ -788,9 +809,7 @@
       <div class="Example">
         <Group>
           <div slot="header">
-            <Header mode="secondary">
-              Перетащите кружок
-            </Header>
+            <Header mode="secondary">Перетащите кружок</Header>
           </div>
           <TouchExample />
         </Group>

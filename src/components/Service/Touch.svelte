@@ -5,10 +5,7 @@
     coordY,
     touchEnabled,
   } from '../../lib/touch';
-  import type {
-    VKUITouchEventHander,
-    VKUITouchEvent,
-  } from '../../lib/touch';
+  import type { VKUITouchEventHander, VKUITouchEvent } from '../../lib/touch';
 
   export interface Gesture {
     startX?: number;
@@ -52,23 +49,26 @@
   export let onEnd: (outputEvent: TouchEvent) => void = undefined;
   export let onEndX: (outputEvent: TouchEvent) => void = undefined;
   export let onEndY: (outputEvent: TouchEvent) => void = undefined;
-  export let useCapture = false; 
-  
-  export let container:HTMLElement;
+  export let useCapture = false;
+
+  export let container: HTMLElement;
   let gesture: Partial<Gesture> = {};
   let cancelClick = false;
 
   onMount(() => {
     if (canUseDOM) {
-      container.addEventListener(events[0], onStartEvent, { capture: useCapture, passive: false });
+      container.addEventListener(events[0], onStartEvent, {
+        capture: useCapture,
+        passive: false,
+      });
       touchEnabled && subscribe(container);
     }
-  })
+  });
 
-  onDestroy(()=>{
+  onDestroy(() => {
     container.removeEventListener(events[0], onStartEvent);
     touchEnabled && unsubscribe(container);
-  })
+  });
 
   /**
    * Обработчик событий touchstart
@@ -76,7 +76,7 @@
    * @param {Object} e Браузерное событие
    * @return {void}
    */
-   const onStartEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
+  const onStartEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
     gesture = {
       startX: coordX(e),
       startY: coordY(e),
@@ -105,16 +105,16 @@
     !touchEnabled && subscribe(document);
   };
 
-   /**
+  /**
    * Обработчик событий touchmove
    *
    * @param {Object} e Браузерное событие
    * @return {void}
    */
-   const onMoveEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
+  const onMoveEvent: VKUITouchEventHander = (e: VKUITouchEvent) => {
     const { isPressed, isX, isY, startX, startY } = gesture;
 
-    if (isPressed) {      
+    if (isPressed) {
       // смещения
       const shiftX = coordX(e) - startX;
       const shiftY = coordY(e) - startY;
@@ -132,8 +132,8 @@
       if (!isX && !isY) {
         let willBeX = shiftXAbs >= 5 && shiftXAbs > shiftYAbs;
         let willBeY = shiftYAbs >= 5 && shiftYAbs > shiftXAbs;
-        let willBeSlidedX = willBeX && !!onMoveX || !!onMove;
-        let willBeSlidedY = willBeY && !!onMoveY || !!onMove;
+        let willBeSlidedX = (willBeX && !!onMoveX) || !!onMove;
+        let willBeSlidedY = (willBeY && !!onMoveY) || !!onMove;
 
         gesture.isY = willBeY;
         gesture.isX = willBeX;
@@ -207,14 +207,14 @@
     !touchEnabled && unsubscribe(document);
   };
 
-  const subscribe = (element: HTMLElement|Document) => {
+  const subscribe = (element: HTMLElement | Document) => {
     const listenerParams = { capture: useCapture, passive: false };
     element.addEventListener(events[1], onMoveEvent, listenerParams);
     element.addEventListener(events[2], onEndEvent, listenerParams);
     element.addEventListener(events[3], onEndEvent, listenerParams);
-  }
+  };
 
-  const unsubscribe = (element: HTMLElement|Document) => {
+  const unsubscribe = (element: HTMLElement | Document) => {
     // Здесь нужен последний аргумент с такими же параметрами, потому что
     // некоторые браузеры на странных вендорах типа Meizu не удаляют обработчик.
     // https://github.com/VKCOM/VKUI/issues/444
@@ -222,7 +222,7 @@
     element.removeEventListener(events[1], onMoveEvent, listenerParams);
     element.removeEventListener(events[2], onEndEvent, listenerParams);
     element.removeEventListener(events[3], onEndEvent, listenerParams);
-  }
+  };
 
   /**
    * Обработчик событий dragstart
@@ -263,6 +263,11 @@ Touch – это компонент для удобной работы с pointe
 Компонент используется во многих других компонентах библиотеки (Cell, Slider, Gallery, Tappable).
 -->
 
-<div {...$$restProps} bind:this={container} on:click="{onClick}" on:dragstart="{onDragStart}">
+<div
+  {...$$restProps}
+  bind:this="{container}"
+  on:click="{onClick}"
+  on:dragstart="{onDragStart}"
+>
   <slot />
 </div>
