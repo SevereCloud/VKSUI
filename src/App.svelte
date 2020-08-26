@@ -43,9 +43,23 @@
   import UsersStack from './components/Blocks/UsersStack.svelte';
   import Counter from './components/Blocks/Counter.svelte';
   import Spinner from './components/Blocks/Spinner.svelte';
+  import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
   import TouchExample from './TouchExample.svelte';
 
-  import { Icon16Dropdown, Icon24Dismiss, Icon16Chevron, Icon28UserOutline, Icon28PaletteOutline, Icon28SettingsOutline, Icon28MessageOutline } from '@sveltevk/icons';
+  import { 
+    Icon16Dropdown, 
+    Icon24Dismiss, 
+    Icon16Chevron, 
+    Icon28UserOutline, 
+    Icon28PaletteOutline, 
+    Icon28SettingsOutline, 
+    Icon28MessageOutline, 
+    Icon20ArticleOutline, 
+    Icon20FollowersOutline, 
+    Icon20GlobeOutline, 
+    Icon20WorkOutline, 
+    Icon20Info,
+  } from '@sveltevk/icons';
 </script>
 
 <main>
@@ -580,6 +594,70 @@
     <Div>
       <Title level="2" weight="semibold">Banner</Title>
       <div class="Example"></div>
+    </Div>
+    <Div>
+      <Title level="2" weight="semibold">MiniInfoCell</Title>
+      <div class="Example">
+        <MiniInfoCell textWrap="short">
+        <div slot="before">
+          <Icon20ArticleOutline />
+        </div>
+        ВКонтакте начинался как сайт для выпускников вузов, а сейчас это огромная экосистема с безграничными возможностями и миллионами пользователей.
+      </MiniInfoCell>
+
+      <MiniInfoCell>
+        <div slot="before">
+          <Icon20FollowersOutline />
+        </div>
+        <div slot="after">
+          <UsersStack
+            photos={[
+              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
+              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
+              'https://sun9-65.userapi.com/Jm47wQlR6z_R_rbAd_7LUf0NQg7QAv35MpvNhA/Ht8eYywub4o.jpg?ava=1',
+            ]}
+          />
+        </div>
+        514,7K подписчиков · 77 друзей
+      </MiniInfoCell>
+
+      <MiniInfoCell>
+        <div slot="before">
+          <Icon20GlobeOutline />
+        </div>
+        <Link href="https://vk.com/team">vk.com/team</Link>
+      </MiniInfoCell>
+
+      <MiniInfoCell>
+        <div slot="before">
+          <Icon20WorkOutline />
+        </div>
+        <div slot="after">
+          <Avatar size={24} src="https://sun9-29.userapi.com/c623616/v623616034/1c184/MnbEYczHxSY.jpg?ava=1" />
+        </div>
+        Место работы: Команда ВКонтакте
+      </MiniInfoCell>
+
+      <MiniInfoCell
+        mode="add"
+        onClick={() => console.log('Указать место учёбы')}
+      >
+        <div slot="before">
+          <Icon20WorkOutline />
+        </div>
+        Укажите место учёбы
+      </MiniInfoCell>
+
+      <MiniInfoCell
+        mode="more"
+        onClick={() => console.log('Показать подробную информацию')}
+      >
+        <div slot="before">
+          <Icon20Info />
+        </div>
+        Подробная информация
+      </MiniInfoCell>
+      </div>
     </Div>
   </Div>
 
