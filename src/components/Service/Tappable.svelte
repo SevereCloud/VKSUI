@@ -281,24 +281,24 @@
     return storage[id];
   };
 
-  $: className = classNames(getClassName('Tappable', platform), $$props.class, {
+  $: $$restProps.class = classNames(getClassName('Tappable', platform), $$props.class, {
     'Tappable--active': active,
     'Tappable--inactive': !active,
   });
 </script>
 
 {#if disabled}
-  <div class="{className}">
+  <div {...$$restProps}>
     <slot />
   </div>
 {:else}
   <Touch
     bind:container
-    class="{className}"
     onStart="{onStart}"
     onMove="{onMove}"
     onEnd="{onEnd}"
     on:click
+    {...$$restProps}
   >
     {#if platform === ANDROID}
       <span class="Tappable__waves">

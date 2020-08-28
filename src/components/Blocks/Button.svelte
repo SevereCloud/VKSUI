@@ -1,5 +1,5 @@
 <style>
-  .Button {
+  :global(.Button) {
     display: inline-block;
     box-sizing: border-box;
     outline: none;
@@ -16,154 +16,154 @@
     align-items: center;
   }
 
-  .Button.Tappable--active {
+  :global(.Button.Tappable--active) {
     opacity: 0.6;
   }
 
-  .Button[disabled] {
+  :global(.Button[disabled]) {
     opacity: 0.4;
   }
 
-  .Button--aln-left .Button__in {
+  :global(.Button--aln-left) .Button__in {
     justify-content: flex-start;
   }
 
-  .Button--aln-center .Button__in {
+  :global(.Button--aln-center) .Button__in {
     justify-content: center;
   }
 
-  .Button--aln-right .Button__in {
+  :global(.Button--aln-right) .Button__in {
     justify-content: flex-end;
   }
 
-  .Button--str {
+  :global(.Button--str) {
     display: block;
     max-width: 100%;
     flex-grow: 1;
   }
 
-  .Button--str:first-child:last-child {
+  :global(.Button--str:first-child:last-child) {
     width: 100%;
   }
 
-  .Button--stretched .Button__in {
+  :global(.Button--stretched) .Button__in {
     justify-content: center;
   }
 
-  .Button__before .Icon--16 {
+  .Button__before :global(.Icon--16) {
     margin-right: 6px;
   }
 
-  .Button__before .Icon--24,
-  .Button__before .Icon--28 {
+  .Button__before :global(.Icon--24),
+  .Button__before :global(.Icon--28) {
     margin-right: 8px;
   }
 
-  .Button:not(.Button--sz-xl) .Button__after {
+  :global(.Button:not(.Button--sz-xl)) .Button__after {
     margin-left: 8px;
   }
 
-  .Button::before,
-  .Button::after {
+  :global(.Button::before),
+  :global(.Button::after) {
     display: none;
   }
 
-  .Button--lvl-primary {
+  :global(.Button--lvl-primary) {
     background-color: var(--button_primary_background);
     color: var(--button_primary_foreground);
   }
 
-  .Button--lvl-secondary {
+  :global(.Button--lvl-secondary) {
     background-color: var(--button_secondary_background);
     color: var(--button_secondary_foreground);
   }
 
-  .Button--lvl-tertiary {
+  :global(.Button--lvl-tertiary) {
     background-color: var(--button_tertiary_background);
     color: var(--button_tertiary_foreground);
   }
 
-  .Button--lvl-commerce {
+  :global(.Button--lvl-commerce) {
     background-color: var(--button_commerce_background);
     color: var(--button_commerce_foreground);
   }
 
-  .Button--lvl-outline {
+  :global(.Button--lvl-outline) {
     background-color: transparent;
     border: 1px solid var(--button_outline_border);
     color: var(--button_outline_foreground);
   }
 
-  .Button--lvl-destructive {
+  :global(.Button--lvl-destructive) {
     background-color: var(--destructive);
     color: #fff;
   }
 
-  .Button--lvl-overlay_primary {
+  :global(.Button--lvl-overlay_primary) {
     background-color: var(--media_overlay_button_background);
     color: var(--media_overlay_button_foreground);
   }
 
-  .Button--lvl-overlay_secondary {
+  :global(.Button--lvl-overlay_secondary) {
     background-color: rgba(255, 255, 255, 0.2);
     color: #fff;
   }
 
-  .Button--lvl-overlay_outline {
+  :global(.Button--lvl-overlay_outline) {
     background-color: transparent;
     border: 1px solid #fff;
     color: #fff;
   }
 
-  .Button--sz-m {
+  :global(.Button--sz-m) {
     padding: 0 16px;
   }
 
-  .Button--sz-m .Button__before {
+  :global(.Button--sz-m) .Button__before {
     margin-left: -4px;
   }
 
-  .Button--sz-m .Button__content {
+  :global(.Button--sz-m) .Button__content {
     font-size: 14px;
     line-height: 14px;
     font-weight: 500;
     padding: 7px 0;
   }
 
-  .Button--sz-l {
+  :global(.Button--sz-l) {
     padding: 0 16px;
   }
 
-  .Button--sz-l .Button__before {
+  :global(.Button--sz-l) .Button__before {
     margin-left: -4px;
   }
 
-  .Button--sz-l .Button__content {
+  :global(.Button--sz-l) .Button__content {
     font-size: 15px;
     font-weight: 500;
     padding: 8px 0;
   }
 
-  .Button--sz-xl {
+  :global(.Button--sz-xl) {
     display: block;
     width: 100%;
     padding: 0 16px;
   }
 
-  .Button--sz-xl .Button__before {
+  :global(.Button--sz-xl) .Button__before {
     margin-left: -6px;
     margin-right: 2px;
   }
 
-  .Button--sz-xl .Button__before ~ .Button__content {
+  :global(.Button--sz-xl) .Button__before ~ .Button__content {
     padding-left: 0;
   }
 
-  .Button--sz-xl .Button__in {
+  :global(.Button--sz-xl) .Button__in {
     justify-content: center;
   }
 
-  .Button--sz-xl .Button__content {
+  :global(.Button--sz-xl) .Button__content {
     font-size: 17px;
     font-weight: 500;
     padding: 11px;
@@ -172,54 +172,55 @@
   /*
   iOS
  */
-  .Button--ios {
+  :global(.Button--ios) {
     border-radius: 10px;
   }
 
   /*
   Android
  */
-  .Button--android {
+  :global(.Button--android) {
     border-radius: 8px;
   }
 
   /**
  * Counter
  */
-  .Button--lvl-primary .Counter {
+  :global(.Button--lvl-primary) :global(.Counter) {
     background-color: var(--button_primary_foreground);
     color: var(--button_primary_background);
   }
 
-  .Button--lvl-secondary .Counter {
+  :global(.Button--lvl-secondary) :global(.Counter) {
     background-color: var(--button_secondary_foreground);
     color: var(--background_content);
   }
 
-  .Button--lvl-tertiary .Counter {
+  :global(.Button--lvl-tertiary) :global(.Counter) {
     background-color: var(--button_tertiary_foreground);
     color: var(--background_content);
   }
 
-  .Button--lvl-outline .Counter {
+  :global(.Button--lvl-outline) :global(.Counter) {
     background-color: var(--button_outline_foreground);
     color: var(--background_content);
   }
 
-  .Button--lvl-commerce .Counter {
+  :global(.Button--lvl-commerce) :global(.Counter) {
     background-color: var(--button_commerce_foreground);
     color: var(--button_commerce_background);
   }
 </style>
 
-<!-- svelte-ignore css-unused-selector -->
-<!-- svelte-ignore css-unused-selector -->
-<!-- svelte-ignore css-unused-selector -->
 <script lang="ts">
+  import Tappable from '../Service/Tappable.svelte';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import { ANDROID } from '../../lib/platform';
+
+  export let before: any = undefined;
+  export let after: any = undefined;
 
   export let mode:
     | 'primary'
@@ -233,33 +234,39 @@
     | 'overlay_outline' = 'primary';
   export let size: 'm' | 'l' | 'xl' = 'm';
   export let stretched: boolean = false;
+  export let align: 'left' | 'center' | 'right' = 'center';
 
   const platform = usePlatform();
-</script>
 
-<!-- FIXME: Tappable -->
-<button
-  {...$$restProps}
-  class="{classNames(
+  const SLOTS = $$props.$$slots;
+  $: $$restProps.class = classNames(
     getClassName('Button', platform),
     $$props.class,
     `Button--sz-${size}`,
     `Button--lvl-${mode}`,
-    `Button--aln-${$$props.align || 'center'}`,
+    `Button--aln-${align || 'center'}`,
     {
       ['Button--str']: stretched,
     },
-  )}"
->
+  );
+</script>
+
+<Tappable {...$$restProps} on:click>
   <div class="Button__in">
-    <div class="Button__before">
-      <slot name="before" />
-    </div>
-    <div class="Button__content">
-      <slot />
-    </div>
-    <div class="Button__after">
-      <slot name="after" />
-    </div>
+    {#if (SLOTS && SLOTS.before) || before}
+      <div class="Button__before">
+        <slot name="before">{before}</slot>
+      </div>
+    {/if}
+    {#if (SLOTS && SLOTS.default)}
+      <div class="Button__content">
+        <slot />
+      </div>
+    {/if}
+    {#if (SLOTS && SLOTS.after) || after}
+      <div class="Button__after">
+        <slot name="after">{after}</slot>
+      </div>
+    {/if}
   </div>
-</button>
+</Tappable>

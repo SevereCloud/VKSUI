@@ -224,7 +224,7 @@
   const platform = usePlatform();
 
   const SLOTS = $$props.$$slots;
-  $$restProps.class = classNames(
+  $: $$restProps.class = classNames(
     getClassName('SimpleCell', platform),
     `SimpleCell--sizeX-${sizeX}`,
     { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline },

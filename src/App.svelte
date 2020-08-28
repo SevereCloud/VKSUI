@@ -18,9 +18,8 @@
     right: 0;
     position: fixed;
   }
-  :global(body){
+  :global(body) {
     background: var(--background_page);
-    
   }
 </style>
 
@@ -56,6 +55,7 @@
   import Counter from './components/Blocks/Counter.svelte';
   import Spinner from './components/Blocks/Spinner.svelte';
   import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
+  import Button from './components/Blocks/Button.svelte';
   import TouchExample from './TouchExample.svelte';
 
   import {
@@ -72,11 +72,13 @@
     Icon20WorkOutline,
     Icon20Info,
     Icon28MoonOutline,
+    Icon16Add,
+    Icon24Camera,
+    Icon24Shuffle,
   } from '@sveltevk/icons';
 
   let scheme = 'bright_light';
   const changeScheme = () => {
-    console.log(scheme)
     scheme = scheme === 'bright_light' ? 'space_gray' : 'bright_light';
 
     const schemeAttribute = document.createAttribute('scheme');
@@ -109,7 +111,105 @@
     <Title level="1" weight="heavy">Blocks</Title>
     <Div>
       <Title level="2" weight="semibold">Button</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Типы кнопок</Header>
+          </div>
+          <Div>
+            <Button>Primary</Button>
+          </Div>
+          <Div>
+            <Button mode="secondary">Secondary</Button>
+          </Div>
+          <Div>
+            <Button mode="tertiary">Tertiary</Button>
+          </Div>
+          <Div>
+            <Button mode="outline">Outline</Button>
+          </Div>
+          <Div>
+            <Button mode="commerce">Commerce</Button>
+          </Div>
+          <Div>
+            <Button mode="destructive">Destructive</Button>
+          </Div>
+          <Div style="background: #232323">
+            <Button mode="overlay_primary">Overlay Primary</Button>
+          </Div>
+          <Div style="background: #232323">
+            <Button mode="overlay_secondary">Overlay Secondary</Button>
+          </Div>
+          <Div style="background: #232323">
+            <Button mode="overlay_outline">Overlay Outline</Button>
+          </Div>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Допустимые размеры</Header>
+          </div>
+          <Div>
+            <Button>Medium</Button>
+          </Div>
+          <Div>
+            <Button size="l">Large</Button>
+          </Div>
+          <Div>
+            <Button size="xl" mode="secondary">Extra large</Button>
+          </Div>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Растягивание по ширине</Header>
+          </div>
+          <Div>
+            <Button size="l">No stretch</Button>
+          </Div>
+          <Div style="display: flex">
+            <Button size="l" stretched style="margin-right: 8px">
+              Stretched
+            </Button>
+            <Button size="l" stretched mode="secondary">Stretched</Button>
+          </Div>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Кнопки с иконками</Header>
+          </div>
+          <Div>
+            <Button>
+              <div slot="before">
+                <Icon16Add />
+              </div>
+              Add item
+            </Button>
+          </Div>
+          <Div>
+            <Button size="l">
+              <div slot="before">
+                <Icon24Camera />
+              </div>
+              Take a photo
+            </Button>
+          </Div>
+          <Div>
+            <Button mode="secondary" size="l">
+              <div slot="before">
+                <Icon24Shuffle />
+              </div>
+              Shuffle
+            </Button>
+          </Div>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Ссылки в виде кнопок</Header>
+          </div>
+          <Div>
+            <Button href="#">I am link</Button>
+          </Div>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">CellButton</Title>
