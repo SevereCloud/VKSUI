@@ -7,9 +7,20 @@
     height: 667px;
     width: 375px;
     overflow-y: auto;
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    border: 1px solid var(--background_highlighted);
     display: block;
     margin: auto;
+    background: var(--background_content);
+  }
+  .fixable {
+    padding: 8px;
+    top: 0;
+    right: 0;
+    position: fixed;
+  }
+  :global(body){
+    background: var(--background_page);
+    
   }
 </style>
 
@@ -19,6 +30,7 @@
   import './styles/constants.css';
   import './styles/styles.css';
   import './styles/bright_light.css';
+  import './styles/space_gray.css';
   import Title from './components/Typography/Title.svelte';
   import Caption from './components/Typography/Caption.svelte';
   import Text from './components/Typography/Text.svelte';
@@ -59,10 +71,25 @@
     Icon20GlobeOutline,
     Icon20WorkOutline,
     Icon20Info,
+    Icon28MoonOutline,
   } from '@sveltevk/icons';
+
+  let scheme = 'bright_light';
+  const changeScheme = () => {
+    console.log(scheme)
+    scheme = scheme === 'bright_light' ? 'space_gray' : 'bright_light';
+
+    const schemeAttribute = document.createAttribute('scheme');
+    schemeAttribute.value = scheme;
+    document.body.attributes.setNamedItem(schemeAttribute);
+  };
 </script>
 
 <main>
+  <div class="fixable" on:click="{changeScheme}">
+    <Icon28MoonOutline />
+  </div>
+
   <Div>
     <Title level="1" weight="heavy">Layout</Title>
     <Panel>
