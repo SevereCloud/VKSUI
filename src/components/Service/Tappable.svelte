@@ -126,7 +126,7 @@
 <script lang="ts">
   // props
   export let activeEffectDelay: number = ACTIVE_EFFECT_DELAY;
-  // export let disabled: boolean = false;
+  export let disabled: boolean = false;
   export let stopPropagation: boolean = false;
 
   // state
@@ -152,8 +152,6 @@
    * Обрабатывает событие touchstart
    */
   const onStart: TouchEventHandler = ({ originalEvent }: TouchEvent) => {
-    console.log('onStart');
-
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     if (originalEvent.touches && originalEvent.touches.length > 1) {
       deactivateOtherInstances();
@@ -282,30 +280,37 @@
   const getStorage: GetStorage = () => {
     return storage[id];
   };
-</script>
 
-<!-- TODO: проверить пропсы с классом -->
-
-<Touch
-  bind:container
-  class="{classNames(getClassName('Tappable', platform), $$props.class, {
+  $: className = classNames(getClassName('Tappable', platform), $$props.class, {
     'Tappable--active': active,
     'Tappable--inactive': !active,
-  })}"
-  onStart="{onStart}"
-  onMove="{onMove}"
-  onEnd="{onEnd}"
->
-  {#if platform === ANDROID}
-    <span class="Tappable__waves">
-      {#each Object.keys(clicks) as k}
-        <span
-          class="Tappable__wave"
-          style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
-          id="{k}"
-        ></span>
-      {/each}
-    </span>
-  {/if}
-  <slot />
-</Touch>
+  });
+</script>
+
+{#if disabled}
+  <div class="{className}">
+    <slot />
+  </div>
+{:else}
+  <Touch
+    bind:container
+    class="{className}"
+    onStart="{onStart}"
+    onMove="{onMove}"
+    onEnd="{onEnd}"
+    on:click
+  >
+    {#if platform === ANDROID}
+      <span class="Tappable__waves">
+        {#each Object.keys(clicks) as k}
+          <span
+            class="Tappable__wave"
+            style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
+            id="{k}"
+          ></span>
+        {/each}
+      </span>
+    {/if}
+    <slot />
+  </Touch>
+{/if}

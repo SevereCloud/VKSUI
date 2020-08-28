@@ -337,7 +337,12 @@
       <div class="Example">
         <Group>
           <Header mode="secondary">Меню</Header>
-          <SimpleCell expandable>
+          <SimpleCell
+            expandable
+            on:click="{() => {
+              console.log('AOA');
+            }}"
+          >
             <div slot="before">
               <Icon28UserOutline />
             </div>

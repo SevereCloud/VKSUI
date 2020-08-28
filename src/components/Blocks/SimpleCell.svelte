@@ -200,7 +200,7 @@
 <script lang="ts">
   import Icon24Chevron from '@sveltevk/icons/dist/24/chevron';
 
-  import Tapptable from '../Service/Tapptable.svelte';
+  import Tappable from '../Service/Tappable.svelte';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
@@ -213,7 +213,7 @@
   /**
    * Убирает анимацию нажатия
    */
-  //  disabled?: boolean;
+  export let disabled: boolean = false;
 
   /**
    * В iOS добавляет chevron справа. Передавать `true`, если предполагается переход при клике по ячейке.
@@ -224,6 +224,12 @@
   const platform = usePlatform();
 
   const SLOTS = $$props.$$slots;
+  $$restProps.class = classNames(
+    getClassName('SimpleCell', platform),
+    `SimpleCell--sizeX-${sizeX}`,
+    { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline },
+    $$props.class,
+  );
 </script>
 
 <!-- 
@@ -233,10 +239,7 @@ SimpleCell — это упрощенная и улучшенная с точки
 Всё это влияет на скорость её отрисовки, особенно если идёт речь о сотнях экземпляров.
 -->
 
-<Tapptable
-  {...$$restProps}
-  class="{classNames(getClassName('SimpleCell', platform), `SimpleCell--sizeX-${sizeX}`, { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline }, $$props.class)}"
->
+<Tappable {...$$restProps} disabled="{disabled}" on:click>
   <slot name="before" />
   <div class="SimpleCell__main">
     <div class="SimpleCell__children">
@@ -262,4 +265,4 @@ SimpleCell — это упрощенная и улучшенная с точки
       {/if}
     </div>
   {/if}
-</Tapptable>
+</Tappable>
