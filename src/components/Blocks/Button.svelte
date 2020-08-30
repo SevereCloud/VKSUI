@@ -244,7 +244,7 @@
     $$props.class,
     `Button--sz-${size}`,
     `Button--lvl-${mode}`,
-    `Button--aln-${align || 'center'}`,
+    `Button--aln-${align}`,
     {
       ['Button--str']: stretched,
     },

@@ -56,6 +56,7 @@
   import Spinner from './components/Blocks/Spinner.svelte';
   import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
   import Button from './components/Blocks/Button.svelte';
+  import CellButton from './components/Blocks/CellButton.svelte';
   import TouchExample from './TouchExample.svelte';
 
   import {
@@ -75,6 +76,7 @@
     Icon16Add,
     Icon24Camera,
     Icon24Shuffle,
+    Icon24Add,
   } from '@sveltevk/icons';
 
   let scheme = 'bright_light';
@@ -213,7 +215,31 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">CellButton</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Кнопка-ячейка</Header>
+          </div>
+          <CellButton>Добавить новую школу</CellButton>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Стилизация</Header>
+          </div>
+          <CellButton mode="danger">Покинуть беседу</CellButton>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Кнопка c иконкой</Header>
+          </div>
+          <CellButton>
+            <div slot="before">
+              <Icon24Add />
+            </div>
+            Добавить родственника
+          </CellButton>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Div</Title>
