@@ -57,7 +57,9 @@
   import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
   import Button from './components/Blocks/Button.svelte';
   import CellButton from './components/Blocks/CellButton.svelte';
+
   import TouchExample from './TouchExample.svelte';
+  import BannerExample from './BannerExample.svelte';
 
   import {
     Icon16Dropdown,
@@ -771,7 +773,9 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Banner</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <BannerExample />
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">MiniInfoCell</Title>
