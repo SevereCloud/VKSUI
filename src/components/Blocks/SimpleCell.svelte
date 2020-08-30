@@ -206,6 +206,8 @@
   import getClassName from '../../lib/getClassName';
   import { IOS } from '../../lib/platform';
   import { SizeType } from '../Service/AdaptivityContext';
+  import div from '../Elements/div.svelte';
+  import a from '../Elements/a.svelte';
 
   export let indicator: any = undefined;
   export let description: string = '';
@@ -239,7 +241,12 @@ SimpleCell — это упрощенная и улучшенная с точки
 Всё это влияет на скорость её отрисовки, особенно если идёт речь о сотнях экземпляров.
 -->
 
-<Tappable {...$$restProps} disabled="{disabled}" on:click>
+<Tappable
+  {...$$restProps}
+  disabled="{disabled}"
+  on:click
+  Component="{$$restProps.href ? a : div}"
+>
   <slot name="before" />
   <div class="SimpleCell__main">
     <div class="SimpleCell__children">

@@ -84,6 +84,7 @@
   import { ANDROID } from '../../lib/platform';
   import { getOffsetRect } from '../../lib/offset';
   import Touch from './Touch.svelte';
+  import div from '../Elements/div.svelte';
   import type { TouchEventHandler, TouchEvent } from './Touch.svelte';
   import { coordX, coordY } from '../../lib/touch';
   import type { VKUITouchEventHander, VKUITouchEvent } from '../../lib/touch';
@@ -128,6 +129,7 @@
   export let activeEffectDelay: number = ACTIVE_EFFECT_DELAY;
   export let disabled: boolean = false;
   export let stopPropagation: boolean = false;
+  export let Component = div;
 
   // state
   export let clicks: {
@@ -281,36 +283,38 @@
     return storage[id];
   };
 
-  $: $$restProps.class = classNames(getClassName('Tappable', platform), $$props.class, {
-    'Tappable--active': active,
-    'Tappable--inactive': !active,
-  });
+  $: rootComponent = !disabled ? Touch : Component;
+
+  $: $$restProps.class = classNames(
+    getClassName('Tappable', platform),
+    $$props.class,
+    {
+      'Tappable--active': active,
+      'Tappable--inactive': !active,
+    },
+  );
 </script>
 
-{#if disabled}
-  <div {...$$restProps}>
-    <slot />
-  </div>
-{:else}
-  <Touch
-    bind:container
-    onStart="{onStart}"
-    onMove="{onMove}"
-    onEnd="{onEnd}"
-    on:click
-    {...$$restProps}
-  >
-    {#if platform === ANDROID}
-      <span class="Tappable__waves">
-        {#each Object.keys(clicks) as k}
-          <span
-            class="Tappable__wave"
-            style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
-            id="{k}"
-          ></span>
-        {/each}
-      </span>
-    {/if}
-    <slot />
-  </Touch>
-{/if}
+<svelte:component
+  this="{rootComponent}"
+  bind:container
+  onStart="{onStart}"
+  onMove="{onMove}"
+  onEnd="{onEnd}"
+  Component="{Component}"
+  on:click
+  {...$$restProps}
+>
+  {#if platform === ANDROID}
+    <span class="Tappable__waves">
+      {#each Object.keys(clicks) as k}
+        <span
+          class="Tappable__wave"
+          style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
+          id="{k}"
+        ></span>
+      {/each}
+    </span>
+  {/if}
+  <slot />
+</svelte:component>

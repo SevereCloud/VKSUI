@@ -218,6 +218,10 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import { ANDROID } from '../../lib/platform';
+  import button from '../Elements/button.svelte';
+  import a from '../Elements/a.svelte';
+
+  export let Component = button;
 
   export let before: any = undefined;
   export let after: any = undefined;
@@ -251,14 +255,18 @@
   );
 </script>
 
-<Tappable {...$$restProps} on:click>
+<Tappable
+  {...$$restProps}
+  on:click
+  Component="{$$restProps.href ? a : Component}"
+>
   <div class="Button__in">
     {#if (SLOTS && SLOTS.before) || before}
       <div class="Button__before">
         <slot name="before">{before}</slot>
       </div>
     {/if}
-    {#if (SLOTS && SLOTS.default)}
+    {#if SLOTS && SLOTS.default}
       <div class="Button__content">
         <slot />
       </div>

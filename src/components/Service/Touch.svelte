@@ -37,9 +37,11 @@
 <script lang="ts">
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { canUseDOM } from '../../lib/dom';
+  import div from '../Elements/div.svelte';
 
   const dispatch = createEventDispatcher();
 
+  export let Component = div;
   export let onStart: (outputEvent: TouchEvent) => void = undefined;
   export let onStartX: (outputEvent: TouchEvent) => void = undefined;
   export let onStartY: (outputEvent: TouchEvent) => void = undefined;
@@ -51,7 +53,7 @@
   export let onEndY: (outputEvent: TouchEvent) => void = undefined;
   export let useCapture = false;
 
-  export let container: HTMLElement;
+  export let container: HTMLElement = undefined;
   let gesture: Partial<Gesture> = {};
   let cancelClick = false;
 
@@ -263,11 +265,12 @@ Touch – это компонент для удобной работы с pointe
 Компонент используется во многих других компонентах библиотеки (Cell, Slider, Gallery, Tappable).
 -->
 
-<div
+<svelte:component
+  this="{Component}"
   {...$$restProps}
-  bind:this="{container}"
+  bind:this_="{container}"
   on:click="{onClick}"
   on:dragstart="{onDragStart}"
 >
   <slot />
-</div>
+</svelte:component>
