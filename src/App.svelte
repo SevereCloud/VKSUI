@@ -823,7 +823,7 @@
 
         <MiniInfoCell
           mode="add"
-          onClick="{() => console.log('Указать место учёбы')}"
+          on:click="{() => console.log('Указать место учёбы')}"
         >
           <div slot="before">
             <Icon20WorkOutline />
@@ -833,7 +833,7 @@
 
         <MiniInfoCell
           mode="more"
-          onClick="{() => console.log('Показать подробную информацию')}"
+          on:click="{() => console.log('Показать подробную информацию')}"
         >
           <div slot="before">
             <Icon20Info />

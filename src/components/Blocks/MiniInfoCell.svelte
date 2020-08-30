@@ -1,15 +1,15 @@
 <style>
-  .MiniInfoCell {
+  :global(.MiniInfoCell) {
     display: flex;
     padding-top: 6px;
     padding-bottom: 6px;
   }
 
-  .MiniInfoCell--lvl-primary {
+  :global(.MiniInfoCell--lvl-primary) {
     color: var(--text_primary);
   }
 
-  .MiniInfoCell--lvl-secondary {
+  :global(.MiniInfoCell--lvl-secondary) {
     color: var(--text_subhead);
   }
 
@@ -26,7 +26,7 @@
     white-space: nowrap;
   }
 
-  .MiniInfoCell--wr-short :global(.MiniInfoCell__content) {
+  :global(.MiniInfoCell--wr-short) :global(.MiniInfoCell__content) {
     white-space: initial;
     display: -webkit-box;
     max-height: 60px;
@@ -34,7 +34,7 @@
     -webkit-box-orient: vertical;
   }
 
-  .MiniInfoCell--wr-full :global(.MiniInfoCell__content) {
+  :global(.MiniInfoCell--wr-full) :global(.MiniInfoCell__content) {
     overflow: inherit;
     white-space: initial;
   }
@@ -49,31 +49,31 @@
     padding: 0;
   }
 
-  .MiniInfoCell--md-add,
-  .MiniInfoCell--md-add .MiniInfoCell__icon {
+  :global(.MiniInfoCell--md-add),
+  :global(.MiniInfoCell--md-add) .MiniInfoCell__icon {
     color: var(--accent);
   }
 
-  .MiniInfoCell--md-more,
-  .MiniInfoCell--md-more .MiniInfoCell__icon {
+  :global(.MiniInfoCell--md-more),
+  :global(.MiniInfoCell--md-more) .MiniInfoCell__icon {
     color: var(--link_alternate);
   }
 
-  .MiniInfoCell--md-more {
+  :global(.MiniInfoCell--md-more) {
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
   /* iOS */
 
-  .MiniInfoCell--ios {
+  :global(.MiniInfoCell--ios) {
     padding-left: 12px;
     padding-right: 12px;
   }
 
   /* Android */
 
-  .MiniInfoCell--android {
+  :global(.MiniInfoCell--android) {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -84,6 +84,8 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import Text from '../Typography/Text.svelte';
+  import Tappable from '../Service/Tappable.svelte';
+  import div from '../Elements/div.svelte';
 
   /**
    * Тип ячейки:
@@ -115,12 +117,21 @@
   const platform = usePlatform();
 
   const SLOTS = $$props.$$slots;
+
+  let Component = mode === 'base' ? div : Tappable;
+
+  $: $$restProps.class = classNames(
+    getClassName('MiniInfoCell', platform),
+    {
+      [`MiniInfoCell--md-${mode}`]: mode !== 'base',
+      [`MiniInfoCell--wr-${textWrap}`]: textWrap !== 'nowrap',
+    },
+    `MiniInfoCell--lvl-${textLevel}`,
+    $$props.class,
+  );
 </script>
 
-<div
-  {...$$restProps}
-  class="{classNames(getClassName('MiniInfoCell', platform), { [`MiniInfoCell--md-${mode}`]: mode !== 'base', [`MiniInfoCell--wr-${textWrap}`]: textWrap !== 'nowrap' }, `MiniInfoCell--lvl-${textLevel}`, $$props.class)}"
->
+<svelte:component this="{Component}" {...$$restProps} on:click>
   <div class="MiniInfoCell__icon">
     <slot name="before" />
   </div>
@@ -136,4 +147,4 @@
       <slot name="after" />
     </div>
   {/if}
-</div>
+</svelte:component>
