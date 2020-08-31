@@ -57,6 +57,7 @@
   import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
   import Button from './components/Blocks/Button.svelte';
   import CellButton from './components/Blocks/CellButton.svelte';
+  import Placeholder from './components/Blocks/Placeholder.svelte';
 
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
@@ -79,6 +80,8 @@
     Icon24Camera,
     Icon24Shuffle,
     Icon24Add,
+    Icon56UsersOutline,
+    Icon56MentionOutline,
   } from '@sveltevk/icons';
 
   let scheme = 'bright_light';
@@ -769,7 +772,24 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Placeholder</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Placeholder header="Уведомления от сообществ">
+          <div slot="icon">
+            <Icon56UsersOutline />
+          </div>
+          <div slot="action">
+            <Button size="l">Подключить сообщества</Button>
+          </div>
+          Подключите сообщества, от которых Вы хотите получать уведомления
+        </Placeholder>
+        <Separator wide />
+        <Placeholder>
+          <div slot="icon">
+            <Icon56MentionOutline />
+          </div>
+          Введите адрес страницы в поле поиска
+        </Placeholder>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Banner</Title>

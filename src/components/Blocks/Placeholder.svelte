@@ -59,6 +59,14 @@
 <script lang="ts">
   import classNames from '../../lib/classNames';
 
+  /**
+   * Заголовок плейсхолдера
+   */
+  export let header: any = undefined;
+
+  /**
+   * Растягивает плейсхолдер на весь экран, но в таком случае на экране должен быть только плейсхолдер
+   */
   export let stretched: boolean = false;
 
   const SLOTS = $$props.$$slots;
@@ -78,24 +86,26 @@
   {...$$restProps}
   class="{classNames('Placeholder', { 'Placeholder--stretched': stretched }, $$props.class)}"
 >
-  {#if SLOTS && SLOTS.icon}
-    <div class="Placeholder__icon">
-      <slot name="icon" />
-    </div>
-  {/if}
-  {#if SLOTS && SLOTS.header}
-    <div class="Placeholder__header">
-      <slot name="header" />
-    </div>
-  {/if}
-  {#if SLOTS && SLOTS.default}
-    <div class="Placeholder__text">
-      <slot />
-    </div>
-  {/if}
-  {#if SLOTS && SLOTS.action}
-    <div class="Placeholder__action">
-      <slot name="action" />
-    </div>
-  {/if}
+  <div class="Placeholder__in">
+    {#if SLOTS && SLOTS.icon}
+      <div class="Placeholder__icon">
+        <slot name="icon" />
+      </div>
+    {/if}
+    {#if (SLOTS && SLOTS.header) || header}
+      <div class="Placeholder__header">
+        <slot name="header">{header}</slot>
+      </div>
+    {/if}
+    {#if SLOTS && SLOTS.default}
+      <div class="Placeholder__text">
+        <slot />
+      </div>
+    {/if}
+    {#if SLOTS && SLOTS.action}
+      <div class="Placeholder__action">
+        <slot name="action" />
+      </div>
+    {/if}
+  </div>
 </div>
