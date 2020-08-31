@@ -13,10 +13,15 @@
     background: var(--background_content);
   }
   .fixable {
+    display: flex;
     padding: 8px;
     top: 0;
     right: 0;
     position: fixed;
+  }
+  .fixable div {
+    display: flex;
+    padding: 6px;
   }
   :global(body) {
     background: var(--background_page);
@@ -103,16 +108,46 @@
     Icon28SlidersOutline,
     Icon28UsersOutline,
     Icon28FavoriteOutline,
+    Icon28SortHorizontalOutline,
   } from '@sveltevk/icons';
 
-  let scheme = 'bright_light';
-  const changeScheme = () => {
-    scheme = scheme === 'bright_light' ? 'space_gray' : 'bright_light';
+  // Разные настройки для тем
+  import { setContext } from 'svelte';
+  import { SSRContextKey, SSRBuildContext } from './lib/ssr';
 
+  // userAgent
+  let userAgent =
+    window.localStorage.getItem('userAgent') === 'iphone'
+      ? 'iphone'
+      : 'android';
+  setContext(SSRContextKey, SSRBuildContext({ userAgent }));
+
+  const changeUserAgent = () => {
+    userAgent = userAgent === 'android' ? 'iphone' : 'android';
+    window.localStorage.setItem('userAgent', userAgent);
+    document.location.reload();
+  };
+
+  // scheme
+  const setScheme = (s) => {
     const schemeAttribute = document.createAttribute('scheme');
-    schemeAttribute.value = scheme;
+    schemeAttribute.value = s;
     document.body.attributes.setNamedItem(schemeAttribute);
   };
+
+  let scheme =
+    window.localStorage.getItem('scheme') === 'space_gray'
+      ? 'space_gray'
+      : 'bright_light';
+  setScheme(scheme);
+
+  const changeScheme = () => {
+    scheme = scheme === 'bright_light' ? 'space_gray' : 'bright_light';
+    setScheme(scheme);
+    window.localStorage.setItem('scheme', scheme);
+  };
+
+  // Всякое для примеров
 
   const promoBannerProps: BannerData = {
     title: 'Заголовок',
@@ -133,11 +168,16 @@
   let activeTab2 = 'music';
 </script>
 
-<main>
-  <div class="fixable" on:click="{changeScheme}">
+<div class="fixable">
+  <div on:click="{changeUserAgent}">
+    <Icon28SortHorizontalOutline />
+  </div>
+  <div on:click="{changeScheme}">
     <Icon28MoonOutline />
   </div>
+</div>
 
+<main>
   <Div>
     <Title level="1" weight="heavy">Layout</Title>
   </Div>
