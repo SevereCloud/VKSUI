@@ -21,6 +21,16 @@
   :global(body) {
     background: var(--background_page);
   }
+
+  .userStack {
+    background-image: linear-gradient(135deg, #f24973 0%, #3948e6 100%);
+    height: 200px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 6px;
+    border-radius: 12px;
+  }
 </style>
 
 <script lang="ts">
@@ -61,6 +71,7 @@
   import Tabs from './components/Blocks/Tabs.svelte';
   import TabsItem from './components/Blocks/TabsItem.svelte';
   import PromoBanner from './components/Advertisement/PromoBanner.svelte';
+  import HorizontalScroll from './components/Layout/HorizontalScroll.svelte';
   import type { BannerData } from './components/Advertisement/PromoBanner.svelte';
 
   import TouchExample from './TouchExample.svelte';
@@ -87,6 +98,11 @@
     Icon24Add,
     Icon56UsersOutline,
     Icon56MentionOutline,
+    Icon28Notifications,
+    Icon28BlockOutline,
+    Icon28SlidersOutline,
+    Icon28UsersOutline,
+    Icon28FavoriteOutline,
   } from '@sveltevk/icons';
 
   let scheme = 'bright_light';
@@ -268,7 +284,13 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Div</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <Div>
+            <Button stretched mode="secondary" size="l">Edit Info</Button>
+          </Div>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Link</Title>
@@ -353,7 +375,45 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Group</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <div>
+          <Group>
+            <div slot="header">
+              <Header mode="secondary">Media Upload</Header>
+            </div>
+            <SimpleCell>
+              <div slot="after">
+                <Switch defaultChecked />
+              </div>
+              Comppress Photos
+            </SimpleCell>
+            <SimpleCell>
+              <div slot="after">
+                <Switch />
+              </div>
+              Compress Videos
+            </SimpleCell>
+          </Group>
+          <Group
+            description="Allow access to location services to attach your
+            location to messages, posts, photos and stories, to improve ads in
+            your news feed and optimize content and friend suggestions"
+            separator="show"
+          >
+            <div slot="header">
+              <Header mode="secondary">System settings</Header>
+            </div>
+            <SimpleCell indicator="While Using" expandable>Location</SimpleCell>
+          </Group>
+        </div>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Other</Header>
+          </div>
+          <SimpleCell indicator="Wi-Fi" expandable>Autoplay Media</SimpleCell>
+          <SimpleCell expandable>Stickers</SimpleCell>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Card</Title>
@@ -755,7 +815,169 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Counter</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Счётчики в ячейках</Header>
+          </div>
+          <List>
+            <SimpleCell>
+              <div slot="indicator">
+                <Counter>4</Counter>
+              </div>
+              <div slot="before">
+                <Icon28UserOutline />
+              </div>
+              Друзья
+            </SimpleCell>
+            <SimpleCell>
+              <div slot="indicator">
+                <Counter mode="primary">2</Counter>
+              </div>
+              <div slot="before">
+                <Icon28UsersOutline />
+              </div>
+              Группы
+            </SimpleCell>
+            <SimpleCell>
+              <div slot="indicator">
+                <Counter>224</Counter>
+              </div>
+              <div slot="before">
+                <Icon28MessageOutline />
+              </div>
+              Сообщения
+            </SimpleCell>
+            <SimpleCell>
+              <div slot="indicator">
+                <Counter mode="primary">1</Counter>
+              </div>
+              <div slot="before">
+                <Icon28FavoriteOutline />
+              </div>
+              Закладки
+            </SimpleCell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Счётчики в кнопках</Header>
+          </div>
+          <Div>
+            <Button mode="secondary" size="l">
+              <div slot="after">
+                <Counter>16</Counter>
+              </div>
+              Secondary large
+            </Button>
+          </Div>
+          <Div>
+            <Button mode="tertiary">
+              <div slot="after">
+                <Counter>6</Counter>
+              </div>
+              Tertiary medium
+            </Button>
+          </Div>
+          <Div>
+            <Button mode="outline" size="l">
+              <div slot="after">
+                <Counter>20</Counter>
+              </div>
+              Outline large
+            </Button>
+          </Div>
+          <Div>
+            <Button mode="commerce" size="l">
+              <div slot="after">
+                <Counter>4</Counter>
+              </div>
+              Commerce large
+            </Button>
+          </Div>
+          <Div>
+            <Button size="xl">
+              <div slot="after">
+                <Counter>8</Counter>
+              </div>
+              Primary extra large
+            </Button>
+          </Div>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header>
+              <div slot="indicator">
+                <Counter size="s" mode="prominent">5</Counter>
+              </div>
+              <div slot="aside">
+                <Link>Посмотреть все</Link>
+              </div>
+              Заявки в друзья
+            </Header>
+          </div>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar />
+            </div>
+            Александр Сорокин
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar />
+            </div>
+            Виктор Пелевин
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar />
+            </div>
+            Михаил Зыгарь
+          </SimpleCell>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">В переключателях</Header>
+          </div>
+          <Tabs mode="buttons">
+            <HorizontalScroll>
+              <TabsItem>
+                <div slot="after">
+                  <Counter size="s">8</Counter>
+                </div>
+                Все
+              </TabsItem>
+              <TabsItem selected>
+                <div slot="after">
+                  <Counter size="s">24</Counter>
+                </div>
+                Люди
+              </TabsItem>
+              <TabsItem>
+                <div slot="after">
+                  <Counter size="s">2</Counter>
+                </div>
+                Сообщества
+              </TabsItem>
+              <TabsItem>Музыка</TabsItem>
+            </HorizontalScroll>
+          </Tabs>
+          <Tabs>
+            <TabsItem>
+              <div slot="after">
+                <Counter size="s">6</Counter>
+              </div>
+              Диалоги
+            </TabsItem>
+            <TabsItem selected>
+              <div slot="after">
+                <Counter size="s">24</Counter>
+              </div>
+              Сообщения
+            </TabsItem>
+          </Tabs>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">UsersStack</Title>
@@ -800,11 +1022,57 @@
             и ещё 3 человека
           </UsersStack>
         </Group>
+
+        <Group>
+          <Div>
+            <div class="userStack">
+              <UsersStack
+                photos="{['https://sun9-69.userapi.com/c206728/v206728108/15b1b9/YpxKXVzlvaA.jpg?ava=1', 'https://sun9-69.userapi.com/c206728/v206728108/15b1b9/YpxKXVzlvaA.jpg?ava=1', 'https://sun9-69.userapi.com/c206728/v206728108/15b1b9/YpxKXVzlvaA.jpg?ava=1']}"
+                style="color: #fff"
+              >
+                Проголосовали 2 176 человек
+              </UsersStack>
+            </div>
+          </Div>
+        </Group>
       </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Separator</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Сепаратор</Header>
+          </div>
+          <SimpleCell>
+            <div slot="before">
+              <Icon28Notifications />
+            </div>
+            Уведомления
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Icon28BlockOutline />
+            </div>
+            Не беспокоить
+          </SimpleCell>
+
+          <Separator style="{'margin: 12px 0'}" />
+
+          <SimpleCell>
+            <div slot="before">
+              <Icon28UserOutline />
+            </div>
+            Учётная запись
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Icon28SlidersOutline />
+            </div>
+            Основные
+          </SimpleCell>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Placeholder</Title>
