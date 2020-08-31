@@ -185,30 +185,32 @@
 
   /**
  * Counter
+ * TODO: Переписать без использования !important
  */
+
   :global(.Button--lvl-primary) :global(.Counter) {
-    background-color: var(--button_primary_foreground);
-    color: var(--button_primary_background);
+    background-color: var(--button_primary_foreground) !important;
+    color: var(--button_primary_background) !important;
   }
 
   :global(.Button--lvl-secondary) :global(.Counter) {
-    background-color: var(--button_secondary_foreground);
-    color: var(--background_content);
+    background-color: var(--button_secondary_foreground) !important;
+    color: var(--background_content) !important;
   }
 
   :global(.Button--lvl-tertiary) :global(.Counter) {
-    background-color: var(--button_tertiary_foreground);
-    color: var(--background_content);
+    background-color: var(--button_tertiary_foreground) !important;
+    color: var(--background_content) !important;
   }
 
   :global(.Button--lvl-outline) :global(.Counter) {
-    background-color: var(--button_outline_foreground);
-    color: var(--background_content);
+    background-color: var(--button_outline_foreground) !important;
+    color: var(--background_content) !important;
   }
 
   :global(.Button--lvl-commerce) :global(.Counter) {
-    background-color: var(--button_commerce_foreground);
-    color: var(--button_commerce_background);
+    background-color: var(--button_commerce_foreground) !important;
+    color: var(--button_commerce_background) !important;
   }
 </style>
 

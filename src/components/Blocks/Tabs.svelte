@@ -82,7 +82,7 @@
  * Counter inside TabsItem
  */
 
-  .TabsItem :global(.Counter) {
+  :global(.TabsItem) :global(.Counter) {
     margin-left: 8px;
   }
 
