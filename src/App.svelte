@@ -63,6 +63,7 @@
 
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
+  import SearchExample from './SearchExample.svelte';
 
   import {
     Icon16Dropdown,
@@ -95,7 +96,7 @@
     document.body.attributes.setNamedItem(schemeAttribute);
   };
 
-  let activeTab2 = 'music'
+  let activeTab2 = 'music';
 </script>
 
 <main>
@@ -105,9 +106,6 @@
 
   <Div>
     <Title level="1" weight="heavy">Layout</Title>
-    <Panel>
-      <div class="Example">test</div>
-    </Panel>
   </Div>
 
   <Div>
@@ -703,21 +701,23 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Search</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <SearchExample />
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Tabs</Title>
       <div class="Example">
         <Tabs>
           <TabsItem
-            on:click={() => activeTab2 = 'music'}
-            selected={activeTab2 === 'music'}
+            on:click="{() => (activeTab2 = 'music')}"
+            selected="{activeTab2 === 'music'}"
           >
             Моя музыка
           </TabsItem>
           <TabsItem
-            on:click={() => activeTab2 = 'recomendations'}
-            selected={activeTab2 === 'recomendations'}
+            on:click="{() => (activeTab2 = 'recomendations')}"
+            selected="{activeTab2 === 'recomendations'}"
           >
             Рекомендации
           </TabsItem>
