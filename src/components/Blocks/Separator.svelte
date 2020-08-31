@@ -36,7 +36,7 @@
   /**
    * С этим свойством компонент не будет иметь отступы слева и справа
    */
-  export let wide = false;
+  export let wide: boolean = false;
 
   const platform = usePlatform();
 </script>
