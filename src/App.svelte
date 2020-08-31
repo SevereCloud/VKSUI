@@ -60,6 +60,8 @@
   import Placeholder from './components/Blocks/Placeholder.svelte';
   import Tabs from './components/Blocks/Tabs.svelte';
   import TabsItem from './components/Blocks/TabsItem.svelte';
+  import PromoBanner from './components/Advertisement/PromoBanner.svelte';
+  import type { BannerData } from './components/Advertisement/PromoBanner.svelte';
 
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
@@ -94,6 +96,22 @@
     const schemeAttribute = document.createAttribute('scheme');
     schemeAttribute.value = scheme;
     document.body.attributes.setNamedItem(schemeAttribute);
+  };
+
+  const promoBannerProps: BannerData = {
+    title: 'Заголовок',
+    domain: 'vk.com',
+    trackingLink: 'https://vk.com',
+    ctaText: 'Перейти',
+    advertisingLabel: 'Реклама',
+    iconLink:
+      'https://sun9-7.userapi.com/c846420/v846420985/1526c3/ISX7VF8NjZk.jpg',
+    description: 'Описание рекламы',
+    ageRestrictions: '14+',
+    statistics: [
+      { url: '', type: 'playbackStarted' },
+      { url: '', type: 'click' },
+    ],
   };
 
   let activeTab2 = 'music';
@@ -998,6 +1016,16 @@
         <Caption level="4" weight="semibold" caps>
           Caption CAPS 4 semibold
         </Caption>
+      </div>
+    </Div>
+  </Div>
+
+  <Div>
+    <Title level="1" weight="heavy">Advertisement</Title>
+    <Div>
+      <Title level="2" weight="semibold">PromoBanner</Title>
+      <div class="Example">
+        <PromoBanner bannerData="{promoBannerProps}" />
       </div>
     </Div>
   </Div>
