@@ -58,6 +58,8 @@
   import Button from './components/Blocks/Button.svelte';
   import CellButton from './components/Blocks/CellButton.svelte';
   import Placeholder from './components/Blocks/Placeholder.svelte';
+  import Tabs from './components/Blocks/Tabs.svelte';
+  import TabsItem from './components/Blocks/TabsItem.svelte';
 
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
@@ -92,6 +94,8 @@
     schemeAttribute.value = scheme;
     document.body.attributes.setNamedItem(schemeAttribute);
   };
+
+  let activeTab2 = 'music'
 </script>
 
 <main>
@@ -703,11 +707,25 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Tabs</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Tabs>
+          <TabsItem
+            on:click={() => activeTab2 = 'music'}
+            selected={activeTab2 === 'music'}
+          >
+            Моя музыка
+          </TabsItem>
+          <TabsItem
+            on:click={() => activeTab2 = 'recomendations'}
+            selected={activeTab2 === 'recomendations'}
+          >
+            Рекомендации
+          </TabsItem>
+        </Tabs>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">TabsItem</Title>
-      <div class="Example"></div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Tooltip</Title>
