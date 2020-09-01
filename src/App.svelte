@@ -39,16 +39,19 @@
 </style>
 
 <script lang="ts">
-  import Div from './components/Blocks/Div.svelte';
-  import Progress from './components/Blocks/Progress.svelte';
   import './styles/constants.css';
   import './styles/styles.css';
   import './styles/bright_light.css';
   import './styles/space_gray.css';
+
   import Title from './components/Typography/Title.svelte';
   import Caption from './components/Typography/Caption.svelte';
   import Text from './components/Typography/Text.svelte';
   import Subhead from './components/Typography/Subhead.svelte';
+  import Headline from './components/Typography/Headline.svelte';
+
+  import Div from './components/Blocks/Div.svelte';
+  import Progress from './components/Blocks/Progress.svelte';
   import CardGrid from './components/Blocks/CardGrid.svelte';
   import SimpleCell from './components/Blocks/SimpleCell.svelte';
   import Gradient from './components/Blocks/Gradient.svelte';
@@ -60,7 +63,6 @@
   import Avatar from './components/Blocks/Avatar.svelte';
   import SSRWrapper from './components/Service/SSRWrapper.svelte';
   import Group from './components/Blocks/Group.svelte';
-  import Headline from './components/Typography/Headline.svelte';
   import Panel from './components/Layout/Panel.svelte';
   import Switch from './components/Blocks/Switch.svelte';
   import InfoRow from './components/Blocks/InfoRow.svelte';
@@ -75,8 +77,12 @@
   import Placeholder from './components/Blocks/Placeholder.svelte';
   import Tabs from './components/Blocks/Tabs.svelte';
   import TabsItem from './components/Blocks/TabsItem.svelte';
+  import RichCell from './components/Blocks/RichCell.svelte';
+
   import PromoBanner from './components/Advertisement/PromoBanner.svelte';
+
   import HorizontalScroll from './components/Layout/HorizontalScroll.svelte';
+
   import type { BannerData } from './components/Advertisement/PromoBanner.svelte';
 
   import TouchExample from './TouchExample.svelte';
@@ -109,6 +115,7 @@
     Icon28UsersOutline,
     Icon28FavoriteOutline,
     Icon28SortHorizontalOutline,
+    Icon28UserAddOutline,
   } from '@sveltevk/icons';
 
   // Разные настройки для тем
@@ -719,7 +726,74 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">RichCell</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <RichCell
+            disabled
+            multiline
+            text="Держи за обед в EZO"
+            caption="Вчера в 20:30"
+            after="+ 1 500 ₽"
+          >
+            <div slot="before">
+              <Avatar
+                size="{72}"
+                src="https://sun9-16.userapi.com/c857724/v857724589/9c7ad/01M-8UlcNoo.jpg?ava=1"
+              />
+            </div>
+            <div slot="actions">
+              <Button>Принять</Button>
+              <Button mode="secondary">Отклонить</Button>
+            </div>
+            Тарас Иванов
+          </RichCell>
+          <RichCell disabled caption="Команда ВКонтакте, Санкт-Петербург">
+            <div slot="after">
+              <Icon28UserAddOutline />
+            </div>
+            <div slot="before">
+              <Avatar
+                size="{72}"
+                src="https://sun9-34.userapi.com/c857132/v857132690/49628/r4wBoWw0mJI.jpg?ava=1"
+              />
+            </div>
+            <div slot="bottom">
+              <UsersStack
+                photos="{['https://sun9-11.userapi.com/c858420/v858420276/5e9b7/WodDi1aEvFQ.jpg?ava=1', 'https://sun9-55.userapi.com/c848416/v848416376/1b82ab/K5YJ8Htn3as.jpg?ava=1', 'https://sun9-48.userapi.com/MTiajl5N6b467FGSPppTxnMvk3DSjWVaImgCjw/n4ajtifm__g.jpg?ava=1']}"
+              >
+                73 общих друга
+              </UsersStack>
+            </div>
+            <div slot="actions">
+              <Button>Добавить</Button>
+              <Button mode="secondary">Скрыть</Button>
+            </div>
+            Илья Гришин
+          </RichCell>
+          <RichCell
+            text="Поездка в Лиссабон"
+            caption="Вчера в 20:30"
+            after="+ 1 500 ₽"
+          >
+            <div slot="before">
+              <Avatar
+                size="{48}"
+                src="https://sun9-49.userapi.com/c850332/v850332555/115030/JyNJrr4cytY.jpg?ava=1"
+              />
+            </div>
+            Михаил Лихачев
+          </RichCell>
+          <RichCell caption="Вчера в 20:30" after="- 700 ₽">
+            <div slot="before">
+              <Avatar
+                size="{48}"
+                src="https://sun9-60.userapi.com/c851416/v851416327/be840/bnUHAblZoBY.jpg?ava=1"
+              />
+            </div>
+            Тимофей Чаптыков
+          </RichCell>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">List</Title>
