@@ -84,7 +84,6 @@
 
 <script lang="ts">
   import classNames from '../../lib/classNames';
-  import getClassName from '../../lib/getClassName';
   import Icon24Dismiss from '@sveltevk/icons/dist/24/dismiss';
   import Button from '../Blocks/Button.svelte';
   import SimpleCell from '../Blocks/SimpleCell.svelte';

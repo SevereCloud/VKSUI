@@ -85,7 +85,7 @@
   import { getOffsetRect } from '../../lib/offset';
   import Touch from './Touch.svelte';
   import div from '../Elements/div.svelte';
-  import type { TouchEventHandler, TouchEvent } from './Touch.svelte';
+  // import type { TouchEventHandler, TouchEvent } from './Touch.svelte';
   import { coordX, coordY } from '../../lib/touch';
   import type { VKUITouchEventHander, VKUITouchEvent } from '../../lib/touch';
 

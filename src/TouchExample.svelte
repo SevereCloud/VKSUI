@@ -25,7 +25,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import Touch from './components/Service/Touch.svelte';
-  import type { TouchEvent } from './components/Service/Touch.svelte';
+  // import type { TouchEvent } from './components/Service/Touch.svelte';
 
   let container: HTMLElement;
 

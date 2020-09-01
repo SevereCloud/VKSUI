@@ -31,8 +31,6 @@
   import List from './components/Blocks/List.svelte';
   import Search from './components/Blocks/Search.svelte';
 
-  import { Icon24Filter } from '@sveltevk/icons';
-
   let search = '';
 
   $: searchThematics = thematics.filter(

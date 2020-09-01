@@ -89,7 +89,6 @@
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
-  import { ANDROID } from '../../lib/platform';
   import button from '../Elements/button.svelte';
   import a from '../Elements/a.svelte';
 

@@ -63,7 +63,6 @@
   import Avatar from './components/Blocks/Avatar.svelte';
   import SSRWrapper from './components/Service/SSRWrapper.svelte';
   import Group from './components/Blocks/Group.svelte';
-  import Panel from './components/Layout/Panel.svelte';
   import Switch from './components/Blocks/Switch.svelte';
   import InfoRow from './components/Blocks/InfoRow.svelte';
   import List from './components/Blocks/List.svelte';
@@ -133,11 +132,11 @@
   const changeUserAgent = () => {
     userAgent = userAgent === 'android' ? 'iphone' : 'android';
     window.localStorage.setItem('userAgent', userAgent);
-    document.location.reload(true);
+    document.location.reload();
   };
 
   // scheme
-  const setScheme = (s) => {
+  const setScheme = (s:string) => {
     const schemeAttribute = document.createAttribute('scheme');
     schemeAttribute.value = s;
     document.body.attributes.setNamedItem(schemeAttribute);

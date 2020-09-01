@@ -271,7 +271,7 @@
   import getClassName from '../../lib/getClassName';
   import { IOS } from '../../lib/platform';
   import Touch from '../Service/Touch.svelte';
-  import type { TouchEventHandler, TouchEvent } from '../Service/Touch.svelte';
+  // import type { TouchEventHandler, TouchEvent } from '../Service/Touch.svelte';
   import Icon16SearchOutline from '@sveltevk/icons/dist/16/search_outline';
   import Icon16Clear from '@sveltevk/icons/dist/16/clear';
   import { createEventDispatcher } from 'svelte';
