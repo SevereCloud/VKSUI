@@ -78,6 +78,7 @@
   import Tabs from './components/Blocks/Tabs.svelte';
   import TabsItem from './components/Blocks/TabsItem.svelte';
   import RichCell from './components/Blocks/RichCell.svelte';
+  import PanelSpinner from './components/Blocks/PanelSpinner.svelte';
 
   import PromoBanner from './components/Advertisement/PromoBanner.svelte';
 
@@ -132,7 +133,7 @@
   const changeUserAgent = () => {
     userAgent = userAgent === 'android' ? 'iphone' : 'android';
     window.localStorage.setItem('userAgent', userAgent);
-    document.location.reload();
+    document.location.reload(true);
   };
 
   // scheme
@@ -843,7 +844,9 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">PanelSpinner</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <PanelSpinner />
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Switch</Title>
