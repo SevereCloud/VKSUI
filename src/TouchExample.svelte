@@ -42,9 +42,9 @@
     limitY = container.offsetTop;
   });
 
-  const onMove = (e: TouchEvent) => {
-    let newShiftX = startX + e.shiftX;
-    let newShiftY = startY + e.shiftY;
+  const onMove = (e) => {
+    let newShiftX = startX + e.detail.shiftX;
+    let newShiftY = startY + e.detail.shiftY;
 
     shiftX =
       newShiftX > limitX ? limitX : newShiftX < -limitX ? -limitX : newShiftX;
@@ -52,9 +52,9 @@
       newShiftY > limitY ? limitY : newShiftY < -limitY ? -limitY : newShiftY;
   };
 
-  const onEnd = (e: TouchEvent) => {
-    startX += e.shiftX;
-    startY += e.shiftY;
+  const onEnd = (e) => {
+    startX += e.detail.shiftX;
+    startY += e.detail.shiftY;
   };
 
   $: limitExceeded = Math.abs(shiftX) >= limitX || Math.abs(shiftY) >= limitY;
@@ -63,8 +63,8 @@
 <div class="container" class:limitExceeded>
   <Touch
     bind:container
-    onEnd="{onEnd}"
-    onMove="{onMove}"
+    on:end="{onEnd}"
+    on:move="{onMove}"
     class="circle"
     style="{`transform: translate(${shiftX}px, ${shiftY}px)`}"
   />

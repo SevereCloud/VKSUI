@@ -153,7 +153,8 @@
   /*
    * Обрабатывает событие touchstart
    */
-  const onStart: TouchEventHandler = ({ originalEvent }: TouchEvent) => {
+  const onStart = ({ detail }) => {
+    const { originalEvent } = detail;
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     if (originalEvent.touches && originalEvent.touches.length > 1) {
       deactivateOtherInstances();
@@ -173,11 +174,9 @@
   /*
    * Обрабатывает событие touchmove
    */
-  const onMove: TouchEventHandler = ({
-    originalEvent,
-    shiftXAbs,
-    shiftYAbs,
-  }: TouchEvent) => {
+  const onMove = ({ detail }) => {
+    const { originalEvent, shiftXAbs, shiftYAbs } = detail;
+
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     if (shiftXAbs > 20 || shiftYAbs > 20) {
       isSlide = true;
@@ -188,7 +187,8 @@
   /*
    * Обрабатывает событие touchend
    */
-  const onEnd: TouchEventHandler = ({ originalEvent }: TouchEvent) => {
+  const onEnd = ({ detail }) => {
+    const { originalEvent } = detail;
     !insideTouchRoot && stopPropagation && originalEvent.stopPropagation();
     const now = nowTs();
 
@@ -298,9 +298,9 @@
 <svelte:component
   this="{rootComponent}"
   bind:container
-  onStart="{onStart}"
-  onMove="{onMove}"
-  onEnd="{onEnd}"
+  on:start="{onStart}"
+  on:move="{onMove}"
+  on:end="{onEnd}"
   Component="{Component}"
   on:click
   {...$$restProps}

@@ -316,11 +316,11 @@
     inputEl.dispatchEvent(ev2);
   };
 
-  const onIconClickStart = (e: TouchEvent) => {
+  const onIconClickStart = (e) => {
     dispatch('iconClick', e.originalEvent);
   };
 
-  const onIconCancelClickStart = (e: TouchEvent) => {
+  const onIconCancelClickStart = (e) => {
     e.originalEvent.preventDefault();
     inputEl.focus();
     onCancel();
@@ -368,12 +368,12 @@
     <div class="Search__after" onClick="{this.onCancel}">
       <div class="Search__icons">
         {#if SLOTS && SLOTS.icon}
-          <Touch onStart="{onIconClickStart}" class="Search__icon">
+          <Touch on:start="{onIconClickStart}" class="Search__icon">
             <slot name="icon" />
           </Touch>
         {/if}
         {#if !!value}
-          <Touch onStart="{onIconCancelClickStart}" class="Search__icon">
+          <Touch on:start="{onIconCancelClickStart}" class="Search__icon">
             <Icon16Clear />
           </Touch>
         {/if}

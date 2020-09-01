@@ -38,19 +38,21 @@
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { canUseDOM } from '../../lib/dom';
   import div from '../Elements/div.svelte';
+  import { current_component } from 'svelte/internal';
 
   const dispatch = createEventDispatcher();
+  const callbacks = current_component.$$.callbacks;
 
   export let Component = div;
-  export let onStart: (outputEvent: TouchEvent) => void = undefined;
-  export let onStartX: (outputEvent: TouchEvent) => void = undefined;
-  export let onStartY: (outputEvent: TouchEvent) => void = undefined;
-  export let onMove: (outputEvent: TouchEvent) => void = undefined;
-  export let onMoveX: (outputEvent: TouchEvent) => void = undefined;
-  export let onMoveY: (outputEvent: TouchEvent) => void = undefined;
-  export let onEnd: (outputEvent: TouchEvent) => void = undefined;
-  export let onEndX: (outputEvent: TouchEvent) => void = undefined;
-  export let onEndY: (outputEvent: TouchEvent) => void = undefined;
+  // export let onStart: (outputEvent: TouchEvent) => void = undefined;
+  // export let onStartX: (outputEvent: TouchEvent) => void = undefined;
+  // export let onStartY: (outputEvent: TouchEvent) => void = undefined;
+  // export let onMove: (outputEvent: TouchEvent) => void = undefined;
+  // export let onMoveX: (outputEvent: TouchEvent) => void = undefined;
+  // export let onMoveY: (outputEvent: TouchEvent) => void = undefined;
+  // export let onEnd: (outputEvent: TouchEvent) => void = undefined;
+  // export let onEndX: (outputEvent: TouchEvent) => void = undefined;
+  // export let onEndY: (outputEvent: TouchEvent) => void = undefined;
   export let useCapture = false;
 
   export let container: HTMLElement = undefined;
@@ -92,17 +94,11 @@
       originalEvent: e,
     };
 
-    if (onStart) {
-      onStart(outputEvent);
-    }
+    dispatch('start', outputEvent);
 
-    if (onStartX) {
-      onStartX(outputEvent);
-    }
+    dispatch('startX', outputEvent);
 
-    if (onStartY) {
-      onStartY(outputEvent);
-    }
+    dispatch('startY', outputEvent);
 
     !touchEnabled && subscribe(document);
   };
@@ -134,8 +130,8 @@
       if (!isX && !isY) {
         let willBeX = shiftXAbs >= 5 && shiftXAbs > shiftYAbs;
         let willBeY = shiftYAbs >= 5 && shiftYAbs > shiftXAbs;
-        let willBeSlidedX = (willBeX && !!onMoveX) || !!onMove;
-        let willBeSlidedY = (willBeY && !!onMoveY) || !!onMove;
+        let willBeSlidedX = (willBeX && !!callbacks.moveX) || !!callbacks.move;
+        let willBeSlidedY = (willBeY && !!callbacks.moveY) || !!callbacks.move;
 
         gesture.isY = willBeY;
         gesture.isX = willBeX;
@@ -156,16 +152,14 @@
           originalEvent: e,
         };
 
-        if (onMove) {
-          onMove(outputEvent);
+        dispatch('move', outputEvent);
+
+        if (gesture.isSlideX) {
+          dispatch('moveX', outputEvent);
         }
 
-        if (gesture.isSlideX && onMoveX) {
-          onMoveX(outputEvent);
-        }
-
-        if (gesture.isSlideY && onMoveY) {
-          onMoveY(outputEvent);
+        if (gesture.isSlideY) {
+          dispatch('moveY', outputEvent);
         }
       }
     }
@@ -187,16 +181,14 @@
         originalEvent: e,
       };
 
-      if (onEnd) {
-        onEnd(outputEvent);
+      dispatch('end', outputEvent);
+
+      if (isSlideY) {
+        dispatch('endY', outputEvent);
       }
 
-      if (isSlideY && onEndY) {
-        onEndY(outputEvent);
-      }
-
-      if (isSlideX && onEndX) {
-        onEndX(outputEvent);
+      if (isSlideX) {
+        dispatch('endX', outputEvent);
       }
     }
 
