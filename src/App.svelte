@@ -54,6 +54,7 @@
   import Progress from './components/Blocks/Progress.svelte';
   import CardGrid from './components/Blocks/CardGrid.svelte';
   import SimpleCell from './components/Blocks/SimpleCell.svelte';
+  import Cell from './components/Blocks/Cell.svelte';
   import Gradient from './components/Blocks/Gradient.svelte';
   import CardScroll from './components/Blocks/CardScroll.svelte';
   import Card from './components/Blocks/Card.svelte';
@@ -116,6 +117,9 @@
     Icon28FavoriteOutline,
     Icon28SortHorizontalOutline,
     Icon28UserAddOutline,
+    Icon28InfoOutline,
+    Icon28ServicesOutline,
+    Icon24MoreHorizontal,
   } from '@sveltevk/icons';
 
   // Разные настройки для тем
@@ -136,7 +140,7 @@
   };
 
   // scheme
-  const setScheme = (s:string) => {
+  const setScheme = (s: string) => {
     const schemeAttribute = document.createAttribute('scheme');
     schemeAttribute.value = s;
     document.body.attributes.setNamedItem(schemeAttribute);
@@ -155,6 +159,9 @@
   };
 
   // Всякое для примеров
+
+  let removeList = ['Михаил Андриевский', 'Вадим Дорохов', 'Саша Колобов'];
+  let draggingList = ['Say', 'Hello', 'To', 'My', 'Little', 'Friend'];
 
   const promoBannerProps: BannerData = {
     title: 'Заголовок',
@@ -615,7 +622,229 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Cell</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Простейший пример</Header>
+          </div>
+          <List>
+            <Cell>Пятница</Cell>
+            <Cell>Суббота</Cell>
+            <Cell>Воскресение</Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Переходы</Header>
+          </div>
+          <List>
+            <Cell expandable on:click="{() => console.log('click')}">
+              Учетная запись
+            </Cell>
+            <Cell expandable on:click="{() => console.log('click')}">
+              Основные
+            </Cell>
+            <Cell expandable on:click="{() => console.log('click')}">
+              Приватность
+            </Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Индикатор</Header>
+          </div>
+          <List>
+            <Cell
+              expandable
+              onClick="{() => console.log('click')}"
+              indicator="При использовании"
+            >
+              Геолокация
+            </Cell>
+            <Cell
+              expandable
+              onClick="{() => console.log('click')}"
+              indicator="Всегда"
+            >
+              Автопроигрывание медиа
+            </Cell>
+            <Cell
+              expandable
+              onClick="{() => console.log('click')}"
+              indicator="Выключены"
+            >
+              Стикеры
+            </Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Многострочность</Header>
+          </div>
+          <List>
+            <Cell multiline>
+              A Series of Unfortunate Events, Archer, Brooklyn Nine-Nine, Doctor
+              Who, Game of Thrones
+            </Cell>
+            <Cell multiline>The Avalanches</Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Подпись</Header>
+          </div>
+          <List>
+            <Cell description="Depeche Mode">Where’s the Revolution</Cell>
+            <Cell description="The Weeknd">
+              I Feel It Coming (Feat. Daft Punk)
+            </Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Большая ячейка</Header>
+          </div>
+          <List>
+            <Cell size="l" description="Друзья в Facebook">
+              <div slot="before">
+                <Avatar size="{72}" />
+              </div>
+              <div slot="asideContent">
+                <Icon24MoreHorizontal />
+              </div>
+              <div style="display: flex" slot="bottomContent">
+                <Button size="m">Добавить</Button>
+                <Button size="m" mode="secondary" style="margin-left: 8px">
+                  Скрыть
+                </Button>
+              </div>
+              Семён Ефимов
+            </Cell>
+            <Cell size="l" description="29 лет, Санкт-Петербург">
+              <div slot="before">
+                <Avatar size="{72}" />
+              </div>
+              <div slot="asideContent">
+                <Icon24MoreHorizontal />
+              </div>
+              <div style="display: flex" slot="bottomContent">
+                <Button size="m">Добавить</Button>
+                <Button size="m" mode="secondary" style="margin-left: 8px">
+                  Скрыть
+                </Button>
+              </div>
+              Александр Попов
+            </Cell>
+            <Cell size="l" description="Команда ВКонтакте">
+              <div slot="before">
+                <Avatar size="{72}" />
+              </div>
+              <div slot="asideContent">
+                <Icon24MoreHorizontal />
+              </div>
+              <div style="display: flex" slot="bottomContent">
+                <Button size="m">Добавить</Button>
+                <Button size="m" mode="secondary" style="margin-left: 8px">
+                  Скрыть
+                </Button>
+              </div>
+              Екатерина Скобейко
+            </Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Иконки</Header>
+          </div>
+          <List>
+            <Cell>
+              <div slot="before">
+                <Icon28InfoOutline />
+              </div>
+              Информация
+            </Cell>
+            <Cell>
+              <div slot="before">
+                <Icon28ServicesOutline />
+              </div>
+              Сервисы
+            </Cell>
+          </List>
+        </Group>
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Чекбоксы</Header>
+          </div>
+          <List>
+            <Cell selectable>
+              <div slot="before">
+                <Avatar
+                  size="{40}"
+                  src="https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1"
+                />
+              </div>
+              Артур Стамбульцян
+            </Cell>
+            <Cell selectable>
+              <div slot="before">
+                <Avatar
+                  size="{40}"
+                  src="https://sun9-60.userapi.com/c851416/v851416327/be840/bnUHAblZoBY.jpg?ava=1"
+                />
+              </div>
+              Тимофей Чаптыков
+            </Cell>
+            <Cell selectable>
+              <div slot="before">
+                <Avatar
+                  size="{40}"
+                  src="https://sun9-44.userapi.com/c858128/v858128761/67fe1/nAnraWnpHK8.jpg?ava=1"
+                />
+              </div>
+              Влад Анесов
+            </Cell>
+          </List>
+        </Group>
+        {#if removeList.length > 0}
+          <Group>
+            <div slot="header">
+              <Header mode="secondary">Удаление</Header>
+            </div>
+            <List>
+              {#each removeList as item, index}
+                <Cell
+                  removable
+                  onRemove="{() => {
+                    removeList = [...removeList.slice(0, index), ...removeList.slice(index + 1)];
+                  }}"
+                >
+                  {item}
+                </Cell>
+              {/each}
+            </List>
+          </Group>
+        {/if}
+        <Group>
+          <div slot="header">
+            <Header mode="secondary">Перетаскивание</Header>
+          </div>
+          <List>
+            {#each draggingList as item}
+              <Cell
+                draggable
+                onDragFinish="{({ from, to }) => {
+                  const newDraggingList = [...draggingList];
+                  newDraggingList.splice(from, 1);
+                  newDraggingList.splice(to, 0, draggingList[from]);
+                  draggingList = newDraggingList;
+                }}"
+              >
+                {item}
+              </Cell>
+            {/each}
+          </List>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">SimpleCell</Title>
