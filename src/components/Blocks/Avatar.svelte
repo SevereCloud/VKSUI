@@ -62,6 +62,7 @@
     | 24 = 48;
   export let mode: 'default' | 'image' | 'app' = 'default';
   export let shadow: boolean = true;
+  export let style: string = '';
 
   const platform = usePlatform();
 
@@ -72,10 +73,10 @@
       borderRadius = '50%';
       break;
     case 'image':
-      borderRadius = '4';
+      borderRadius = '4px';
       break;
     case 'app':
-      borderRadius = Math.floor((size * 10) / 48).toString();
+      borderRadius = Math.floor((size * 10) / 48).toString() + 'px';
       break;
   }
 
@@ -103,13 +104,13 @@
         class="Avatar__img"
         src="{$$props.src}"
         alt="{$$props.alt}"
-        style="{$$props.style + `; border-radius:${borderRadius}`}"
+        style="{style + `; border-radius:${borderRadius}`}"
       />
     {:else}
       <div
         {...$$restProps}
         class="Avatar__img"
-        style="{$$props.style + `; border-radius:${borderRadius}`}"
+        style="{style + `; border-radius:${borderRadius}`}"
       ></div>
     {/if}
 
@@ -123,7 +124,7 @@
     {#if SLOTS && SLOTS.default}
       <div
         class="Avatar__children"
-        style="{`width: ${size}px, height: ${size}px; border-radius:${borderRadius}`}"
+        style="{`width: ${size}px; height: ${size}px; border-radius:${borderRadius}`}"
       >
         <slot />
       </div>

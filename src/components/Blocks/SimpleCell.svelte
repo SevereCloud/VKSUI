@@ -21,12 +21,12 @@
     text-overflow: initial;
   }
 
-  :global(.SimpleCell) :global(.Avatar),
-  :global(.SimpleCell) :global(.Icon) {
+  :global(.SimpleCell) > :global(*) > :global(.Avatar),
+  :global(.SimpleCell) > :global(*) > :global(.Icon) {
     flex-shrink: 0;
   }
 
-  :global(.SimpleCell) :global(.Icon) {
+  :global(.SimpleCell) > :global(*) > :global(.Icon) {
     color: var(--accent);
   }
 
@@ -38,29 +38,29 @@
     overflow: hidden;
   }
 
-  :global(.SimpleCell) :global(.Icon),
-  :global(.SimpleCell) :global(.Avatar) {
+  :global(.SimpleCell) > :global(*) > :global(.Icon),
+  :global(.SimpleCell) > :global(*) > :global(.Avatar) {
     padding-right: 12px;
   }
 
-  :global(.SimpleCell) :global(.Icon--28) {
+  :global(.SimpleCell) > :global(*) > :global(.Icon--28) {
     padding-right: 16px;
   }
 
-  :global(.SimpleCell) :global(.Icon),
-  :global(.SimpleCell) :global(.Avatar--sz-32),
-  :global(.SimpleCell) :global(.Avatar--sz-28) {
+  :global(.SimpleCell) > :global(*) > :global(.Icon),
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-32),
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-28) {
     padding-top: 10px;
     padding-bottom: 10px;
   }
 
-  :global(.SimpleCell) :global(.Avatar--sz-40) {
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-40) {
     padding-top: 4px;
     padding-bottom: 4px;
   }
 
-  :global(.SimpleCell) :global(.Avatar--sz-48),
-  :global(.SimpleCell) :global(.Avatar--sz-72) {
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-48),
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-72) {
     padding-top: 6px;
     padding-bottom: 6px;
   }
@@ -74,10 +74,8 @@
     margin-top: 3px;
   }
 
-  :global(.SimpleCell)
-    :global(.Avatar--sz-32 ~ .SimpleCell__main .SimpleCell__description),
-  :global(.SimpleCell)
-    :global(.Avatar--sz-28 ~ .SimpleCell__main .SimpleCell__description) {
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-32 ~ .SimpleCell__main .SimpleCell__description),
+  :global(.SimpleCell) > :global(*) > :global(.Avatar--sz-28 ~ .SimpleCell__main .SimpleCell__description) {
     margin-top: 2px;
   }
 
@@ -103,11 +101,13 @@
     color: var(--accent);
   }
 
-  .SimpleCell__after :global(.Icon) {
+  .SimpleCell__after > :global(.Icon:last-child),
+  .SimpleCell__after > :global(*) > :global(.Icon) {
     padding-left: 8px;
   }
 
-  .SimpleCell__after :global(.Icon:last-child) {
+  .SimpleCell__after > :global(.Icon:last-child),
+  .SimpleCell__after > :global(*) > :global(.Icon:last-child) {
     padding-right: 2px;
   }
 
