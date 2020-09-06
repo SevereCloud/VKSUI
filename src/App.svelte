@@ -120,6 +120,8 @@
     Icon28InfoOutline,
     Icon28ServicesOutline,
     Icon24MoreHorizontal,
+    Icon28PrivacyOutline,
+    Icon16Like,
   } from '@sveltevk/icons';
 
   // Разные настройки для тем
@@ -1026,7 +1028,26 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">List</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Cell expandable>
+          <div slot="before">
+            <Icon28UserOutline />
+          </div>
+          Учетная запись
+        </Cell>
+        <Cell expandable>
+          <div slot="before">
+            <Icon28SettingsOutline />
+          </div>
+          Основные
+        </Cell>
+        <Cell expandable>
+          <div slot="before">
+            <Icon28PrivacyOutline />
+          </div>
+          Приватность
+        </Cell>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Footer</Title>
@@ -1078,7 +1099,28 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Switch</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <Cell>
+            <div slot="asideContent">
+              <Switch />
+            </div>
+            Комментарии к записям
+          </Cell>
+          <Cell>
+            <div slot="asideContent">
+              <Switch defaultChecked />
+            </div>
+            Ссылки
+          </Cell>
+          <Cell>
+            <div slot="asideContent">
+              <Switch disabled />
+            </div>
+            Фотоальбомы
+          </Cell>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">InfoRow</Title>
@@ -1104,7 +1146,173 @@
     </Div>
     <Div>
       <Title level="2" weight="semibold">Avatar</Title>
-      <div class="Example"></div>
+      <div class="Example">
+        <Group>
+          <Header mode="secondary">Дефолтный размер</Header>
+          <SimpleCell description="VKontakte">
+            <div slot="before">
+              <Avatar
+                src="{'https://sun9-61.userapi.com/O-2f7t0yecmx38WXoF37RkhkJTG2rcjL4Yq88w/J39s0u1f90c.jpg?ava=1'}"
+              />
+            </div>
+            Артур Стамбульцян
+          </SimpleCell>
+        </Group>
+        <Group>
+          <Header mode="secondary">RichCell</Header>
+          <RichCell disabled caption="Команда ВКонтакте, Санкт-Петербург">
+            <div slot="before">
+              <Avatar
+                size="{72}"
+                src="https://sun9-34.userapi.com/c857132/v857132690/49628/r4wBoWw0mJI.jpg?ava=1"
+              />
+            </div>
+            <div slot="bottom">
+              <UsersStack
+                photos="{['https://sun9-11.userapi.com/c858420/v858420276/5e9b7/WodDi1aEvFQ.jpg?ava=1', 'https://sun9-55.userapi.com/c848416/v848416376/1b82ab/K5YJ8Htn3as.jpg?ava=1', 'https://sun9-48.userapi.com/MTiajl5N6b467FGSPppTxnMvk3DSjWVaImgCjw/n4ajtifm__g.jpg?ava=1']}"
+              >
+                73 общих друга
+              </UsersStack>
+            </div>
+            <div slot="actions">
+              <Button>Добавить</Button>
+              <Button mode="secondary">Скрыть</Button>
+            </div>
+            Илья Гришин
+          </RichCell>
+        </Group>
+        <Group>
+          <Header mode="secondary">Placeholder</Header>
+          <SimpleCell description="Только от друзей друзей">
+            <div slot="before">
+              <Avatar
+                style="background: var(--accent)"
+                size="{28}"
+                shadow="{false}"
+              >
+                <Icon16Add fill="var(--white)" />
+              </Avatar>
+            </div>
+            Заявки в друзья
+          </SimpleCell>
+          <SimpleCell description="Только важные">
+            <div slot="before">
+              <Avatar
+                style="background: var(--destructive)"
+                size="{28}"
+                shadow="{false}"
+              >
+                <Icon16Like fill="var(--white)" />
+              </Avatar>
+            </div>
+            Отметки «Мне нравится»
+          </SimpleCell>
+        </Group>
+        <Group
+          description="Дефолтный стиль аватарки. Используется для юзеров, групп."
+        >
+          <Header mode="secondary">Дефолтный тип</Header>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar
+                src="https://sun9-19.userapi.com/c846020/v846020298/1d0e79/R41LGoPtIK0.jpg?ava=1"
+              />
+            </div>
+            Евгений Авсиевич
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar
+                src="https://sun9-70.userapi.com/c636327/v636327034/2be84/TYzZpZ8BL0k.jpg?ava=1"
+              />
+            </div>
+            Татьяна Плуталова
+          </SimpleCell>
+          <SimpleCell>
+            <div slot="before">
+              <Avatar
+                src="https://sun9-18.userapi.com/c841629/v841629884/290aa/TUPsSYQXzKg.jpg?ava=1"
+              />
+            </div>
+            Олег Илларианов
+          </SimpleCell>
+        </Group>
+        <Group
+          description="Аватарки для приложений. Радиус скургления зависит от
+          значения свойства size."
+        >
+          <Header mode="secondary">Приложения</Header>
+          <SimpleCell description="Ролевая">
+            <div slot="before">
+              <Avatar
+                mode="app"
+                src="https://pp.userapi.com/c844616/v844616889/9ec4a/9Fk-RI7uchQ.jpg"
+              />
+            </div>
+            Шторм онлайн
+          </SimpleCell>
+          <SimpleCell description="Настольная" multiline="{false}">
+            <div slot="before">
+              <Avatar
+                mode="app"
+                src="https://pp.userapi.com/c848536/v848536020/18242/ZLjAYM59EqY.jpg"
+              />
+            </div>
+            Шашки - 3 вида: шашки, уголки, поддавки
+          </SimpleCell>
+          <SimpleCell description="Головоломка">
+            <div slot="before">
+              <Avatar
+                mode="app"
+                src="https://pp.userapi.com/c849028/v849028348/1b353/Na_GRlqgRNM.jpg"
+              />
+            </div>
+            Вега Микс на даче
+          </SimpleCell>
+        </Group>
+        <Group
+          description="Используется для остальных случаев. Например, для музыки
+          и плейлистов."
+        >
+          <Header mode="secondary">Обложки</Header>
+          <SimpleCell description="Arctic Monkeys">
+            <div slot="before">
+              <Avatar
+                mode="image"
+                src="https://pp.userapi.com/c841025/v841025503/617f7/bkN1Def0s14.jpg"
+              />
+            </div>
+            <div slot="after">
+              <Icon24MoreHorizontal fill="var(--accent)" />
+            </div>
+            I Wanna Be Yours
+          </SimpleCell>
+          <SimpleCell description="Лето (звери)">
+            <div slot="before">
+              <Avatar
+                mode="image"
+                src="https://pp.userapi.com/c845220/v845220642/7cacc/XzhH5b7FSKY.jpg"
+              />
+            </div>
+            <div slot="after">
+              <Icon24MoreHorizontal fill="var(--accent)" />
+            </div>
+            6 утра
+          </SimpleCell>
+          <SimpleCell description="Depeche Mode">
+            <div slot="before">
+              <Avatar
+                mode="image"
+                src="https://pp.userapi.com/c837628/v837628453/39175/4JRjMaFvCrw.jpg"
+              />
+            </div>
+            <div slot="after">
+              <Icon24MoreHorizontal fill="var(--accent)" />
+            </div>
+            Enjoy the Silence
+          </SimpleCell>
+        </Group>
+      </div>
     </Div>
     <Div>
       <Title level="2" weight="semibold">Gallery</Title>
