@@ -5,18 +5,21 @@
   "description": "VKSUI library",
   "repository": "https://github.com/SevereCloud/VKSUI",
   "homepage": "https://github.com/SevereCloud/VKSUI",
+  "defaultSchemeId": "bright_light",
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public",
     "format": "prettier --write  'src/**/*.{js,jsx,ts,tsx}'",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "generate_scheme": "./tasks/generate_scheme.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^5.0.2",
     "@tsconfig/svelte": "^1.0.10",
+    "@vkontakte/appearance": "https://github.com/VKCOM/Appearance#7.2.4",
     "prettier": "2.1.1",
     "prettier-plugin-svelte": "^1.1.1",
     "rollup": "^2.26.5",
