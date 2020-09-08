@@ -44,43 +44,43 @@
   import './styles/bright_light.css';
   import './styles/space_gray.css';
 
-  import Title from './components/Typography/Title.svelte';
-  import Caption from './components/Typography/Caption.svelte';
-  import Text from './components/Typography/Text.svelte';
-  import Subhead from './components/Typography/Subhead.svelte';
-  import Headline from './components/Typography/Headline.svelte';
-
-  import Div from './components/Blocks/Div.svelte';
-  import Progress from './components/Blocks/Progress.svelte';
-  import CardGrid from './components/Blocks/CardGrid.svelte';
-  import SimpleCell from './components/Blocks/SimpleCell.svelte';
-  import Cell from './components/Blocks/Cell.svelte';
-  import Gradient from './components/Blocks/Gradient.svelte';
-  import CardScroll from './components/Blocks/CardScroll.svelte';
-  import Card from './components/Blocks/Card.svelte';
-  import Header from './components/Blocks/Header.svelte';
-  import Separator from './components/Blocks/Separator.svelte';
-  import Link from './components/Blocks/Link.svelte';
-  import Avatar from './components/Blocks/Avatar.svelte';
-  import SSRWrapper from './components/Service/SSRWrapper.svelte';
-  import Group from './components/Blocks/Group.svelte';
-  import Switch from './components/Blocks/Switch.svelte';
-  import InfoRow from './components/Blocks/InfoRow.svelte';
-  import List from './components/Blocks/List.svelte';
-  import Footer from './components/Blocks/Footer.svelte';
-  import UsersStack from './components/Blocks/UsersStack.svelte';
-  import Counter from './components/Blocks/Counter.svelte';
-  import Spinner from './components/Blocks/Spinner.svelte';
-  import MiniInfoCell from './components/Blocks/MiniInfoCell.svelte';
-  import Button from './components/Blocks/Button.svelte';
-  import CellButton from './components/Blocks/CellButton.svelte';
-  import Placeholder from './components/Blocks/Placeholder.svelte';
-  import Tabs from './components/Blocks/Tabs.svelte';
-  import TabsItem from './components/Blocks/TabsItem.svelte';
-  import RichCell from './components/Blocks/RichCell.svelte';
-  import PanelSpinner from './components/Blocks/PanelSpinner.svelte';
-
-  import PromoBanner from './components/Advertisement/PromoBanner.svelte';
+  import {
+    Title,
+    Caption,
+    Text,
+    Subhead,
+    Headline,
+    Div,
+    Progress,
+    CardGrid,
+    SimpleCell,
+    Cell,
+    Gradient,
+    CardScroll,
+    Card,
+    Header,
+    Separator,
+    Link,
+    Avatar,
+    SSRWrapper,
+    Group,
+    Switch,
+    InfoRow,
+    List,
+    Footer,
+    UsersStack,
+    Counter,
+    Spinner,
+    MiniInfoCell,
+    Button,
+    CellButton,
+    Placeholder,
+    Tabs,
+    TabsItem,
+    RichCell,
+    PanelSpinner,
+    PromoBanner,
+  } from './index';
 
   import HorizontalScroll from './components/Layout/HorizontalScroll.svelte';
 
