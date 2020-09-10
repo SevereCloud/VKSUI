@@ -39,10 +39,10 @@
 </style>
 
 <script lang="ts">
-  import './styles/constants.css';
-  import './styles/styles.css';
-  import './styles/bright_light.css';
-  import './styles/space_gray.css';
+  import '../src/styles/constants.css';
+  import '../src/styles/styles.css';
+  import '../src/styles/bright_light.css';
+  import '../src/styles/space_gray.css';
 
   import {
     Title,
@@ -80,11 +80,11 @@
     RichCell,
     PanelSpinner,
     PromoBanner,
-  } from './index';
+  } from '../src';
 
-  import HorizontalScroll from './components/Layout/HorizontalScroll.svelte';
+  import HorizontalScroll from '../src/components/Layout/HorizontalScroll.svelte';
 
-  import type { BannerData } from './components/Advertisement/PromoBanner.svelte';
+  import type { BannerData } from '../src/components/Advertisement/PromoBanner.svelte';
 
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
@@ -126,7 +126,7 @@
 
   // Разные настройки для тем
   import { setContext } from 'svelte';
-  import { SSRContextKey, SSRBuildContext } from './lib/ssr';
+  import { SSRContextKey, SSRBuildContext } from '../src/lib/ssr';
 
   // userAgent
   let userAgent =

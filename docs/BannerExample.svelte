@@ -23,12 +23,14 @@
 </style>
 
 <script>
-  import Banner from './components/Blocks/Banner.svelte';
-  import Header from './components/Blocks/Header.svelte';
-  import Link from './components/Blocks/Link.svelte';
-  import Avatar from './components/Blocks/Avatar.svelte';
-  import Group from './components/Blocks/Group.svelte';
-  import Button from './components/Blocks/Button.svelte';
+  import {
+    Banner,
+    Header,
+    Link,
+    Avatar,
+    Group,
+    Button,
+  } from '../src';
 
   import { Icon24Play, Icon28MusicOutline } from '@sveltevk/icons';
 

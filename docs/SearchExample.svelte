@@ -27,9 +27,11 @@
 </script>
 
 <script>
-  import SimpleCell from './components/Blocks/SimpleCell.svelte';
-  import List from './components/Blocks/List.svelte';
-  import Search from './components/Blocks/Search.svelte';
+  import {
+    SimpleCell,
+    List,
+    Search,
+  } from '../src';
 
   let search = '';
 

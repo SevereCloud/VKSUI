@@ -35,7 +35,7 @@
     "sirv-cli": "^1.0.6"
   },
   "dependencies": {
-    "@sveltevk/icons": "0.37.1",
+    "@sveltevk/icons": "^1.40.0",
     "svg-baker-runtime": "^1.4.7"
   }
 }
