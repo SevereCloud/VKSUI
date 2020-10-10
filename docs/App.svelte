@@ -80,6 +80,11 @@
     RichCell,
     PanelSpinner,
     PromoBanner,
+    FormItem,
+    FormLayoutGroup,
+    FormLayout,
+    FormStatus,
+    Input,
   } from '../src';
 
   import HorizontalScroll from '../src/components/Layout/HorizontalScroll.svelte';
@@ -139,7 +144,7 @@
     userAgent = userAgent === 'android' ? 'iphone' : 'android';
     window.localStorage.setItem('userAgent', userAgent);
     console.log(userAgent);
-    
+
     // document.location.reload();
   };
 
@@ -1726,6 +1731,57 @@
 
     <Div>
       <Title level="1" weight="heavy">Forms</Title>
+      <Div>
+        <Title level="2" weight="semibold">FormItem</Title>
+        <div class="Example"></div>
+      </Div>
+      <Div>
+        <Title level="2" weight="semibold">FormLayoutGroup</Title>
+        <div class="Example">
+          <FormLayout>
+            <FormLayoutGroup mode="horizontal">
+              <FormItem top="Имя">
+                <Input />
+              </FormItem>
+              <FormItem top="Фамилия">
+                <Input />
+              </FormItem>
+            </FormLayoutGroup>
+          </FormLayout>
+        </div>
+      </Div>
+      <Div>
+        <Title level="2" weight="semibold">FormStatus</Title>
+        <div class="Example">
+          <FormItem>
+            <FormStatus header="Некорректный мобильный номер" mode="error">
+              Необходимо корректно ввести номер в международном формате
+            </FormStatus>
+          </FormItem>
+          <FormItem top="Мобильный телефон">
+            <Input defaultValue="+7 12 344 15 48" />
+          </FormItem>
+          <FormItem top="Код подтверждения">
+            <Input />
+          </FormItem>
+        </div>
+      </Div>
+      <Div>
+        <Title level="2" weight="semibold">Input</Title>
+        <div class="Example">
+          <FormLayout>
+            <FormItem top="Фамилия">
+              <Input type="text" defaultValue="Петров" />
+            </FormItem>
+            <FormItem>
+              <Input type="text" defaultValue="Иванов" align="center" />
+            </FormItem>
+            <FormItem>
+              <Input type="text" defaultValue="Сидоров" align="right" />
+            </FormItem>
+          </FormLayout>
+        </div>
+      </Div>
     </Div>
 
     <Div>
