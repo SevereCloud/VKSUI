@@ -173,7 +173,6 @@
     canUseClipPath = platformVersion && platformVersion.major >= 12;
   }
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -191,7 +190,7 @@
     {#each photosShown as photo}
       <div
         class="UsersStack__photo"
-        style="{`background-image: url(${photo})`}"
+        style={`background-image: url(${photo})`}
       ></div>
     {/each}
     {#if canShowOthers}
@@ -202,7 +201,7 @@
       </div>
     {/if}
   </div>
-  {#if SLOTS && SLOTS.default}
+  {#if $$slots.default}
     <div class="UsersStack__text">
       <slot />
     </div>

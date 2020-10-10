@@ -116,7 +116,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
 
   let Component = mode === 'base' ? div : Tappable;
 
@@ -142,7 +141,7 @@
     <slot />
   </Text>
 
-  {#if SLOTS && SLOTS.after}
+  {#if $$slots.after}
     <div class="MiniInfoCell__after">
       <slot name="after" />
     </div>

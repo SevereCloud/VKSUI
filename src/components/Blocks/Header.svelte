@@ -109,7 +109,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <div
@@ -120,18 +119,18 @@
   <div class="Header__in">
     <div class="Header__content">
       <slot />
-      {#if (SLOTS && SLOTS.subtitle) || subtitle !== ''}
+      {#if ($$slots.subtitle) || subtitle !== ''}
         <div class="Header__subtitle">
           <slot name="subtitle">{subtitle}</slot>
         </div>
       {/if}
     </div>
-    {#if (SLOTS && SLOTS.indicator) || typeof indicator !== 'undefined'}
+    {#if ($$slots.indicator) || typeof indicator !== 'undefined'}
       <div class="Header__indicator">
         <slot name="indicator">{indicator}</slot>
       </div>
     {/if}
-    {#if SLOTS && SLOTS.aside}
+    {#if $$slots.aside}
       <div class="Header__aside">
         <slot name="aside" />
       </div>

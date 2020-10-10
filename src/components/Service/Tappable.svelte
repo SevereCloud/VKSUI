@@ -310,7 +310,7 @@
       {#each Object.keys(clicks) as k}
         <span
           class="Tappable__wave"
-          style="{`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}"
+          style={`top: ${clicks[k].y}px; left: ${clicks[k].x}px`}
           id="{k}"
         ></span>
       {/each}

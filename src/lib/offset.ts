@@ -1,4 +1,3 @@
-
 export interface OffsetRectInterface {
   top: number;
   left: number;

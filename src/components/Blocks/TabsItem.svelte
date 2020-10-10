@@ -179,7 +179,6 @@
   export let after: any = undefined;
   export let selected: boolean = false;
 
-  const SLOTS = $$props.$$slots;
   $: $$restProps.class = classNames(
     getClassName('TabsItem', platform),
     { 'TabsItem--selected': selected },
@@ -192,7 +191,7 @@
   <div class="TabsItem__in">
     <slot />
   </div>
-  {#if (SLOTS && SLOTS.after) || after}
+  {#if ($$slots.after) || after}
     <div class="TabsItem__after">
       <slot name="after">{after}</slot>
     </div>

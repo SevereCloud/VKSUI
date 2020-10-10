@@ -243,7 +243,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
   $: $$restProps.class = classNames(
     getClassName('Button', platform),
     $$props.class,
@@ -262,17 +261,17 @@
   Component="{$$restProps.href ? a : Component}"
 >
   <div class="Button__in">
-    {#if (SLOTS && SLOTS.before) || before}
+    {#if ($$slots.before) || before}
       <div class="Button__before">
         <slot name="before">{before}</slot>
       </div>
     {/if}
-    {#if SLOTS && SLOTS.default}
+    {#if $$slots.default}
       <div class="Button__content">
         <slot />
       </div>
     {/if}
-    {#if (SLOTS && SLOTS.after) || after}
+    {#if ($$slots.after) || after}
       <div class="Button__after">
         <slot name="after">{after}</slot>
       </div>

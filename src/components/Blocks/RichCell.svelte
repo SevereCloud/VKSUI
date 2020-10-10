@@ -181,7 +181,6 @@
   const isAfterPrimitive =
     typeof after === 'string' || typeof after === 'number';
 
-  const SLOTS = $$props.$$slots;
   $: $$restProps.class = classNames(
     $$props.class,
     getClassName('RichCell', platform),
@@ -205,26 +204,26 @@
         <div class="RichCell__children">
           <slot />
         </div>
-        {#if (SLOTS && SLOTS.after) || after}
+        {#if ($$slots.after) || after}
           <div class="RichCell__after">
             <slot name="after">{after}</slot>
           </div>
         {/if}
       </div>
-      {#if (SLOTS && SLOTS.text) || text}
+      {#if ($$slots.text) || text}
         <div class="RichCell__text">
           <slot name="text">{text}</slot>
         </div>
       {/if}
-      {#if (SLOTS && SLOTS.caption) || caption}
+      {#if ($$slots.caption) || caption}
         <div class="RichCell__caption">
           <slot name="caption">{caption}</slot>
         </div>
       {/if}
-      {#if (SLOTS && SLOTS.bottom) || bottom || (SLOTS && SLOTS.actions)}
+      {#if ($$slots.bottom) || bottom || ($$slots.actions)}
         <div class="RichCell__bottom">
           <slot name="bottom">{bottom ?? ''}</slot>
-          {#if SLOTS && SLOTS.actions}
+          {#if $$slots.actions}
             <div class="RichCell__actions">
               <slot name="actions" />
             </div>

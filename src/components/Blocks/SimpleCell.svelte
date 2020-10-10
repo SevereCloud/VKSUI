@@ -225,7 +225,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
   $: $$restProps.class = classNames(
     getClassName('SimpleCell', platform),
     `SimpleCell--sizeX-${sizeX}`,
@@ -252,19 +251,19 @@ SimpleCell — это упрощенная и улучшенная с точки
     <div class="SimpleCell__children">
       <slot />
     </div>
-    {#if (SLOTS && SLOTS.description) || description}
+    {#if ($$slots.description) || description}
       <div class="SimpleCell__description">
         <slot name="description">{description}</slot>
       </div>
     {/if}
   </div>
   <!-- TODO: что насчет null? -->
-  {#if (SLOTS && SLOTS.indicator) || typeof indicator !== 'undefined'}
+  {#if ($$slots.indicator) || typeof indicator !== 'undefined'}
     <div class="SimpleCell__indicator">
       <slot name="indicator">{indicator}</slot>
     </div>
   {/if}
-  {#if (SLOTS && SLOTS.after) || (expandable && platform === IOS)}
+  {#if ($$slots.after) || (expandable && platform === IOS)}
     <div class="SimpleCell__after">
       <slot name="after" />
       {#if expandable && platform === IOS}

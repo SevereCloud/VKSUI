@@ -69,7 +69,6 @@
    */
   export let stretched: boolean = false;
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -87,22 +86,22 @@
   class="{classNames('Placeholder', { 'Placeholder--stretched': stretched }, $$props.class)}"
 >
   <div class="Placeholder__in">
-    {#if SLOTS && SLOTS.icon}
+    {#if $$slots.icon}
       <div class="Placeholder__icon">
         <slot name="icon" />
       </div>
     {/if}
-    {#if (SLOTS && SLOTS.header) || header}
+    {#if ($$slots.header) || header}
       <div class="Placeholder__header">
         <slot name="header">{header}</slot>
       </div>
     {/if}
-    {#if SLOTS && SLOTS.default}
+    {#if $$slots.default}
       <div class="Placeholder__text">
         <slot />
       </div>
     {/if}
-    {#if SLOTS && SLOTS.action}
+    {#if $$slots.action}
       <div class="Placeholder__action">
         <slot name="action" />
       </div>

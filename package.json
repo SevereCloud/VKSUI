@@ -18,24 +18,24 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^5.0.2",
+    "@sveltevk/icons": "^1.44.1",
     "@tsconfig/svelte": "^1.0.10",
     "@vkontakte/appearance": "https://github.com/VKCOM/Appearance#7.2.4",
     "prettier": "2.1.1",
-    "prettier-plugin-svelte": "^1.1.1",
+    "prettier-plugin-svelte": "^1.3.0",
     "rollup": "^2.26.5",
     "rollup-plugin-livereload": "^1.3.0",
+    "rollup-plugin-postcss": "^3.1.6",
     "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^7.0.0",
-    "svelte": "^3.24.1",
-    "svelte-check": "^1.0.25",
-    "svelte-preprocess": "^4.1.1",
+    "sirv-cli": "^1.0.6",
+    "svelte": "^3.29.0",
+    "svelte-check": "^1.0.55",
+    "svelte-preprocess": "^4.5.1",
     "tslib": "^2.0.1",
-    "typescript": "^4.0.2",
-    "rollup-plugin-postcss": "^3.1.6",
-    "sirv-cli": "^1.0.6"
+    "typescript": "^4.0.3"
   },
   "dependencies": {
-    "@sveltevk/icons": "^1.40.0",
     "svg-baker-runtime": "^1.4.7"
   }
 }

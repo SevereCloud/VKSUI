@@ -369,7 +369,6 @@
     dispatch('dismiss', e);
   };
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <div
@@ -378,35 +377,35 @@
   on:click
 >
   <svelte:component this="{innerComponent}" class="Banner__in">
-    {#if mode === 'image' && ((SLOTS && SLOTS.background) || background)}
+    {#if mode === 'image' && (($$slots.background) || background)}
       <div class="Banner__bg">
         <slot name="background">{background}</slot>
       </div>
     {/if}
 
-    {#if (SLOTS && SLOTS.before) || before}
+    {#if ($$slots.before) || before}
       <div class="Banner__before">
         <slot name="before">{before}</slot>
       </div>
     {/if}
 
     <div class="Banner__content">
-      {#if (SLOTS && SLOTS.header) || header}
+      {#if ($$slots.header) || header}
         <div class="Banner__header">
           <slot name="header">{header}</slot>
         </div>
       {/if}
-      {#if (SLOTS && SLOTS.subheader) || subheader}
+      {#if ($$slots.subheader) || subheader}
         <div class="Banner__subheader">
           <slot name="subheader">{subheader}</slot>
         </div>
       {/if}
-      {#if (SLOTS && SLOTS.text) || text}
+      {#if ($$slots.text) || text}
         <div class="Banner__text">
           <slot name="text">{text}</slot>
         </div>
       {/if}
-      {#if (SLOTS && SLOTS.actions) || actions}
+      {#if ($$slots.actions) || actions}
         <div class="Banner__actions">
           <slot name="actions">{actions}</slot>
         </div>

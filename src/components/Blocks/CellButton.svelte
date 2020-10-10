@@ -102,7 +102,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
   $: $$restProps.class = classNames(
     getClassName('CellButton', platform),
     $$props.class,
@@ -118,12 +117,12 @@
   Component="{$$restProps.href ? a : Component}"
 >
   <div class="CellButton__in">
-    {#if (SLOTS && SLOTS.before) || before}
+    {#if ($$slots.before) || before}
       <div class="CellButton__before">
         <slot name="before">{before}</slot>
       </div>
     {/if}
-    {#if SLOTS && SLOTS.default}
+    {#if $$slots.default}
       <div class="CellButton__content">
         <slot />
       </div>

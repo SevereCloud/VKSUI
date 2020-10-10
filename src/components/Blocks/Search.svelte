@@ -326,7 +326,6 @@
     onCancel();
   };
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -335,7 +334,7 @@
 -->
 
 <div
-  class="{classNames(getClassName('Search', platform), { 'Search--focused': focused, 'Search--has-value': !!value, 'Search--has-after': !!((SLOTS && SLOTS.after) || after), 'Search--has-icon': !!(SLOTS && SLOTS.icon) }, $$props.class)}"
+  class="{classNames(getClassName('Search', platform), { 'Search--focused': focused, 'Search--has-value': !!value, 'Search--has-after': !!(($$slots.after) || after), 'Search--has-icon': !!($$slots.icon) }, $$props.class)}"
 >
   <div class="Search__in">
     <div class="Search__width"></div>
@@ -350,9 +349,9 @@
         on:change
         bind:value
       />
-      {#if platform === IOS && ((SLOTS && SLOTS.after) || after)}
+      {#if platform === IOS && (($$slots.after) || after)}
         <div class="Search__after-width">
-          <slot>{after}</slot>
+          <slot name="after">{after}</slot>
         </div>
       {/if}
       <div class="Search__placeholder">
@@ -367,7 +366,7 @@
 
     <div class="Search__after" onClick="{this.onCancel}">
       <div class="Search__icons">
-        {#if SLOTS && SLOTS.icon}
+        {#if $$slots.icon}
           <Touch on:start="{onIconClickStart}" class="Search__icon">
             <slot name="icon" />
           </Touch>
@@ -378,9 +377,9 @@
           </Touch>
         {/if}
       </div>
-      {#if platform === IOS && ((SLOTS && SLOTS.after) || after)}
+      {#if platform === IOS && (($$slots.after) || after)}
         <div class="Search__after-in">
-          <slot>{after}</slot>
+          <slot name="after">{after}</slot>
         </div>
       {/if}
     </div>

@@ -62,7 +62,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -76,7 +75,7 @@
 >
   <slot name="header" />
   <slot />
-  {#if (SLOTS && SLOTS.description) || description !== ''}
+  {#if ($$slots.description) || description !== ''}
     <div class="Group__description">
       <slot name="description">{description}</slot>
     </div>

@@ -27,7 +27,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -40,7 +39,7 @@
   {...$$restProps}
   class="{classNames(getClassName('InfoRow', platform), $$props.class)}"
 >
-  {#if (SLOTS && SLOTS.header) || header}
+  {#if ($$slots.header) || header}
     <Subhead class="InfoRow__header" weight="regular">
       <slot name="header">{header}</slot>
     </Subhead>

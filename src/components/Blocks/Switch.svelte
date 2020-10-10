@@ -116,7 +116,7 @@
 
 <label
   class="{classNames(getClassName('Switch', platform), $$props.class)}"
-  style="{$$props.style}"
+  style={$$props.style}
 >
   <input {...$$restProps} type="checkbox" class="Switch__self" />
   <span class="Switch__pseudo"></span>

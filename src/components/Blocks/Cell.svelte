@@ -423,7 +423,6 @@
 
   const platform = usePlatform();
 
-  const SLOTS = $$props.$$slots;
 
   $: rootProps = selectable ? {} : $$restProps;
   $: linkProps = href ? $$restProps : {};
@@ -577,7 +576,7 @@
     class="Cell__in"
     href="{href}"
     disabled="{!selectable && !href && !expandable || removable || draggable}"
-    style="{removable ? `transform: translateX(-${removeOffset}px)` : null}"
+    style={removable ? `transform: translateX(-${removeOffset}px)` : null}
   >
     {#if selectable}
       <input
@@ -594,7 +593,7 @@
         </div>
       {/if}
       {#if removable && IS_PLATFORM_IOS}
-        <div class="Cell__remove-marker" on:click="{activateRemove}"></div>
+        <div class="Cell__remove-marker" on:click={activateRemove}></div>
       {/if}
       {#if draggable && IS_PLATFORM_ANDROID}
         <Touch
@@ -606,7 +605,7 @@
           <Icon24Reorder />
         </Touch>
       {/if}
-      {#if (SLOTS && SLOTS.before) || before}
+      {#if ($$slots.before) || before}
         <div class="Cell__before-in">
           <slot name="before">{before}</slot>
         </div>
@@ -616,12 +615,12 @@
       <div class="Cell__children">
         <slot />
       </div>
-      {#if (SLOTS && SLOTS.description) || description}
+      {#if ($$slots.description) || description}
         <div class="Cell__description">
           <slot name="description">{description}</slot>
         </div>
       {/if}
-      {#if size === 'l' && ((SLOTS && SLOTS.bottomContent) || bottomContent)}
+      {#if size === 'l' && (($$slots.bottomContent) || bottomContent)}
         <div class="Cell__bottom">
           <slot name="bottomContent">{bottomContent}</slot>
         </div>
@@ -662,7 +661,7 @@
       bind:this="{removeButton}"
       class="Cell__remove"
       on:click="{onRemoveClick}"
-      style="{removable ? `transform: translateX(-${removeOffset}px)` : null}"
+      style={removable ? `transform: translateX(-${removeOffset}px)` : null}
     >
       <span class="Cell__remove-in">
         <slot name="removePlaceholder">{removePlaceholder}</slot>

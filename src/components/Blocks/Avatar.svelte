@@ -80,7 +80,6 @@
       break;
   }
 
-  const SLOTS = $$props.$$slots;
 </script>
 
 <!-- 
@@ -97,34 +96,34 @@
 <div
   class="{classNames(getClassName('Avatar', platform), $$props.class, `Avatar--type-${mode}`, `Avatar--sz-${size}`)}"
 >
-  <div class="Avatar__in" style="{`width: ${size}px; height: ${size}px`}">
+  <div class="Avatar__in" style={`width: ${size}px; height: ${size}px`}>
     {#if $$props.src}
       <img
         {...$$restProps}
         class="Avatar__img"
         src="{$$props.src}"
         alt="{$$props.alt}"
-        style="{style + `; border-radius:${borderRadius}`}"
+        style={style + `; border-radius:${borderRadius}`}
       />
     {:else}
       <div
         {...$$restProps}
         class="Avatar__img"
-        style="{style + `; border-radius:${borderRadius}`}"
+        style={style + `; border-radius:${borderRadius}`}
       ></div>
     {/if}
 
     {#if shadow}
       <span
         class="Avatar__shadow"
-        style="{`border-radius:${borderRadius}`}"
+        style={`border-radius:${borderRadius}`}
       ></span>
     {/if}
 
-    {#if SLOTS && SLOTS.default}
+    {#if $$slots.default}
       <div
         class="Avatar__children"
-        style="{`width: ${size}px; height: ${size}px; border-radius:${borderRadius}`}"
+        style={`width: ${size}px; height: ${size}px; border-radius:${borderRadius}`}
       >
         <slot />
       </div>
