@@ -1,10 +1,14 @@
 <script lang="ts">
-  import { setContext } from 'svelte';
+  import { setContext, beforeUpdate } from 'svelte';
   import { SSRContextKey, SSRBuildContext } from '../../lib/ssr';
 
   export let userAgent: string;
 
-  setContext(SSRContextKey, SSRBuildContext({ userAgent }));
+  beforeUpdate(() => {
+    setContext(SSRContextKey, SSRBuildContext({ userAgent }));
+  })
 </script>
 
+{#key userAgent}
 <slot />
+{/key}
