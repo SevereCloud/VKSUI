@@ -85,6 +85,7 @@
     FormLayout,
     FormStatus,
     Input,
+    File,
   } from '../src';
 
   import HorizontalScroll from '../src/components/Layout/HorizontalScroll.svelte';
@@ -127,6 +128,7 @@
     Icon24MoreHorizontal,
     Icon28PrivacyOutline,
     Icon16Like,
+    Icon24Document,
   } from '@sveltevk/icons';
 
   // Разные настройки для тем
@@ -1780,6 +1782,26 @@
               <Input type="text" defaultValue="Сидоров" align="right" />
             </FormItem>
           </FormLayout>
+        </div>
+      </Div>
+      <Div>
+        <Title level="2" weight="semibold">File</Title>
+        <div class="Example">
+          <FormItem top="Загрузите ваше фото">
+            <File controlSize="m">
+              <div slot="before">
+                <Icon24Camera />
+              </div>
+              Открыть галерею
+            </File>
+          </FormItem>
+          <FormItem top="Загрузите документы">
+            <File controlSize="l" mode="secondary">
+              <div slot="before">
+                <Icon24Document />
+              </div>
+            </File>
+          </FormItem>
         </div>
       </Div>
     </Div>

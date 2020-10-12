@@ -152,6 +152,7 @@
 <svelte:component
   this="{Component}"
   {...$$restProps}
+  on:click
   on:mouseover="{handleMouseEnter}"
   on:mouseout="{handleMouseLeave}"
   class="{classNames(getClassName('FormField', platform), $$props.class)}"

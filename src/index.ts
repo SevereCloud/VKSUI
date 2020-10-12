@@ -61,3 +61,4 @@ export { default as FormLayoutGroup } from './components/Forms/FormLayoutGroup.s
 export { default as FormLayout } from './components/Forms/FormLayout.svelte';
 export { default as FormStatus } from './components/Forms/FormStatus.svelte';
 export { default as Input } from './components/Forms/Input.svelte';
+export { default as File } from './components/Forms/File.svelte';

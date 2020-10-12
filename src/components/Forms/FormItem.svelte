@@ -80,7 +80,8 @@
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
-  import { Subhead, Caption } from '../../index';
+  import Caption from '../Typography/Caption.svelte';
+  import Subhead from '../Typography/Subhead.svelte';
 
   export let top: string = undefined;
   export let bottom: string = undefined;
