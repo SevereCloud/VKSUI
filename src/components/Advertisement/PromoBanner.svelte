@@ -5,31 +5,19 @@
     outline: 1px solid var(--separator_alpha);
     color: var(--text_primary);
     background: var(--background_content);
-    padding-bottom: 11px;
+    padding-bottom: 10px;
     position: relative;
   }
 
   .PromoBanner__head {
-    padding: 11px 11px 0 11px;
-    height: 27px;
-  }
-
-  .PromoBanner__age {
-    border: 1px solid var(--separator_alpha);
-    padding: 0 4px;
-    line-height: 18px;
-    font-size: 12px;
+    display: flex;
+    padding-top: 14px;
+    padding-bottom: 10px;
     color: var(--text_secondary);
   }
 
-  .PromoBanner__label {
-    font-size: 12px;
-    line-height: 18px;
-    color: var(--text_secondary);
-  }
-
-  .PromoBanner__age + .PromoBanner__label {
-    padding-left: 10px;
+  :global(.PromoBanner__age) {
+    margin-left: 6px;
   }
 
   .PromoBanner__close {
@@ -50,6 +38,20 @@
 
   .PromoBanner__pixels {
     display: none;
+  }
+
+  /* iOS */
+
+  .PromoBanner--ios .PromoBanner__head {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  /* Android */
+
+  .PromoBanner--android .PromoBanner__head {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 </style>
 
@@ -83,11 +85,14 @@
 </script>
 
 <script lang="ts">
+  import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
+  import getClassName from '../../lib/getClassName';
   import Icon24Dismiss from '@sveltevk/icons/dist/24/dismiss';
   import Button from '../Blocks/Button.svelte';
   import SimpleCell from '../Blocks/SimpleCell.svelte';
   import Avatar from '../Blocks/Avatar.svelte';
+  import Caption from '../Typography/Caption.svelte';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
@@ -104,18 +109,22 @@
     bannerData.ageRestrictions != null
       ? parseInt(bannerData.ageRestrictions)
       : bannerData.ageRestriction;
+
+  const platform = usePlatform();
 </script>
 
-<div class="{classNames('PromoBanner', $$props.class)}">
+<div class="{classNames(getClassName('PromoBanner', platform), $$props.class)}">
   <div class="PromoBanner__head">
-    {#if ageRestrictions != null}
-      <span class="PromoBanner__age">{ageRestrictions}+</span>
-    {/if}
-    <span class="PromoBanner__label">
+    <Caption weight="regular" level="1" class="PromoBanner__label">
       {bannerData.advertisingLabel || 'Advertisement'}
-    </span>
+    </Caption>
+    {#if ageRestrictions != null}
+      <Caption weight="regular" level="1" class="PromoBanner__age">
+        {ageRestrictions}+
+      </Caption>
+    {/if}
 
-    {#if isCloseButtonHidden}
+    {#if !isCloseButtonHidden}
       <div class="PromoBanner__close" on:click="{() => dispatch('close')}">
         <Icon24Dismiss />
       </div>
@@ -143,8 +152,6 @@
   </SimpleCell>
 
   {#if currentPixel.length > 0}
-    <div class="PromoBanner__pixels">
-      <img src="{currentPixel}" alt="" />
-    </div>
+    <div class="PromoBanner__pixels"><img src="{currentPixel}" alt="" /></div>
   {/if}
 </div>
