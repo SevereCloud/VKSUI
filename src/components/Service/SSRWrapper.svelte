@@ -6,7 +6,9 @@
 
   beforeUpdate(() => {
     setContext(SSRContextKey, SSRBuildContext({ userAgent }));
-  })
+  });
+
+  setContext(SSRContextKey, SSRBuildContext({ userAgent }));
 </script>
 
 {#key userAgent}
