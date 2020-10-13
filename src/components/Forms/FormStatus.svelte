@@ -46,6 +46,7 @@
 </style>
 
 <script lang="ts">
+  import useAdaptivity from '../../hooks/useAdaptivity';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
@@ -53,9 +54,7 @@
   export let mode: 'default' | 'error' = 'default';
   export let header: any = undefined;
 
-  // FIXME: sizeY
-  export let sizeY = 'regular';
-
+  const adaptivity = useAdaptivity();
   const platform = usePlatform();
 </script>
 
@@ -67,7 +66,7 @@
 
 <div 
   {...$$restProps}
-  class={classNames(getClassName('FormStatus', platform), `FormStatus--${mode}`, $$props.class, `FormStatus--sizeY-${sizeY}`)} 
+  class={classNames(getClassName('FormStatus', platform), `FormStatus--${mode}`, $$props.class, `FormStatus--sizeY-${adaptivity.sizeY}`)} 
 >
   {#if ($$slots.header) || header}
     <div class="FormStatus__header"><slot name="header">{header}</slot></div>

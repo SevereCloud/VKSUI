@@ -198,20 +198,18 @@
 </style>
 
 <script lang="ts">
-  import Icon24Chevron from '@sveltevk/icons/dist/24/chevron';
-
-  import Tappable from '../Service/Tappable.svelte';
+  import useAdaptivity from '../../hooks/useAdaptivity';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import { IOS } from '../../lib/platform';
-  import { SizeType } from '../Service/AdaptivityContext';
-  import div from '../Elements/div.svelte';
+  import Tappable from '../Service/Tappable.svelte';
+  import Icon24Chevron from '@sveltevk/icons/dist/24/chevron';
+  import Div from '../Elements/div.svelte';
   import a from '../Elements/a.svelte';
 
   export let indicator: any = undefined;
   export let description: string = '';
-  export let sizeX: SizeType = SizeType.REGULAR;
   /**
    * Убирает анимацию нажатия
    */
@@ -223,11 +221,12 @@
   export let expandable: boolean = false;
   export let multiline: boolean = false;
 
+  const adaptivity = useAdaptivity();
   const platform = usePlatform();
 
   $: $$restProps.class = classNames(
     getClassName('SimpleCell', platform),
-    `SimpleCell--sizeX-${sizeX}`,
+    `SimpleCell--sizeX-${adaptivity.sizeX}`,
     { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline },
     $$props.class,
   );
@@ -244,7 +243,7 @@ SimpleCell — это упрощенная и улучшенная с точки
   {...$$restProps}
   disabled="{disabled}"
   on:click
-  Component="{$$restProps.href ? a : div}"
+  Component="{$$restProps.href ? a : Div}"
 >
   <slot name="before" />
   <div class="SimpleCell__main">

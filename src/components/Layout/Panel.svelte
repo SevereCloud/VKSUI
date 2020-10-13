@@ -111,27 +111,24 @@
 </style>
 
 <script lang="ts">
+  import useAdaptivity from '../../hooks/useAdaptivity';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import { IOS } from '../../lib/platform';
   import Touch from '../Service/Touch.svelte';
-  import { SizeType } from '../Service/AdaptivityContext';
 
-  // TODO: Нужно получать из контекста
-  export let sizeX: SizeType = SizeType.REGULAR;
-  // export let sizeY: SizeType = SizeType.REGULAR;
-  // export let viewWidth: ViewWidth = ViewWidth.MOBILE;
 
   export let centered: boolean = false;
 
+  const adaptivity = useAdaptivity();
   const platform = usePlatform();
 </script>
 
 <!-- TODO: -->
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Panel', platform), `Panel--${sizeX}`, { 'Panel--centered': centered, [`Panel--sizeX-${sizeX}`]: true }, $$props.class)}"
+  class="{classNames(getClassName('Panel', platform), `Panel--${adaptivity.sizeX}`, { 'Panel--centered': centered, [`Panel--sizeX-${adaptivity.sizeX}`]: true }, $$props.class)}"
 >
   <Touch class="Panel__in">
     {#if platform === IOS}

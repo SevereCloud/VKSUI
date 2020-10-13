@@ -314,15 +314,14 @@
   import Tappable from '../Service/Tappable.svelte';
   import Touch from '../Service/Touch.svelte';
   import label from '../Elements/label.svelte';
-  import div from '../Elements/div.svelte';
+  import Div from '../Elements/div.svelte';
   import a from '../Elements/a.svelte';
 
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import { ANDROID, IOS } from '../../lib/platform';
-  import { SizeType } from '../Service/AdaptivityContext';
-  import { onDestroy, beforeUpdate, createEventDispatcher } from 'svelte';
+  import { onDestroy, createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -423,7 +422,6 @@
 
   const platform = usePlatform();
 
-
   $: rootProps = selectable ? {} : $$restProps;
   $: linkProps = href ? $$restProps : {};
   const IS_PLATFORM_ANDROID = platform === ANDROID;
@@ -440,8 +438,8 @@
     }
   };
 
-  const activateRemove = (e:PointerEvent) => {
-    e.stopPropagation();    
+  const activateRemove = (e: MouseEvent) => {
+    e.stopPropagation();
     isRemoveActivated = true;
     document.addEventListener('click', deactivateRemove);
   };
@@ -468,7 +466,7 @@
   //   }
   // });
 
-  $: removeOffset = isRemoveActivated?removeButton.offsetWidth:0;
+  $: removeOffset = isRemoveActivated ? removeButton.offsetWidth : 0;
 
   let dragShift: number;
   let listEl: HTMLElement;
@@ -492,7 +490,7 @@
     if (removeOffset) {
       return;
     }
-    
+
     rootEl.style.transform = `translateY(${detail.shiftY}px)`;
     const rootGesture = rootEl.getBoundingClientRect();
     dragDirection = dragShift - detail.shiftY < 0 ? 'down' : 'up';
@@ -501,7 +499,7 @@
 
     siblings.forEach((sibling, siblingIndex) => {
       if (!sibling.getBoundingClientRect) {
-        return
+        return;
       }
 
       const siblingGesture = sibling.getBoundingClientRect();
@@ -572,7 +570,7 @@
   <Tappable
     {...linkProps}
     on:click="{href ? onClick : null}"
-    Component="{selectable ? label : href ? a : div}"
+    Component="{selectable ? label : href ? a : Div}"
     class="Cell__in"
     href="{href}"
     disabled="{!selectable && !href && !expandable || removable || draggable}"

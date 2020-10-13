@@ -55,6 +55,7 @@
 </style>
 
 <script lang="ts">
+  import useAdaptivity from '../../hooks/useAdaptivity';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
@@ -62,9 +63,7 @@
 
   export let align: 'left' | 'center' | 'right' = undefined;
 
-  // FIXME: sizeY
-  export let sizeY = 'regular';
-
+  const adaptivity = useAdaptivity();
   const platform = usePlatform();
 </script>
 
@@ -74,7 +73,7 @@
 -->
 
 <FormField
-  class={classNames(getClassName('Input', platform), $$props.class, { [`Input--${align}`]: !!align }, `Input--sizeY-${sizeY}`)}
+  class={classNames(getClassName('Input', platform), $$props.class, { [`Input--${align}`]: !!align }, `Input--sizeY-${adaptivity.sizeY}`)}
 >
   <input {...$$restProps} class="Input__el" />
 </FormField>
