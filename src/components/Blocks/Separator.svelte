@@ -48,7 +48,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Separator', platform), $$props.class, {
+  class="{classNames(getClassName('Separator', $platform), $$props.class, {
     'Separator--wide': wide,
   })}"
 >

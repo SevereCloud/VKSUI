@@ -113,7 +113,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Header', platform), { 'Header--pi': typeof indicator === 'string' || typeof indicator === 'number' }, `Header--mode-${mode}`, $$props.class)}"
+  class="{classNames(getClassName('Header', $platform), { 'Header--pi': typeof indicator === 'string' || typeof indicator === 'number' }, `Header--mode-${mode}`, $$props.class)}"
 >
 
   <div class="Header__in">

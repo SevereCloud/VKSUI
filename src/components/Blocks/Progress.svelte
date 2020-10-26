@@ -24,7 +24,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Progress', platform), $$props.class)}"
+  class="{classNames(getClassName('Progress', $platform), $$props.class)}"
 >
   <div class="Progress__bg"></div>
   <div class="Progress__in" style={'width:' + `${value}%`}></div>

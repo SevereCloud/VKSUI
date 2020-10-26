@@ -4,7 +4,6 @@
     box-sizing: border-box;
     outline: none;
     text-decoration: none;
-    cursor: default;
     border: 1px solid transparent;
     margin: 0;
     padding: 0;
@@ -14,6 +13,10 @@
   .Button__in {
     display: flex;
     align-items: center;
+  }
+
+  .Button__before:not(:last-child) {
+    margin-left: -4px;
   }
 
   :global(.Button.Tappable--active) {
@@ -38,34 +41,13 @@
 
   :global(.Button--str) {
     display: block;
-    max-width: 100%;
-    flex-grow: 1;
-  }
-
-  :global(.Button--str:first-child:last-child) {
     width: 100%;
+    flex-grow: 1;
+    flex-basis: 0;
   }
 
-  :global(.Button--stretched) .Button__in {
+  :global(.Button--str) .Button__in {
     justify-content: center;
-  }
-
-  .Button__before :global(.Icon--16) {
-    margin-right: 6px;
-  }
-
-  .Button__before :global(.Icon--24),
-  .Button__before :global(.Icon--28) {
-    margin-right: 8px;
-  }
-
-  :global(.Button:not(.Button--sz-xl)) .Button__after {
-    margin-left: 8px;
-  }
-
-  :global(.Button::before),
-  :global(.Button::after) {
-    display: none;
   }
 
   :global(.Button--lvl-primary) {
@@ -115,58 +97,59 @@
     color: #fff;
   }
 
-  :global(.Button--sz-m) {
+  :global(.Button--sz-s) {
+    min-height: 30px;
     padding: 0 16px;
   }
 
-  :global(.Button--sz-m) .Button__before {
-    margin-left: -4px;
+  :global(.Button--sz-s) .Button__before:not(:last-child) {
+    margin-right: 6px;
   }
 
-  :global(.Button--sz-m) .Button__content {
-    font-size: 14px;
-    line-height: 14px;
-    font-weight: 500;
+  :global(.Button--sz-s) .Button__after:not(:first-child) {
+    margin-left: 6px;
+  }
+
+  :global(.Button--sz-s) :global(.Button__content) {
+    padding: 4px 0 6px;
+  }
+
+  :global(.Button--sz-s) :global(.Button__content--caps) {
     padding: 7px 0;
   }
 
+  :global(.Button--sz-m) {
+    padding: 0 16px;
+    min-height: 36px;
+  }
+
+  :global(.Button--sz-m) .Button__before:not(:last-child) {
+    margin-right: 6px;
+  }
+
+  :global(.Button--sz-m) .Button__after:not(:first-child) {
+    margin-left: 6px;
+  }
+
+  :global(.Button--sz-m) :global(.Button__content) {
+    padding: 6px 0 8px;
+  }
+
   :global(.Button--sz-l) {
-    padding: 0 16px;
+    padding: 0 20px;
+    min-height: 44px;
   }
 
-  :global(.Button--sz-l) .Button__before {
-    margin-left: -4px;
+  :global(.Button--sz-l) .Button__before:not(:last-child) {
+    margin-right: 8px;
   }
 
-  :global(.Button--sz-l) .Button__content {
-    font-size: 15px;
-    font-weight: 500;
-    padding: 8px 0;
+  :global(.Button--sz-l) .Button__after:not(:first-child) {
+    margin-left: 8px;
   }
 
-  :global(.Button--sz-xl) {
-    display: block;
-    width: 100%;
-    padding: 0 16px;
-  }
-
-  :global(.Button--sz-xl) .Button__before {
-    margin-left: -6px;
-    margin-right: 2px;
-  }
-
-  :global(.Button--sz-xl) .Button__before ~ .Button__content {
-    padding-left: 0;
-  }
-
-  :global(.Button--sz-xl) .Button__in {
+  :global(.Button--sz-l) .Button__in {
     justify-content: center;
-  }
-
-  :global(.Button--sz-xl) .Button__content {
-    font-size: 17px;
-    font-weight: 500;
-    padding: 11px;
   }
 
   /*
@@ -176,6 +159,10 @@
     border-radius: 10px;
   }
 
+  :global(.Button--ios.Button--sz-l) :global(.Button__content) {
+    padding: 9px 0 11px;
+  }
+
   /*
   Android
  */
@@ -183,44 +170,97 @@
     border-radius: 8px;
   }
 
+  :global(.Button--android.Button--sz-l) :global(.Button__content) {
+    padding: 10px 0 12px;
+  }
+
+  /*
+  VKCOM
+*/
+  :global(.Button--vkcom) {
+    border-radius: 4px;
+  }
+
+  /*
+  sizeY = Compact
+*/
+  /* small size */
+  :global(.Button--sizeY-compact.Button--sz-s) {
+    min-height: 26px;
+  }
+
+  :global(.Button--sizeY-compact.Button--sz-s) :global(.Button__content) {
+    padding-top: 3px;
+    padding-bottom: 5px;
+  }
+
+  :global(.Button--sizeY-compact.Button--sz-s) :global(.Button__content--caps) {
+    padding: 5px 0;
+  }
+
+  /* medium size */
+  :global(.Button--sizeY-compact.Button--sz-m) {
+    min-height: 32px;
+  }
+
+  :global(.Button--sizeY-compact.Button--sz-m) :global(.Button__content) {
+    padding-top: 4px;
+    padding-bottom: 6px;
+  }
+
+  /* large size */
+  :global(.Button--sizeY-compact.Button--sz-l) {
+    min-height: 40px;
+  }
+
+  :global(.Button--sizeY-compact.Button--sz-l) :global(.Button__content) {
+    padding-top: 8px;
+    padding-bottom: 10px;
+  }
+
   /**
  * Counter
- * TODO: Переписать без использования !important
  */
-
   :global(.Button--lvl-primary) :global(.Counter) {
-    background-color: var(--button_primary_foreground) !important;
-    color: var(--button_primary_background) !important;
+    background-color: var(--button_primary_foreground);
+    color: var(--button_primary_background);
   }
 
   :global(.Button--lvl-secondary) :global(.Counter) {
-    background-color: var(--button_secondary_foreground) !important;
-    color: var(--background_content) !important;
+    background-color: var(--button_secondary_foreground);
+    color: var(--background_content);
   }
 
   :global(.Button--lvl-tertiary) :global(.Counter) {
-    background-color: var(--button_tertiary_foreground) !important;
-    color: var(--background_content) !important;
+    background-color: var(--button_tertiary_foreground);
+    color: var(--background_content);
   }
 
   :global(.Button--lvl-outline) :global(.Counter) {
-    background-color: var(--button_outline_foreground) !important;
-    color: var(--background_content) !important;
+    background-color: var(--button_outline_foreground);
+    color: var(--background_content);
   }
 
   :global(.Button--lvl-commerce) :global(.Counter) {
-    background-color: var(--button_commerce_foreground) !important;
-    color: var(--button_commerce_background) !important;
+    background-color: var(--button_commerce_foreground);
+    color: var(--button_commerce_background);
   }
 </style>
 
 <script lang="ts">
   import Tappable from '../Service/Tappable.svelte';
+  import useAdaptivity from '../../hooks/useAdaptivity';
   import usePlatform from '../../hooks/usePlatform';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import button from '../Elements/button.svelte';
   import a from '../Elements/a.svelte';
+  import Caption from '../Typography/Caption.svelte';
+  import Subhead from '../Typography/Subhead.svelte';
+  import Text from '../Typography/Text.svelte';
+  import Title from '../Typography/Title.svelte';
+  import { OS } from '../../lib/platform';
+  import { SizeType } from '../../lib/adaptivity';
 
   export let Component = button;
 
@@ -237,22 +277,27 @@
     | 'overlay_primary'
     | 'overlay_secondary'
     | 'overlay_outline' = 'primary';
-  export let size: 'm' | 'l' | 'xl' = 'm';
+  export let size: 's' | 'm' | 'l' = 's';
   export let stretched: boolean = false;
   export let align: 'left' | 'center' | 'right' = 'center';
 
+  const adaptivity = useAdaptivity();
   const platform = usePlatform();
 
   $: $$restProps.class = classNames(
-    getClassName('Button', platform),
+    getClassName('Button', $platform),
     $$props.class,
     `Button--sz-${size}`,
     `Button--lvl-${mode}`,
-    `Button--aln-${align}`,
+    `Button--aln-${align || 'center'}`,
+    `Button--sizeY-${$adaptivity.sizeY}`,
     {
       ['Button--str']: stretched,
+      ['Button--with-icon']: hasIcons,
     },
   );
+
+  $: hasIcons = $$slots.before || before || $$slots.after || after;
 </script>
 
 <Tappable
@@ -261,17 +306,59 @@
   Component="{$$restProps.href ? a : Component}"
 >
   <div class="Button__in">
-    {#if ($$slots.before) || before}
+    {#if $$slots.before || before}
       <div class="Button__before">
         <slot name="before">{before}</slot>
       </div>
     {/if}
     {#if $$slots.default}
-      <div class="Button__content">
-        <slot />
-      </div>
+      {#if size === 'l'}
+        {#if $adaptivity.sizeY === SizeType.COMPACT}
+          <Text weight="medium" class="Button__content">
+            <slot />
+          </Text>
+        {:else}
+          <Title
+            level="3"
+            weight="medium"
+            Component="div"
+            class="Button__content"
+          >
+            <slot />
+          </Title>
+        {/if}
+      {:else if size === 'm'}
+        {#if $adaptivity.sizeY === SizeType.COMPACT}
+          <Subhead weight="medium" class="Button__content">
+            <slot />
+          </Subhead>
+        {:else}
+          <Text weight="medium" class="Button__content">
+            <slot />
+          </Text>
+        {/if}
+      {:else if size === 's'}
+        {#if hasIcons}
+          <Caption
+            caps="{$platform !== OS.VKCOM}"
+            level="{$platform === OS.VKCOM ? '1' : $adaptivity.sizeY === SizeType.COMPACT ? '3' : '2'}"
+            weight="{$platform === OS.VKCOM || $adaptivity.sizeY === SizeType.COMPACT ? 'medium' : 'semibold'}"
+            class="{'Button__content' + ($platform !== OS.VKCOM ? '--caps' : '')}"
+          >
+            <slot />
+          </Caption>
+        {:else if $adaptivity.sizeY === SizeType.COMPACT}
+          <Caption weight="medium" level="1" class="Button__content">
+            <slot />
+          </Caption>
+        {:else}
+          <Subhead weight="medium" class="Button__content">
+            <slot />
+          </Subhead>
+        {/if}
+      {/if}
     {/if}
-    {#if ($$slots.after) || after}
+    {#if $$slots.after || after}
       <div class="Button__after">
         <slot name="after">{after}</slot>
       </div>

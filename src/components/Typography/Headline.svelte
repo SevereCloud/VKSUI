@@ -30,7 +30,7 @@
 
   let headlineWeight = weight;
 
-  if (platform === ANDROID && weight === 'semibold') {
+  if ($platform === ANDROID && weight === 'semibold') {
     headlineWeight = 'medium';
   }
 </script>
@@ -49,17 +49,17 @@
 ```
 -->
 
-{#if platform === ANDROID}
+{#if $platform === ANDROID}
   <h3
     {...$$restProps}
-    class="{classNames(getClassName('Headline', platform), `Headline--w-${headlineWeight}`, $$props.class)}"
+    class="{classNames(getClassName('Headline', $platform), `Headline--w-${headlineWeight}`, $$props.class)}"
   >
     <slot />
   </h3>
 {:else}
   <h4
     {...$$restProps}
-    class="{classNames(getClassName('Headline', platform), `Headline--w-${headlineWeight}`, $$props.class)}"
+    class="{classNames(getClassName('Headline', $platform), `Headline--w-${headlineWeight}`, $$props.class)}"
   >
     <slot />
   </h4>

@@ -6,6 +6,10 @@
   .Div--android {
     padding: 12px 16px;
   }
+
+  .Div--vkcom {
+    padding: 12px 16px;
+  }
 </style>
 
 <script lang="ts">
@@ -24,7 +28,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Div', platform), $$props.class)}"
+  class="{classNames(getClassName('Div', $platform), $$props.class)}"
 >
   <slot />
 </div>

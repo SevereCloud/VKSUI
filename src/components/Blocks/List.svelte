@@ -13,7 +13,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('List', platform), $$props.class)}"
+  class="{classNames(getClassName('List', $platform), $$props.class)}"
 >
   <slot />
 </div>

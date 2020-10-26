@@ -120,7 +120,7 @@
   let Component = mode === 'base' ? div : Tappable;
 
   $: $$restProps.class = classNames(
-    getClassName('MiniInfoCell', platform),
+    getClassName('MiniInfoCell', $platform),
     {
       [`MiniInfoCell--md-${mode}`]: mode !== 'base',
       [`MiniInfoCell--wr-${textWrap}`]: textWrap !== 'nowrap',

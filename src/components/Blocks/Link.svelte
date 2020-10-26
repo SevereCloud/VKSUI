@@ -38,7 +38,7 @@
 <a
   href="{href}"
   {...$$restProps}
-  class="{classNames(getClassName('Link', platform), $$props.class)}"
+  class="{classNames(getClassName('Link', $platform), $$props.class)}"
 >
   <slot />
 </a>

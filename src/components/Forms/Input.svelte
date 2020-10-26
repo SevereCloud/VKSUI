@@ -73,7 +73,7 @@
 -->
 
 <FormField
-  class={classNames(getClassName('Input', platform), $$props.class, { [`Input--${align}`]: !!align }, `Input--sizeY-${adaptivity.sizeY}`)}
+  class={classNames(getClassName('Input', $platform), $$props.class, { [`Input--${align}`]: !!align }, `Input--sizeY-${$adaptivity.sizeY}`)}
 >
   <input {...$$restProps} class="Input__el" />
 </FormField>

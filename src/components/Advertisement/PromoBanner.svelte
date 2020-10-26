@@ -113,7 +113,7 @@
   const platform = usePlatform();
 </script>
 
-<div class="{classNames(getClassName('PromoBanner', platform), $$props.class)}">
+<div class="{classNames(getClassName('PromoBanner', $platform), $$props.class)}">
   <div class="PromoBanner__head">
     <Caption weight="regular" level="1" class="PromoBanner__label">
       {bannerData.advertisingLabel || 'Advertisement'}

@@ -1,11 +1,12 @@
 import { getContext } from 'svelte';
+import { writable, Writable } from 'svelte/store';
 import { SizeType, AdaptivityContextKey, AdaptivityContextInterface } from '../lib/adaptivity';
 
-export default function useAdaptivity(): AdaptivityContextInterface {
-  const adaptivityContext = getContext(AdaptivityContextKey) as AdaptivityContextInterface;
+export default function useAdaptivity(): Writable<AdaptivityContextInterface> {
+  const adaptivityContext = getContext(AdaptivityContextKey) as Writable<AdaptivityContextInterface>;
 
-  return adaptivityContext || {
+  return adaptivityContext || writable({
     sizeX: SizeType.COMPACT,
     sizeY: SizeType.REGULAR,
-  };
+  });
 }

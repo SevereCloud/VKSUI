@@ -38,21 +38,20 @@
   import { createEventDispatcher, onDestroy, onMount } from 'svelte';
   import { canUseDOM } from '../../lib/dom';
   import div from '../Elements/div.svelte';
-  import { current_component } from 'svelte/internal';
+  import { current_component, getContext } from 'svelte/internal';
+  import { ContextKey } from '../../lib/config';
+  import type { Writable } from 'svelte/store';
 
   const dispatch = createEventDispatcher();
   const callbacks = current_component.$$.callbacks;
 
+  const wContentDocument = getContext(ContextKey.contentDocument) as Writable<
+    Document
+  >;
+  const doc = $wContentDocument || document;
+
   export let Component = div;
-  // export let onStart: (outputEvent: TouchEvent) => void = undefined;
-  // export let onStartX: (outputEvent: TouchEvent) => void = undefined;
-  // export let onStartY: (outputEvent: TouchEvent) => void = undefined;
-  // export let onMove: (outputEvent: TouchEvent) => void = undefined;
-  // export let onMoveX: (outputEvent: TouchEvent) => void = undefined;
-  // export let onMoveY: (outputEvent: TouchEvent) => void = undefined;
-  // export let onEnd: (outputEvent: TouchEvent) => void = undefined;
-  // export let onEndX: (outputEvent: TouchEvent) => void = undefined;
-  // export let onEndY: (outputEvent: TouchEvent) => void = undefined;
+
   export let useCapture = false;
 
   export let container: HTMLElement = undefined;
@@ -100,7 +99,7 @@
 
     dispatch('startY', outputEvent);
 
-    !touchEnabled && subscribe(document);
+    !touchEnabled && subscribe(doc);
   };
 
   /**
@@ -198,7 +197,7 @@
     cancelClick = target.tagName === 'A' && isSlide;
     gesture = {};
 
-    !touchEnabled && unsubscribe(document);
+    !touchEnabled && unsubscribe(doc);
   };
 
   const subscribe = (element: HTMLElement | Document) => {

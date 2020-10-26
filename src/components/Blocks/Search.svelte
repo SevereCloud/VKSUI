@@ -334,7 +334,7 @@
 -->
 
 <div
-  class="{classNames(getClassName('Search', platform), { 'Search--focused': focused, 'Search--has-value': !!value, 'Search--has-after': !!(($$slots.after) || after), 'Search--has-icon': !!($$slots.icon) }, $$props.class)}"
+  class="{classNames(getClassName('Search', $platform), { 'Search--focused': focused, 'Search--has-value': !!value, 'Search--has-after': !!(($$slots.after) || after), 'Search--has-icon': !!($$slots.icon) }, $$props.class)}"
 >
   <div class="Search__in">
     <div class="Search__width"></div>
@@ -349,7 +349,7 @@
         on:change
         bind:value
       />
-      {#if platform === IOS && (($$slots.after) || after)}
+      {#if $platform === IOS && (($$slots.after) || after)}
         <div class="Search__after-width">
           <slot name="after">{after}</slot>
         </div>
@@ -377,7 +377,7 @@
           </Touch>
         {/if}
       </div>
-      {#if platform === IOS && (($$slots.after) || after)}
+      {#if $platform === IOS && (($$slots.after) || after)}
         <div class="Search__after-in">
           <slot name="after">{after}</slot>
         </div>

@@ -59,8 +59,8 @@
 -->
 
 <PopoutWrapper
-  class="{classNames(getClassName('ScreenSpinner', platform), $$props.class)}"
-  style="{$$props.style}"
+  class="{classNames(getClassName('ScreenSpinner', $platform), $$props.class)}"
+  style={$$props.style}
 >
   <div class="ScreenSpinner__container">
     <Spinner size="large" {...$$restProps} />

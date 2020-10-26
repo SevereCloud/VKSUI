@@ -21,6 +21,8 @@
     "@sveltevk/icons": "^1.44.1",
     "@tsconfig/svelte": "^1.0.10",
     "@vkontakte/appearance": "https://github.com/VKCOM/Appearance#7.2.4",
+    "@vkontakte/vk-bridge": "^2.3.0",
+    "@vkontakte/vkjs": "^0.6.0",
     "prettier": "2.1.1",
     "prettier-plugin-svelte": "^1.3.0",
     "rollup": "^2.26.5",

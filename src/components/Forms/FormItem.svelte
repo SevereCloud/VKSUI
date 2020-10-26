@@ -99,7 +99,7 @@
 
 <label 
   {...$$restProps}
-  class={classNames(getClassName('FormItem', platform), `FormItem--${status}`, $$props.class)} 
+  class={classNames(getClassName('FormItem', $platform), `FormItem--${status}`, $$props.class)} 
 >
   {#if ($$slots.top) || top}
   <Subhead weight="regular" class="FormItem__top"><slot name="top">{top}</slot></Subhead>

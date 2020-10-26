@@ -1,13 +1,11 @@
 import { getContext } from 'svelte';
+import { writable } from 'svelte/store';
+import type { Writable } from 'svelte/store';
 import { OS, platform } from '../lib/platform';
-import { SSRContextKey, SSRContextInterface } from '../lib/ssr';
+import { ContextKey } from '../lib/config';
 
-export default function usePlatform(): OS {
-  const ssrContext = getContext(SSRContextKey) as SSRContextInterface;
+export default function usePlatform(): Writable<OS> {
+  const wPlatform = getContext(ContextKey.platform) as Writable<OS>
 
-  if (ssrContext && ssrContext.platform) {
-    return ssrContext.platform;
-  }
-
-  return platform();
+  return wPlatform || writable(platform());
 }

@@ -65,7 +65,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('CardScroll', platform), $$props.class)}"
+  class="{classNames(getClassName('CardScroll', $platform), $$props.class)}"
 >
   <HorizontalScroll>
     <div class="CardScroll__in">

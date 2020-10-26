@@ -196,7 +196,7 @@
 -->
 
 <label
-  class="{classNames(getClassName('Switch', platform), $$props.class, `Switch--sizeY-${adaptivity.sizeY}`)}"
+  class="{classNames(getClassName('Switch', $platform), $$props.class, `Switch--sizeY-${$adaptivity.sizeY}`)}"
   style={$$props.style}
 >
   <input {...$$restProps} type="checkbox" class="Switch__self" />

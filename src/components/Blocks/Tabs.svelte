@@ -123,14 +123,14 @@
   const platform = usePlatform();
 
   // TODO: check this
-  if (platform === ANDROID && mode === 'segmented') {
+  if ($platform === ANDROID && mode === 'segmented') {
     mode = 'default';
   }
 </script>
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Tabs', platform), $$props.class, `Tabs--${mode}`)}"
+  class="{classNames(getClassName('Tabs', $platform), $$props.class, `Tabs--${mode}`)}"
 >
   <div class="Tabs__in">
     <slot />

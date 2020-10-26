@@ -1,4 +1,7 @@
+import { getContext } from 'svelte';
+import type { Writable } from 'svelte/store';
 import type { AnyFunction } from '../types';
+import { ContextKey } from './config';
 
 export const canUseDOM: boolean = !!(
   typeof window !== 'undefined' &&

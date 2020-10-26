@@ -47,7 +47,7 @@
 
 <div 
   {...$$restProps}
-  class={classNames(getClassName('FormLayoutGroup', platform), `FormLayoutGroup--${mode}`, $$props.class)} 
+  class={classNames(getClassName('FormLayoutGroup', $platform), `FormLayoutGroup--${mode}`, $$props.class)} 
 >
   <slot />
 </div>

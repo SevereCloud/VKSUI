@@ -373,7 +373,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Banner', platform), `Banner--md-${mode}`, `Banner--sz-${size}`, { 'Banner--inverted': mode === 'image' && imageTheme === 'dark' }, $$props.class)}"
+  class="{classNames(getClassName('Banner', $platform), `Banner--md-${mode}`, `Banner--sz-${size}`, { 'Banner--inverted': mode === 'image' && imageTheme === 'dark' }, $$props.class)}"
   on:click
 >
   <svelte:component this="{innerComponent}" class="Banner__in">
@@ -421,10 +421,10 @@
     {#if asideMode === 'dismiss'}
       <div class="Banner__dismiss">
         <div class="Banner__dismissIcon" on:click="{onDismiss}">
-          {#if platform === ANDROID}
+          {#if $platform === ANDROID}
             <Icon24Cancel />
           {/if}
-          {#if platform === IOS}
+          {#if $platform === IOS}
             {#if mode === 'image'}
               <Icon24DismissDark />
             {:else}

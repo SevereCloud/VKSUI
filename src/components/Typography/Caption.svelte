@@ -54,7 +54,7 @@
 
   let captionWeight = weight;
 
-  if (platform === ANDROID && weight === 'semibold') {
+  if ($platform === ANDROID && weight === 'semibold') {
     captionWeight = 'medium';
   }
 </script>
@@ -84,7 +84,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Caption', platform), `Caption--w-${captionWeight}`, `Caption--l-${level}`, { 'Caption--caps': caps }, $$props.class)}"
+  class="{classNames(getClassName('Caption', $platform), `Caption--w-${captionWeight}`, `Caption--l-${level}`, { 'Caption--caps': caps }, $$props.class)}"
 >
   <slot />
 </div>

@@ -91,7 +91,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames($$props.class, getClassName('Card', platform), `Card--sz-${size}`, `Card--md-${mode}`)}"
+  class="{classNames($$props.class, getClassName('Card', $platform), `Card--sz-${size}`, `Card--md-${mode}`)}"
 >
   <div class="Card__in">
     <slot />

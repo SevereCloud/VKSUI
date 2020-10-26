@@ -94,7 +94,7 @@
 -->
 
 <div
-  class="{classNames(getClassName('Avatar', platform), $$props.class, `Avatar--type-${mode}`, `Avatar--sz-${size}`)}"
+  class="{classNames(getClassName('Avatar', $platform), $$props.class, `Avatar--type-${mode}`, `Avatar--sz-${size}`)}"
 >
   <div class="Avatar__in" style={`width: ${size}px; height: ${size}px`}>
     {#if $$props.src}

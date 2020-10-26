@@ -66,7 +66,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Spinner', platform), $$props.class)}"
+  class="{classNames(getClassName('Spinner', $platform), $$props.class)}"
 >
   {#if size === 'large'}
     <Spinner44 class="Spinner__self" />

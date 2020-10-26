@@ -69,7 +69,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('CardGrid', platform), $$props.class)}"
+  class="{classNames(getClassName('CardGrid', $platform), $$props.class)}"
 >
   <slot />
 </div>

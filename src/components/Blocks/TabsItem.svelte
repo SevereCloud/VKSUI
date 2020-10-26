@@ -180,11 +180,11 @@
   export let selected: boolean = false;
 
   $: $$restProps.class = classNames(
-    getClassName('TabsItem', platform),
+    getClassName('TabsItem', $platform),
     { 'TabsItem--selected': selected },
     $$props.class,
   );
-  $$restProps.activeEffectDelay = platform === IOS ? 0 : ACTIVE_EFFECT_DELAY;
+  $$restProps.activeEffectDelay = $platform === IOS ? 0 : ACTIVE_EFFECT_DELAY;
 </script>
 
 <Tappable {...$$restProps} on:click>

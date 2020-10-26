@@ -42,7 +42,7 @@
 
   let subheadWeight = weight;
 
-  if (platform === ANDROID && weight === 'semibold') {
+  if ($platform === ANDROID && weight === 'semibold') {
     subheadWeight = 'medium';
   }
 </script>
@@ -62,17 +62,17 @@
 ```
 -->
 
-{#if platform === ANDROID}
+{#if $platform === ANDROID}
   <h4
     {...$$restProps}
-    class="{classNames(getClassName('Subhead', platform), `Subhead--w-${subheadWeight}`, $$props.class)}"
+    class="{classNames(getClassName('Subhead', $platform), `Subhead--w-${subheadWeight}`, $$props.class)}"
   >
     <slot />
   </h4>
 {:else}
   <h5
     {...$$restProps}
-    class="{classNames(getClassName('Subhead', platform), `Subhead--w-${subheadWeight}`, $$props.class)}"
+    class="{classNames(getClassName('Subhead', $platform), `Subhead--w-${subheadWeight}`, $$props.class)}"
   >
     <slot />
   </h5>

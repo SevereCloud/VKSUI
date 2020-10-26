@@ -1,3 +1,8 @@
+import '../src/styles/constants.css';
+import '../src/styles/styles.css';
+import '../src/styles/bright_light.css';
+import '../src/styles/space_gray.css';
+
 /**
  * Advertisement
  */
@@ -6,6 +11,7 @@ export { default as PromoBanner } from './components/Advertisement/PromoBanner.s
 /**
  * Service
  */
+export { default as ConfigProvider } from './components/Service/ConfigProvider.svelte';
 export { default as SSRWrapper } from './components/Service/SSRWrapper.svelte';
 export { default as Tappable } from './components/Service/Tappable.svelte';
 export { default as Touch } from './components/Service/Touch.svelte';

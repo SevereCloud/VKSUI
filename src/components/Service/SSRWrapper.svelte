@@ -1,16 +1,15 @@
 <script lang="ts">
-  import { setContext, beforeUpdate } from 'svelte';
-  import { SSRContextKey, SSRBuildContext } from '../../lib/ssr';
+  import { setContext } from 'svelte';
+  import { platform as getPlatform } from '../../lib/platform';
+  import { writable } from 'svelte/store';
+  import { ContextKey } from '../../lib/config';
 
   export let userAgent: string;
 
-  beforeUpdate(() => {
-    setContext(SSRContextKey, SSRBuildContext({ userAgent }));
-  });
+  let wPlatform = writable(getPlatform(userAgent))
+  setContext(ContextKey.platform, wPlatform)
 
-  setContext(SSRContextKey, SSRBuildContext({ userAgent }));
+  $: wPlatform.set(getPlatform(userAgent))
 </script>
 
-{#key userAgent}
 <slot />
-{/key}

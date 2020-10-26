@@ -34,13 +34,11 @@
 по enter.
 -->
 
-<!-- TODO: По-умолчанию в `onSubmit` происходит `e.preventDefault()`, чтобы избежать перезагрузки страницы -->
-
 <svelte:component
   this="{Component}"
   {...$$restProps}
   on:submit
-  class="{classNames(getClassName('FormLayout', platform), $$props.class)}"
+  class="{classNames(getClassName('FormLayout', $platform), $$props.class)}"
 >
   <div class="FormLayout__container">
     <slot />

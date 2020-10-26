@@ -424,8 +424,8 @@
 
   $: rootProps = selectable ? {} : $$restProps;
   $: linkProps = href ? $$restProps : {};
-  const IS_PLATFORM_ANDROID = platform === ANDROID;
-  const IS_PLATFORM_IOS = platform === IOS;
+  const IS_PLATFORM_ANDROID = $platform === ANDROID;
+  const IS_PLATFORM_IOS = $platform === IOS;
 
   const onClick = (e) => {
     const target = e.target as HTMLElement;
@@ -564,7 +564,7 @@
 <div
   {...rootProps}
   on:click="{href || draggable ? null : onClick}"
-  class="{classNames(getClassName('Cell', platform), { 'Cell--expandable': expandable, 'Cell--multiline': multiline, 'Cell--dragging': dragging, 'Cell--draggable': draggable }, `Cell--${size}`, $$props.class)}"
+  class="{classNames(getClassName('Cell', $platform), { 'Cell--expandable': expandable, 'Cell--multiline': multiline, 'Cell--dragging': dragging, 'Cell--draggable': draggable }, `Cell--${size}`, $$props.class)}"
   bind:this="{rootEl}"
 >
   <Tappable

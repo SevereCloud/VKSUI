@@ -66,7 +66,7 @@
 
 <div 
   {...$$restProps}
-  class={classNames(getClassName('FormStatus', platform), `FormStatus--${mode}`, $$props.class, `FormStatus--sizeY-${adaptivity.sizeY}`)} 
+  class={classNames(getClassName('FormStatus', $platform), `FormStatus--${mode}`, $$props.class, `FormStatus--sizeY-${$adaptivity.sizeY}`)} 
 >
   {#if ($$slots.header) || header}
     <div class="FormStatus__header"><slot name="header">{header}</slot></div>

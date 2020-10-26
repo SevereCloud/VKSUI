@@ -131,8 +131,8 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('PopoutWrapper', platform), `PopoutWrapper--v-${alignY}`, `PopoutWrapper--h-${alignX}`, { 'PopoutWrapper--closing': closing, 'PopoutWrapper--opened': opened }, $$props.class)}"
-  transition:fade="{{ duration: platform === ANDROID ? 200 : 300 }}"
+  class="{classNames(getClassName('PopoutWrapper', $platform), `PopoutWrapper--v-${alignY}`, `PopoutWrapper--h-${alignX}`, { 'PopoutWrapper--closing': closing, 'PopoutWrapper--opened': opened }, $$props.class)}"
+  transition:fade="{{ duration: $platform === ANDROID ? 200 : 300 }}"
   on:introend="{() => (opened = true)}"
 >
   {#if hasMask}

@@ -71,7 +71,7 @@
 
 <section
   {...$$restProps}
-  class="{classNames(getClassName('Group', platform), $$props.class)}"
+  class="{classNames(getClassName('Group', $platform), $$props.class)}"
 >
   <slot name="header" />
   <slot />

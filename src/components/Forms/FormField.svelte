@@ -155,7 +155,7 @@
   on:click
   on:mouseover="{handleMouseEnter}"
   on:mouseout="{handleMouseLeave}"
-  class="{classNames(getClassName('FormField', platform), $$props.class)}"
+  class="{classNames(getClassName('FormField', $platform), $$props.class)}"
 >
   <slot />
   <div

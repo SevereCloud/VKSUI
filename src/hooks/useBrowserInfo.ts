@@ -8,7 +8,7 @@ export default function useBrowserInfo(): BrowserInfo {
 
   let userAgent = canUseDOM && navigator.userAgent ? navigator.userAgent : '';
   if (ssrContext && ssrContext.platform) {
-    userAgent = ssrContext.platform;
+    userAgent = ssrContext.userAgent;
   }
 
   return computeBrowserInfo(userAgent);

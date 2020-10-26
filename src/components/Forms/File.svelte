@@ -40,7 +40,7 @@
 
 <Button
   align={align}
-  class={classNames(getClassName('File', platform), $$props.class)}
+  class={classNames(getClassName('File', $platform), $$props.class)}
   Component={label}
   stretched={stretched}
   mode={mode}

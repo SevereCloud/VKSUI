@@ -1,7 +1,9 @@
+import type { Writable } from 'svelte/store';
+import { writable } from 'svelte/store';
 import { OS, platform } from './platform';
 
 export interface SSRContextInterface {
-  platform: OS;
+  platform: Writable<OS>;
   userAgent?: string;
 }
 
@@ -17,7 +19,7 @@ export const SSRBuildContext = (
   const { userAgent } = props;
 
   const contextValue = {
-    platform: platform(userAgent),
+    platform: writable(platform(userAgent)),
     userAgent,
   };
 

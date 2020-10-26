@@ -48,6 +48,21 @@
     font-size: 12px;
     line-height: 16px;
   }
+
+  .Counter--vkcom.Counter--s-s .Counter__in {
+    font-weight: normal;
+    line-height: 14px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    letter-spacing: 0.2px;
+  }
+
+  .Counter--vkcom.Counter--s-m .Counter__in {
+    padding-left: 6px;
+    padding-right: 6px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
 </style>
 
 <script lang="ts">
@@ -69,7 +84,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Counter', platform), $$props.class, `Counter--${mode}`, `Counter--s-${size}`)}"
+  class="{classNames(getClassName('Counter', $platform), $$props.class, `Counter--${mode}`, `Counter--s-${size}`)}"
 >
   <div class="Counter__in">
     <slot />

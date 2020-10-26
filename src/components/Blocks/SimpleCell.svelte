@@ -225,8 +225,8 @@
   const platform = usePlatform();
 
   $: $$restProps.class = classNames(
-    getClassName('SimpleCell', platform),
-    `SimpleCell--sizeX-${adaptivity.sizeX}`,
+    getClassName('SimpleCell', $platform),
+    `SimpleCell--sizeX-${$adaptivity.sizeX}`,
     { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline },
     $$props.class,
   );
@@ -262,10 +262,10 @@ SimpleCell — это упрощенная и улучшенная с точки
       <slot name="indicator">{indicator}</slot>
     </div>
   {/if}
-  {#if ($$slots.after) || (expandable && platform === IOS)}
+  {#if ($$slots.after) || (expandable && $platform === IOS)}
     <div class="SimpleCell__after">
       <slot name="after" />
-      {#if expandable && platform === IOS}
+      {#if expandable && $platform === IOS}
         <Icon24Chevron />
       {/if}
     </div>

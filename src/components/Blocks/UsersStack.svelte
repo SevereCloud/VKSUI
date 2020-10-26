@@ -142,6 +142,7 @@
   import useBrowserInfo from '../../hooks/useBrowserInfo';
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
+  import usePlatform from '../../hooks/usePlatform';
 
   /**
    * Массив ссылок на фотографии
@@ -161,7 +162,8 @@
    */
   export let visibleCount: number = 3;
 
-  const { platform, platformVersion } = useBrowserInfo();
+  const { platformVersion } = useBrowserInfo();
+  const platform = usePlatform();
 
   const othersCount = Math.max(0, photos.length - visibleCount);
   const canShowOthers = othersCount > 0 && size === 'm';
@@ -169,10 +171,9 @@
   const photosShown = photos.slice(0, visibleCount);
 
   let canUseClipPath = true;
-  if (platform === IOS) {
+  if ($platform === IOS) {
     canUseClipPath = platformVersion && platformVersion.major >= 12;
   }
-
 </script>
 
 <!-- 
@@ -184,7 +185,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('UsersStack', platform), `UsersStack--size-${size}`, `UsersStack--l-${layout}`, { 'UsersStack--others': canShowOthers, 'UsersStack--simple': !canUseClipPath }, $$props.class)}"
+  class="{classNames(getClassName('UsersStack', $platform), `UsersStack--size-${size}`, `UsersStack--l-${layout}`, { 'UsersStack--others': canShowOthers, 'UsersStack--simple': !canUseClipPath }, $$props.class)}"
 >
   <div class="UsersStack__photos">
     {#each photosShown as photo}

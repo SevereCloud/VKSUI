@@ -6,25 +6,22 @@
   .Example {
     height: 667px;
     width: 375px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     border: 1px solid var(--background_highlighted);
     display: block;
     margin: auto;
     background: var(--background_content);
   }
+
+  .scroll {
+    overflow-y: auto;
+  }
+
   .fixable {
-    display: flex;
     padding: 8px;
     top: 0;
     right: 0;
     position: fixed;
-  }
-  .fixable div {
-    display: flex;
-    padding: 6px;
-  }
-  :global(body) {
-    background: var(--background_page);
   }
 
   .userStack {
@@ -39,12 +36,8 @@
 </style>
 
 <script lang="ts">
-  import '../src/styles/constants.css';
-  import '../src/styles/styles.css';
-  import '../src/styles/bright_light.css';
-  import '../src/styles/space_gray.css';
-
   import {
+    ConfigProvider,
     Title,
     Caption,
     Text,
@@ -92,6 +85,8 @@
 
   import type { BannerData } from '../src/components/Advertisement/PromoBanner.svelte';
 
+  import Frame from './Frame.svelte';
+
   import TouchExample from './TouchExample.svelte';
   import BannerExample from './BannerExample.svelte';
   import SearchExample from './SearchExample.svelte';
@@ -109,7 +104,6 @@
     Icon20GlobeOutline,
     Icon20WorkOutline,
     Icon20Info,
-    Icon28MoonOutline,
     Icon16Add,
     Icon24Camera,
     Icon24Shuffle,
@@ -121,7 +115,6 @@
     Icon28SlidersOutline,
     Icon28UsersOutline,
     Icon28FavoriteOutline,
-    Icon28SortHorizontalOutline,
     Icon28UserAddOutline,
     Icon28InfoOutline,
     Icon28ServicesOutline,
@@ -131,44 +124,31 @@
     Icon24Document,
   } from '@sveltevk/icons';
 
-  // Разные настройки для тем
-  import { setContext } from 'svelte';
-  import { SSRContextKey, SSRBuildContext } from '../src/lib/ssr';
+  import { OS } from '../src/lib/platform';
+  import type { AppearanceSchemeType } from '@vkontakte/vk-bridge';
+  import { Scheme, WebviewType } from '../src/lib/config';
+  import {
+calculateAdaptivity,
+    DESKTOP_SIZE,
+    MOBILE_SIZE,
+    SizeType,
+    SMALL_TABLET_SIZE,
+    TABLET_SIZE,
+  } from '../src/lib/adaptivity';
 
-  // userAgent
-  let userAgent =
-    window.localStorage.getItem('userAgent') === 'iphone'
-      ? 'iphone'
-      : 'android';
-  setContext(SSRContextKey, SSRBuildContext({ userAgent }));
-
-  const changeUserAgent = () => {
-    userAgent = userAgent === 'android' ? 'iphone' : 'android';
-    window.localStorage.setItem('userAgent', userAgent);
-    console.log(userAgent);
-
-    // document.location.reload();
-  };
-
-  // scheme
-  const setScheme = (s: string) => {
-    const schemeAttribute = document.createAttribute('scheme');
-    schemeAttribute.value = s;
-    document.body.attributes.setNamedItem(schemeAttribute);
-  };
-
+  let os = (window.localStorage.getItem('os') as OS) || OS.ANDROID;
   let scheme =
-    window.localStorage.getItem('scheme') === 'space_gray'
-      ? 'space_gray'
-      : 'bright_light';
-  setScheme(scheme);
+    (window.localStorage.getItem('scheme') as AppearanceSchemeType) ||
+    Scheme.BRIGHT_LIGHT;
+  let webviewType =
+    (window.localStorage.getItem('webviewType') as WebviewType) ||
+    WebviewType.VKAPPS;
+  let sizeY =
+    (window.localStorage.getItem('sizeY') as SizeType) || SizeType.REGULAR;
+  let windowWidth =
+    parseInt(window.localStorage.getItem('windowWidth')) || MOBILE_SIZE;
 
-  const changeScheme = () => {
-    scheme = scheme === 'bright_light' ? 'space_gray' : 'bright_light';
-    setScheme(scheme);
-    window.localStorage.setItem('scheme', scheme);
-  };
-
+  windowWidth;
   // Всякое для примеров
 
   let removeList = ['Михаил Андриевский', 'Вадим Дорохов', 'Саша Колобов'];
@@ -191,18 +171,107 @@
   };
 
   let activeTab2 = 'music';
+
+  const frames: HTMLIFrameElement[] = [];
+
+  const getRefFrame = (f: HTMLIFrameElement) => {
+    frames.push(f);
+
+    const sprite = document.getElementById('__SVG_SPRITE_NODE__');
+    const masks = document.getElementById('__SVG_MASKS_NODE__');
+
+    if (sprite) {
+      f.contentDocument.body.appendChild(sprite.cloneNode(true));
+    }
+
+    if (masks) {
+      f.contentDocument.body.appendChild(masks.cloneNode(true));
+    }
+
+    f.contentDocument.body.setAttribute('scheme', scheme);
+  };
+
+  const updateFrameScheme = (s: AppearanceSchemeType) => {
+    frames.forEach((f) => {
+      f.contentDocument.body.setAttribute('scheme', s);
+    });
+  };
+
+  $: updateFrameScheme(scheme);
+  $: sizeX = calculateAdaptivity(windowWidth, {}).sizeX;
 </script>
 
+<!-- svelte-ignore a11y-no-onchange -->
 <div class="fixable">
-  <div on:click="{changeUserAgent}">
-    <Icon28SortHorizontalOutline />
+  <div>
+    platform:
+    <select
+      bind:value="{os}"
+      on:change="{() => window.localStorage.setItem('os', os)}"
+    >
+    {#each [OS.ANDROID, OS.IOS, OS.VKCOM] as name}
+      <option value="{name}">{name}</option>
+    {/each}
+    </select>
   </div>
-  <div on:click="{changeScheme}">
-    <Icon28MoonOutline />
+  <div>
+    scheme:
+    <select
+      bind:value="{scheme}"
+      on:change="{() => window.localStorage.setItem('scheme', scheme)}"
+    >
+      {#each [Scheme.BRIGHT_LIGHT, Scheme.SPACE_GRAY] as name}
+        <option value="{name}">{name}</option>
+      {/each}
+    </select>
+  </div>
+  <div>
+    webviewType:
+    <select
+      bind:value="{webviewType}"
+      on:change="{() => window.localStorage.setItem('webviewType', webviewType)}"
+    >
+    {#each [WebviewType.VKAPPS, WebviewType.INTERNAL] as name}
+      <option value="{name}">{name}</option>
+    {/each}
+    </select>
+  </div>
+  <div>
+    SizeY:
+    <select
+      bind:value="{sizeY}"
+      on:change="{() => window.localStorage.setItem('sizeY', sizeY)}"
+    >
+    {#each [SizeType.REGULAR, SizeType.COMPACT] as name}
+      <option value="{name}">{name}</option>
+    {/each}
+    </select>
+  </div>
+  <div>
+    windowWidth:
+    <select
+      bind:value={windowWidth}
+      on:change="{() => window.localStorage.setItem('windowWidth', windowWidth.toString())}"
+    >
+    {#each [
+      DESKTOP_SIZE,
+      TABLET_SIZE,
+      SMALL_TABLET_SIZE,
+      MOBILE_SIZE,
+    ] as name}
+      <option value={name}>{name}px</option>
+    {/each}
+    </select>
   </div>
 </div>
 
-<SSRWrapper userAgent="{userAgent}">
+<ConfigProvider
+  platform="{os}"
+  scheme="{scheme}"
+  webviewType="{webviewType}"
+  sizeY="{sizeY}"
+  sizeX="{sizeX}"
+>
   <main>
     <Div>
       <Title level="1" weight="heavy">Layout</Title>
@@ -220,7 +289,7 @@
       <Title level="1" weight="heavy">Blocks</Title>
       <Div>
         <Title level="2" weight="semibold">Button</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <div slot="header">
               <Header mode="secondary">Типы кнопок</Header>
@@ -255,16 +324,50 @@
           </Group>
           <Group>
             <div slot="header">
+              <Header mode="secondary">Типы кнопок с disabled="true"</Header>
+            </div>
+            <Div>
+              <Button disabled>Primary</Button>
+            </Div>
+            <Div>
+              <Button disabled mode="secondary">Secondary</Button>
+            </Div>
+            <Div>
+              <Button disabled mode="tertiary">Tertiary</Button>
+            </Div>
+            <Div>
+              <Button disabled mode="outline">Outline</Button>
+            </Div>
+            <Div>
+              <Button disabled mode="commerce">Commerce</Button>
+            </Div>
+            <Div>
+              <Button disabled mode="destructive">Destructive</Button>
+            </Div>
+            <Div style="background: #232323">
+              <Button disabled mode="overlay_primary">Overlay Primary</Button>
+            </Div>
+            <Div style="background: #232323">
+              <Button disabled mode="overlay_secondary">
+                Overlay Secondary
+              </Button>
+            </Div>
+            <Div style="background: #232323">
+              <Button disabled mode="overlay_outline">Overlay Outline</Button>
+            </Div>
+          </Group>
+          <Group>
+            <div slot="header">
               <Header mode="secondary">Допустимые размеры</Header>
             </div>
             <Div>
-              <Button>Medium</Button>
+              <Button>Small</Button>
             </Div>
             <Div>
-              <Button size="l">Large</Button>
+              <Button size="m">Medium</Button>
             </Div>
             <Div>
-              <Button size="xl" mode="secondary">Extra large</Button>
+              <Button size="l" mode="secondary">Large</Button>
             </Div>
           </Group>
           <Group>
@@ -294,11 +397,38 @@
               </Button>
             </Div>
             <Div>
+              <Button size="m">
+                <div slot="before">
+                  <Icon16Add />
+                </div>
+                Add item
+              </Button>
+            </Div>
+            <Div>
               <Button size="l">
                 <div slot="before">
                   <Icon24Camera />
                 </div>
                 Take a photo
+              </Button>
+            </Div>
+            <Div>
+              <Button size="l">
+                <div slot="after">
+                  <Counter>16</Counter>
+                </div>
+                Button
+              </Button>
+            </Div>
+            <Div>
+              <Button size="l">
+                <div slot="before">
+                  <Icon24Camera />
+                </div>
+                <div slot="after">
+                  <Counter>16</Counter>
+                </div>
+                Button
               </Button>
             </Div>
             <Div>
@@ -322,7 +452,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">CellButton</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <div slot="header">
               <Header mode="secondary">Кнопка-ячейка</Header>
@@ -350,7 +480,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Div</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <Div>
               <Button stretched mode="secondary" size="l">Edit Info</Button>
@@ -360,14 +490,14 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Link</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Link href="https://google.com" target="_blank">Google</Link>
           <Link href="/profile">Profile</Link>
         </div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">Header</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Header>Рекомендации</Header>
           <Separator />
           <Header>
@@ -441,7 +571,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Group</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <div>
             <Group>
               <div slot="header">
@@ -485,7 +615,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Card</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group separator="hide">
             <div slot="header">
               <Header mode="secondary">Дефолтный стиль</Header>
@@ -520,7 +650,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">CardGrid</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <CardGrid>
             <Card size="l">
               <div style="height: 96px"></div>
@@ -548,7 +678,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">CardScroll</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group
             separator="hide"
             description="Рекомендуемый размер карточки — 144px"
@@ -605,7 +735,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Gradient</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Gradient>
             <Group>
               <div slot="header">
@@ -636,7 +766,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Cell</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <div slot="header">
               <Header mode="secondary">Простейший пример</Header>
@@ -862,7 +992,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">SimpleCell</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <Header mode="secondary">Меню</Header>
             <SimpleCell
@@ -969,7 +1099,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">RichCell</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <RichCell
               disabled
@@ -1040,7 +1170,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">List</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Cell expandable>
             <div slot="before">
               <Icon28UserOutline />
@@ -1063,7 +1193,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Footer</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <List>
               <SimpleCell description="Веб-сайт">
@@ -1091,25 +1221,26 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Spinner</Title>
-        <div
-          class="Example"
-          style="display: flex;align-items: center; flex-direction: column"
-        >
-          <Spinner size="large" style="margin-top: 20px" />
-          <Spinner size="medium" style="margin-top: 20px" />
-          <Spinner size="regular" style="margin-top: 20px" />
-          <Spinner size="small" style="margin-top: 20px" />
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
+          <div
+            style="display: flex;align-items: center; flex-direction: column"
+          >
+            <Spinner size="large" style="margin-top: 20px" />
+            <Spinner size="medium" style="margin-top: 20px" />
+            <Spinner size="regular" style="margin-top: 20px" />
+            <Spinner size="small" style="margin-top: 20px" />
+          </div>
         </div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">PanelSpinner</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <PanelSpinner />
         </div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">Switch</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <Cell>
               <div slot="asideContent">
@@ -1134,7 +1265,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">InfoRow</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <SimpleCell>
               <InfoRow header="Общий бюджет">3000 р.</InfoRow>
@@ -1156,7 +1287,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Avatar</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <Header mode="secondary">Дефолтный размер</Header>
             <SimpleCell description="VKontakte">
@@ -1326,11 +1457,11 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Gallery</Title>
-        <div class="Example"></div>
+        <div class="Example scroll" style={`width:${windowWidth}px`}></div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">Progress</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <Div>
               <InfoRow header="Default">
@@ -1342,13 +1473,13 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Search</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <SearchExample />
         </div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">Tabs</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Tabs>
             <TabsItem
               on:click="{() => (activeTab2 = 'music')}"
@@ -1370,15 +1501,15 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Tooltip</Title>
-        <div class="Example"></div>
+        <div class="Example scroll" style={`width:${windowWidth}px`}></div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">PullToRefresh</Title>
-        <div class="Example"></div>
+        <div class="Example scroll" style={`width:${windowWidth}px`}></div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">Counter</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <div slot="header">
               <Header mode="secondary">Счётчики в ячейках</Header>
@@ -1459,7 +1590,7 @@
               </Button>
             </Div>
             <Div>
-              <Button size="xl">
+              <Button size="l">
                 <div slot="after">
                   <Counter>8</Counter>
                 </div>
@@ -1544,7 +1675,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">UsersStack</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <UsersStack
               photos="{['https://sun9-69.userapi.com/c206728/v206728108/15b1b9/YpxKXVzlvaA.jpg?ava=1']}"
@@ -1602,7 +1733,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Separator</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Group>
             <div slot="header">
               <Header mode="secondary">Сепаратор</Header>
@@ -1639,7 +1770,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Placeholder</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Placeholder header="Уведомления от сообществ">
             <div slot="icon">
               <Icon56UsersOutline />
@@ -1660,13 +1791,13 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Banner</Title>
-        <div class="Example">
-          <BannerExample />
+        <div class="Example" style={`width:${windowWidth}px`}>
+          <Frame getRef="{getRefFrame}" component="{BannerExample}" />
         </div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">MiniInfoCell</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <MiniInfoCell textWrap="short">
             <div slot="before">
               <Icon20ArticleOutline />
@@ -1735,11 +1866,11 @@
       <Title level="1" weight="heavy">Forms</Title>
       <Div>
         <Title level="2" weight="semibold">FormItem</Title>
-        <div class="Example"></div>
+        <div class="Example scroll" style={`width:${windowWidth}px`}></div>
       </Div>
       <Div>
         <Title level="2" weight="semibold">FormLayoutGroup</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <FormLayout>
             <FormLayoutGroup mode="horizontal">
               <FormItem top="Имя">
@@ -1754,7 +1885,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">FormStatus</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <FormItem>
             <FormStatus header="Некорректный мобильный номер" mode="error">
               Необходимо корректно ввести номер в международном формате
@@ -1770,7 +1901,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Input</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <FormLayout>
             <FormItem top="Фамилия">
               <Input type="text" defaultValue="Петров" />
@@ -1786,7 +1917,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">File</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <FormItem top="Загрузите ваше фото">
             <File controlSize="m">
               <div slot="before">
@@ -1810,7 +1941,7 @@
       <Title level="1" weight="heavy">Typography</Title>
       <Div>
         <Title level="2" weight="semibold">Title</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Title level="1" weight="semibold" style="margin-bottom: 16px">
             Title 1 semibold
           </Title>
@@ -1842,7 +1973,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Headline</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Headline weight="regular" style="margin-bottom: 16px">
             Headline regular
           </Headline>
@@ -1856,7 +1987,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Text</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Text weight="regular" style="margin-bottom: 16px">Text regular</Text>
           <Text weight="medium" style="margin-bottom: 16px">Text medium</Text>
           <Text weight="semibold" style="margin-bottom: 16px">
@@ -1866,7 +1997,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Subhead</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Subhead weight="regular" style="margin-bottom: 16px">
             Subhead regular
           </Subhead>
@@ -1883,7 +2014,7 @@
       </Div>
       <Div>
         <Title level="2" weight="semibold">Caption</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <Caption level="1" weight="semibold" style="margin-bottom: 16px">
             Caption 1 semibold
           </Caption>
@@ -1928,7 +2059,7 @@
       <Title level="1" weight="heavy">Advertisement</Title>
       <Div>
         <Title level="2" weight="semibold">PromoBanner</Title>
-        <div class="Example">
+        <div class="Example scroll" style={`width:${windowWidth}px`}>
           <PromoBanner bannerData="{promoBannerProps}" />
         </div>
       </Div>
@@ -1938,13 +2069,8 @@
       <Title level="1" weight="heavy">Service</Title>
       <Div>
         <Title level="2" weight="semibold">Touch</Title>
-        <div class="Example">
-          <Group>
-            <div slot="header">
-              <Header mode="secondary">Перетащите кружок</Header>
-            </div>
-            <TouchExample />
-          </Group>
+        <div class="Example" style={`width:${windowWidth}px`}>
+          <Frame getRef="{getRefFrame}" component="{TouchExample}" />
         </div>
       </Div>
     </Div>
@@ -1961,4 +2087,4 @@
       </Div>
     </Div>
   </main>
-</SSRWrapper>
+</ConfigProvider>

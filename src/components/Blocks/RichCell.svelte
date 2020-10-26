@@ -183,7 +183,7 @@
 
   $: $$restProps.class = classNames(
     $$props.class,
-    getClassName('RichCell', platform),
+    getClassName('RichCell', $platform),
     {
       'RichCell--mult': multiline,
     },

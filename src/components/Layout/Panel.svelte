@@ -128,10 +128,10 @@
 <!-- TODO: -->
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Panel', platform), `Panel--${adaptivity.sizeX}`, { 'Panel--centered': centered, [`Panel--sizeX-${adaptivity.sizeX}`]: true }, $$props.class)}"
+  class="{classNames(getClassName('Panel', $platform), `Panel--${$adaptivity.sizeX}`, { 'Panel--centered': centered, [`Panel--sizeX-${$adaptivity.sizeX}`]: true }, $$props.class)}"
 >
   <Touch class="Panel__in">
-    {#if platform === IOS}
+    {#if $platform === IOS}
       <div class="Panel__fade"></div>
     {/if}
     <div class="Panel__in-before"></div>

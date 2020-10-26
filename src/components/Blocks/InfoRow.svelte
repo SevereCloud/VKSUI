@@ -37,7 +37,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('InfoRow', platform), $$props.class)}"
+  class="{classNames(getClassName('InfoRow', $platform), $$props.class)}"
 >
   {#if ($$slots.header) || header}
     <Subhead class="InfoRow__header" weight="regular">

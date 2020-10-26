@@ -69,17 +69,20 @@
   /*
   Android
  */
-  :global(.CellButton--android) {
+  :global(.CellButton--android),
+  :global(.CellButton--vkcom) {
     padding: 0 16px;
   }
 
-  :global(.CellButton--android) .CellButton__content {
+  :global(.CellButton--android) .CellButton__content,
+  :global(.CellButton--vkcom) .CellButton__content {
     font-size: 16px;
     line-height: 20px;
     padding: 14px 0;
   }
 
-  :global(.CellButton--android) .CellButton__before :global(.Icon) {
+  :global(.CellButton--android) .CellButton__before :global(.Icon),
+  :global(.CellButton--vkcom) .CellButton__before :global(.Icon) {
     margin-right: 16px;
   }
 </style>
@@ -103,7 +106,7 @@
   const platform = usePlatform();
 
   $: $$restProps.class = classNames(
-    getClassName('CellButton', platform),
+    getClassName('CellButton', $platform),
     $$props.class,
     `CellButton--lvl-${mode}`,
     `CellButton--aln-${align}`,
@@ -117,7 +120,7 @@
   Component="{$$restProps.href ? a : Component}"
 >
   <div class="CellButton__in">
-    {#if ($$slots.before) || before}
+    {#if $$slots.before || before}
       <div class="CellButton__before">
         <slot name="before">{before}</slot>
       </div>

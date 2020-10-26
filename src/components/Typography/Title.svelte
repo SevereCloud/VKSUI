@@ -53,7 +53,7 @@
 
   let titleWeight = weight;
   let headlineWeight: 'regular' | 'medium' | 'semibold';
-  if (platform === ANDROID) {
+  if ($platform === ANDROID) {
     if (level === '3') {
       switch (weight) {
         case 'heavy':
@@ -102,35 +102,35 @@
 ```
 -->
 
-{#if level === '3' && platform === ANDROID}
+{#if level === '3' && $platform === ANDROID}
   <Headline {...$$restProps} weight="{headlineWeight}" class="{$$props.class}">
     <slot />
   </Headline>
 {:else if level === '1'}
   <h1
     {...$$restProps}
-    class="{classNames(getClassName('Title', platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
+    class="{classNames(getClassName('Title', $platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
   >
     <slot />
   </h1>
 {:else if level === '2'}
   <h2
     {...$$restProps}
-    class="{classNames(getClassName('Title', platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
+    class="{classNames(getClassName('Title', $platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
   >
     <slot />
   </h2>
 {:else if level === '3'}
   <h3
     {...$$restProps}
-    class="{classNames(getClassName('Title', platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
+    class="{classNames(getClassName('Title', $platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
   >
     <slot />
   </h3>
 {:else}
   <div
     {...$$restProps}
-    class="{classNames(getClassName('Title', platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
+    class="{classNames(getClassName('Title', $platform), `Title--w-${titleWeight}`, `Title--l-${level}`, $$props.class)}"
   >
     <slot />
   </div>

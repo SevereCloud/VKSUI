@@ -29,7 +29,7 @@
 
   let textWeight = weight;
 
-  if (platform === ANDROID && weight === 'semibold') {
+  if ($platform === ANDROID && weight === 'semibold') {
     textWeight = 'medium';
   }
 </script>
@@ -50,7 +50,7 @@
 
 <div
   {...$$restProps}
-  class="{classNames(getClassName('Text', platform), `Text--w-${textWeight}`, $$props.class)}"
+  class="{classNames(getClassName('Text', $platform), `Text--w-${textWeight}`, $$props.class)}"
 >
   <slot />
 </div>
