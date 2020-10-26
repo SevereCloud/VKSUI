@@ -1,16 +1,16 @@
 import { canUseDOM } from './dom';
 
-export enum OS {
+export enum Platform {
   ANDROID = 'android',
   IOS = 'ios',
   VKCOM = 'vkcom'
 }
 
-export const ANDROID: OS = OS.ANDROID;
-export const IOS: OS = OS.IOS;
-export const VKCOM: OS = OS.VKCOM;
+export const ANDROID: Platform = Platform.ANDROID;
+export const IOS: Platform = Platform.IOS;
+export const VKCOM: Platform = Platform.VKCOM;
 
-export function platform(useragent?: string): OS {
+export function platform(useragent?: string): Platform {
   const ua = useragent || (canUseDOM && navigator.userAgent) || '';
 
   return /iphone|ipad|ipod/i.test(ua) ? IOS : ANDROID;

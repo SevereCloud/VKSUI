@@ -259,7 +259,7 @@
   import Subhead from '../Typography/Subhead.svelte';
   import Text from '../Typography/Text.svelte';
   import Title from '../Typography/Title.svelte';
-  import { OS } from '../../lib/platform';
+  import { Platform } from '../../lib/platform';
   import { SizeType } from '../../lib/adaptivity';
 
   export let Component = button;
@@ -340,10 +340,10 @@
       {:else if size === 's'}
         {#if hasIcons}
           <Caption
-            caps="{$platform !== OS.VKCOM}"
-            level="{$platform === OS.VKCOM ? '1' : $adaptivity.sizeY === SizeType.COMPACT ? '3' : '2'}"
-            weight="{$platform === OS.VKCOM || $adaptivity.sizeY === SizeType.COMPACT ? 'medium' : 'semibold'}"
-            class="{'Button__content' + ($platform !== OS.VKCOM ? '--caps' : '')}"
+            caps="{$platform !== Platform.VKCOM}"
+            level="{$platform === Platform.VKCOM ? '1' : $adaptivity.sizeY === SizeType.COMPACT ? '3' : '2'}"
+            weight="{$platform === Platform.VKCOM || $adaptivity.sizeY === SizeType.COMPACT ? 'medium' : 'semibold'}"
+            class="{'Button__content' + ($platform !== Platform.VKCOM ? '--caps' : '')}"
           >
             <slot />
           </Caption>

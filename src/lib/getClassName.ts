@@ -1,8 +1,8 @@
-import { OS, platform } from '../lib/platform';
+import { Platform, platform } from '../lib/platform';
 
 export default function getClassName(
   base: string,
-  osName: OS = platform(),
+  osName: Platform = platform(),
 ): string {
   return `${base} ${base}--${osName}`;
 }

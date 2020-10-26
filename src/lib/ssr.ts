@@ -1,9 +1,9 @@
 import type { Writable } from 'svelte/store';
 import { writable } from 'svelte/store';
-import { OS, platform } from './platform';
+import { Platform, platform } from './platform';
 
 export interface SSRContextInterface {
-  platform: Writable<OS>;
+  platform: Writable<Platform>;
   userAgent?: string;
 }
 

@@ -1,9 +1,9 @@
-import { IOS, OS, platform } from './platform';
+import { IOS, Platform, platform } from './platform';
 import type { Version } from '../types';
 
 export interface BrowserInfo {
   userAgent: string;
-  platform: OS;
+  platform: Platform;
   platformVersion: Version | null;
 }
 

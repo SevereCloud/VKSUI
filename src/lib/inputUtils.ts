@@ -1,6 +1,6 @@
-import type { OS } from "./platform";
+import type { Platform } from "./platform";
 
-const inputUtils = (platform: OS) => {
+const inputUtils = (platform: Platform) => {
   let hasMouse: boolean;
   let hasTouchEvents: boolean;
   let hasHover: boolean;

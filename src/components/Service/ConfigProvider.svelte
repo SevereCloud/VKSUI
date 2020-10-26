@@ -30,7 +30,7 @@
     Appearance,
     ContextKey,
   } from '../../lib/config';
-  import { OS, platform as getPlatform } from '../../lib/platform';
+  import { Platform, platform as getPlatform } from '../../lib/platform';
   import { writable } from 'svelte/store';
   import Adaptivity from './Adaptivity.svelte';
   import type { SizeType, ViewWidth } from '../../lib/adaptivity';
@@ -64,7 +64,7 @@
   /**
    * Платформа
    */
-  export let platform: OS = getPlatform();
+  export let platform: Platform = getPlatform();
 
   export let contentWindow: Window = window;
   export let sizeX: SizeType = undefined;

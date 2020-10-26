@@ -124,7 +124,7 @@
     Icon24Document,
   } from '@sveltevk/icons';
 
-  import { OS } from '../src/lib/platform';
+  import { Platform } from '../src/lib/platform';
   import type { AppearanceSchemeType } from '@vkontakte/vk-bridge';
   import { Scheme, WebviewType } from '../src/lib/config';
   import {
@@ -136,7 +136,7 @@ calculateAdaptivity,
     TABLET_SIZE,
   } from '../src/lib/adaptivity';
 
-  let os = (window.localStorage.getItem('os') as OS) || OS.ANDROID;
+  let os = (window.localStorage.getItem('os') as Platform) || Platform.ANDROID;
   let scheme =
     (window.localStorage.getItem('scheme') as AppearanceSchemeType) ||
     Scheme.BRIGHT_LIGHT;
@@ -209,7 +209,7 @@ calculateAdaptivity,
       bind:value="{os}"
       on:change="{() => window.localStorage.setItem('os', os)}"
     >
-    {#each [OS.ANDROID, OS.IOS, OS.VKCOM] as name}
+    {#each [Platform.ANDROID, Platform.IOS, Platform.VKCOM] as name}
       <option value="{name}">{name}</option>
     {/each}
     </select>
