@@ -1,10 +1,16 @@
 <style>
-  .InfoRow {
+  :global(.InfoRow) {
     user-select: text;
     text-overflow: ellipsis;
     overflow: hidden;
-    font-size: 16px;
-    line-height: 20px;
+  }
+
+  :global(.InfoRow__header) {
+    margin-bottom: 2px;
+    color: var(--text_subhead);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   /* margin у .Subhead перекрывает margin-bottom */
@@ -22,11 +28,11 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import Subhead from '../Typography/Subhead.svelte';
+  import Headline from '../Typography/Headline.svelte';
 
   export let header: string = '';
 
   const platform = usePlatform();
-
 </script>
 
 <!-- 
@@ -35,14 +41,12 @@
 Если таких блоков несколько и они объединены по смыслу, то рекомендуется оборачивать список в `Group` с указанием `header`.
 -->
 
-<div
-  {...$$restProps}
-  class="{classNames(getClassName('InfoRow', $platform), $$props.class)}"
->
+<Headline {...$$restProps} weight="regular" 
+  class={classNames(getClassName('InfoRow', $platform), $$props.class)}>
   {#if ($$slots.header) || header}
     <Subhead class="InfoRow__header" weight="regular">
       <slot name="header">{header}</slot>
     </Subhead>
   {/if}
-  <slot />
-</div>
+  <slot/>
+</Headline>
