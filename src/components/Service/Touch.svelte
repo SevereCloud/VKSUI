@@ -66,12 +66,29 @@
       });
       touchEnabled && subscribe(container);
     }
+
+    container.addEventListener('mouseenter', onEnter, {
+      capture: useCapture,
+      passive: true,
+    });
+    container.addEventListener('mouseleave', onLeave, {
+      capture: useCapture,
+      passive: true,
+    });
   });
 
   onDestroy(() => {
     container.removeEventListener(events[0], onStartEvent);
     touchEnabled && unsubscribe(container);
   });
+
+  const onEnter = (e: MouseEvent) => {
+    dispatch('enter', e)
+  };
+
+  const onLeave = (e: MouseEvent) => {
+    dispatch('leave', e)
+  };
 
   /**
    * Обработчик событий touchstart

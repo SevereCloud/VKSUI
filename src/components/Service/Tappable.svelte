@@ -300,6 +300,14 @@
     }
   };
 
+  const onEnter = () => {
+    hovered = true;
+  };
+
+  const onLeave = () => {
+    hovered = false;
+  };
+
   /*
    * Устанавливает активное выделение
    */
@@ -373,6 +381,8 @@
   on:start="{onStart}"
   on:move="{onMove}"
   on:end="{onEnd}"
+  on:enter="{onEnter}"
+  on:leave="{onLeave}"
   component="{component}"
   on:click
   {disabled}

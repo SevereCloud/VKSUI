@@ -1,4 +1,4 @@
-import type { Platform } from "./platform";
+import { Platform } from "./platform";
 
 const inputUtils = (platform: Platform) => {
   let hasMouse: boolean;
@@ -6,7 +6,7 @@ const inputUtils = (platform: Platform) => {
   let hasHover: boolean;
   let hasTouch: boolean;
 
-  if (platform) {
+  if (platform === Platform.IOS) {
     hasMouse = false;
     hasHover = false;
     hasTouchEvents = true;

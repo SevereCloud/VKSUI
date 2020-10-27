@@ -227,10 +227,10 @@
   const platform = usePlatform();
 
   $: $$restProps.class = classNames(
+    $$props.class,
     getClassName('SimpleCell', $platform),
     `SimpleCell--sizeX-${$adaptivity.sizeX}`,
     { 'SimpleCell--exp': expandable, 'SimpleCell--mult': multiline },
-    $$props.class,
   );
 </script>
 
