@@ -132,7 +132,7 @@
   import getClassName from '../../lib/getClassName';
   import Div from '../Elements/div.svelte';
 
-  export let Component = Div;
+  export let component = Div;
 
   let hover = false;
 
@@ -150,7 +150,7 @@
 </script>
 
 <svelte:component
-  this="{Component}"
+  this="{component}"
   {...$$restProps}
   on:click
   on:mouseover="{handleMouseEnter}"

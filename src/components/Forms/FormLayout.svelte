@@ -23,7 +23,7 @@
   import getClassName from '../../lib/getClassName';
   import Form from '../Elements/form.svelte';
 
-  export let Component = Form;
+  export let component = Form;
 
   const platform = usePlatform();
 </script>
@@ -35,7 +35,7 @@
 -->
 
 <svelte:component
-  this="{Component}"
+  this="{component}"
   {...$$restProps}
   on:submit
   class="{classNames(getClassName('FormLayout', $platform), $$props.class)}"
@@ -43,7 +43,7 @@
   <div class="FormLayout__container">
     <slot />
   </div>
-  {#if Component === Form}
+  {#if component === Form}
     <input type="submit" class="FormLayout__submit" value="" />
   {/if}
 </svelte:component>

@@ -570,7 +570,7 @@
   <Tappable
     {...linkProps}
     on:click="{href ? onClick : null}"
-    Component="{selectable ? label : href ? a : Div}"
+    component="{selectable ? label : href ? a : Div}"
     class="Cell__in"
     href="{href}"
     disabled="{!selectable && !href && !expandable || removable || draggable}"

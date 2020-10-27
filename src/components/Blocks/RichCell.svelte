@@ -142,7 +142,7 @@
   import classNames from '../../lib/classNames';
   import getClassName from '../../lib/getClassName';
   import Tappable from '../Service/Tappable.svelte';
-  import div from '../Elements/div.svelte';
+  import Div from '../Elements/div.svelte';
   import a from '../Elements/a.svelte';
 
   /**
@@ -190,7 +190,7 @@
   );
 </script>
 
-<Tappable {...$$restProps} on:click Component="{$$restProps.href ? a : div}">
+<Tappable {...$$restProps} on:click component="{$$restProps.href ? a : Div}">
   <slot name="before" />
   <div class="RichCell__in">
     <div class="RichCell__top">

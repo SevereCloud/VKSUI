@@ -41,7 +41,7 @@
 <Button
   align={align}
   class={classNames(getClassName('File', $platform), $$props.class)}
-  Component={label}
+  component={label}
   stretched={stretched}
   mode={mode}
   size={controlSize}

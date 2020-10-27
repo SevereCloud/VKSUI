@@ -85,7 +85,7 @@
   import getClassName from '../../lib/getClassName';
   import Text from '../Typography/Text.svelte';
   import Tappable from '../Service/Tappable.svelte';
-  import div from '../Elements/div.svelte';
+  import Div from '../Elements/div.svelte';
 
   /**
    * Тип ячейки:
@@ -117,7 +117,7 @@
   const platform = usePlatform();
 
 
-  let Component = mode === 'base' ? div : Tappable;
+  let component = mode === 'base' ? Div : Tappable;
 
   $: $$restProps.class = classNames(
     getClassName('MiniInfoCell', $platform),
@@ -130,7 +130,7 @@
   );
 </script>
 
-<svelte:component this="{Component}" {...$$restProps} on:click>
+<svelte:component this="{component}" {...$$restProps} on:click>
   <div class="MiniInfoCell__icon">
     <slot name="before" />
   </div>

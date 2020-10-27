@@ -175,7 +175,7 @@
   export let activeEffectDelay: number = ACTIVE_EFFECT_DELAY;
   export let disabled: boolean = undefined;
   export let stopPropagation: boolean = false;
-  export let Component = div;
+  export let component = div;
 
   // state
   export let clicks: {
@@ -353,7 +353,7 @@
     ? 'shadowHovered'
     : 'opacityHovered';
 
-  $: rootComponent = !disabled ? Touch : Component;
+  $: rootComponent = !disabled ? Touch : component;
 
   $: $$restProps.class = classNames(
     getClassName('Tappable', $platform),
@@ -373,7 +373,7 @@
   on:start="{onStart}"
   on:move="{onMove}"
   on:end="{onEnd}"
-  Component="{Component}"
+  component="{component}"
   on:click
   {disabled}
   {...$$restProps}

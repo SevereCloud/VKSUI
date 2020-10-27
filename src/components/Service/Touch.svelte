@@ -50,7 +50,7 @@
   >;
   const doc = $wContentDocument || document;
 
-  export let Component = div;
+  export let component = div;
 
   export let useCapture = false;
 
@@ -257,7 +257,7 @@ Touch – это компонент для удобной работы с pointe
 -->
 
 <svelte:component
-  this="{Component}"
+  this="{component}"
   {...$$restProps}
   bind:this_="{container}"
   on:click="{onClick}"

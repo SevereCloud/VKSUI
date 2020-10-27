@@ -262,7 +262,7 @@
   import { Platform } from '../../lib/platform';
   import { SizeType } from '../../lib/adaptivity';
 
-  export let Component = button;
+  export let component = button;
 
   export let before: any = undefined;
   export let after: any = undefined;
@@ -303,7 +303,7 @@
 <Tappable
   {...$$restProps}
   on:click
-  Component="{$$restProps.href ? a : Component}"
+  component="{$$restProps.href ? a : component}"
 >
   <div class="Button__in">
     {#if $$slots.before || before}
@@ -321,7 +321,7 @@
           <Title
             level="3"
             weight="medium"
-            Component="div"
+            component="div"
             class="Button__content"
           >
             <slot />

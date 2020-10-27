@@ -208,6 +208,8 @@
   import Div from '../Elements/div.svelte';
   import a from '../Elements/a.svelte';
 
+  export let component = Div;
+
   export let indicator: any = undefined;
   export let description: string = '';
   /**
@@ -243,7 +245,7 @@ SimpleCell — это упрощенная и улучшенная с точки
   {...$$restProps}
   disabled="{disabled}"
   on:click
-  Component="{$$restProps.href ? a : Div}"
+  component="{$$restProps.href ? a : component}"
 >
   <slot name="before" />
   <div class="SimpleCell__main">
