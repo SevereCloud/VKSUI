@@ -24,7 +24,7 @@
     | 'overlay_primary'
     | 'overlay_secondary'
     | 'overlay_outline' = 'primary';
-  export let controlSize: 'm' | 'l' | 'xl' = 'm';
+  export let controlSize: 's' | 'm' | 'l' = 's';
   export let stretched: boolean = false;
   export let align: 'left' | 'center' | 'right' = 'center';
   export let style: string = '';
